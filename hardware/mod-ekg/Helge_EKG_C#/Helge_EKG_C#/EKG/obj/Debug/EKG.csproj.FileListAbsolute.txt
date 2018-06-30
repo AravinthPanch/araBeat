@@ -1,0 +1,9 @@
+D:\Users\lub\Desktop\Helge_EKG_C#\Helge_EKG_C#\EKG\bin\Debug\EKG.exe.config
+D:\Users\lub\Desktop\Helge_EKG_C#\Helge_EKG_C#\EKG\bin\Debug\EKG.exe
+D:\Users\lub\Desktop\Helge_EKG_C#\Helge_EKG_C#\EKG\bin\Debug\EKG.pdb
+D:\Users\lub\Desktop\Helge_EKG_C#\Helge_EKG_C#\EKG\obj\Debug\EKG.csprojResolveAssemblyReference.cache
+D:\Users\lub\Desktop\Helge_EKG_C#\Helge_EKG_C#\EKG\obj\Debug\DebugRS232.Form1.resources
+D:\Users\lub\Desktop\Helge_EKG_C#\Helge_EKG_C#\EKG\obj\Debug\EKG.Properties.Resources.resources
+D:\Users\lub\Desktop\Helge_EKG_C#\Helge_EKG_C#\EKG\obj\Debug\EKG.csproj.GenerateResource.Cache
+D:\Users\lub\Desktop\Helge_EKG_C#\Helge_EKG_C#\EKG\obj\Debug\EKG.exe
+D:\Users\lub\Desktop\Helge_EKG_C#\Helge_EKG_C#\EKG\obj\Debug\EKG.pdb
