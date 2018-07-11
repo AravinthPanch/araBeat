@@ -1,29 +1,7 @@
-/***************************************************
-  This is an example for the Adafruit VS1053 Codec Breakout
-
-  Designed specifically to work with the Adafruit VS1053 Codec Breakout
-  ----> https://www.adafruit.com/products/1381
-
-  Adafruit invests time and resources providing this open source code,
-  please support Adafruit and open-source hardware by purchasing
-  products from Adafruit!
-
-  Written by Limor Fried/Ladyada for Adafruit Industries.
-  BSD license, all text above must be included in any redistribution
- ****************************************************/
-
 #include <SoftwareSerial.h>
 
-// define the pins used
 #define VS1053_RX  2 // This is the pin that connects to the RX pin on VS1053
-
 #define VS1053_RESET 9 // This is the pin that connects to the RESET pin on VS1053
-// If you have the Music Maker shield, you don't need to connect the RESET pin!
-
-// If you're using the VS1053 breakout:
-// Don't forget to connect the GPIO #0 to GROUND and GPIO #1 pin to 3.3V
-// If you're using the Music Maker shield:
-// Don't forget to connect the GPIO #1 pin to 3.3V and the RX pin to digital #2
 
 // See http://www.vlsi.fi/fileadmin/datasheets/vs1053.pdf Pg 31
 #define VS1053_BANK_DEFAULT 0x00
@@ -41,16 +19,12 @@
 #define MIDI_CHAN_VOLUME 0x07
 #define MIDI_CHAN_PROGRAM 0xC0
 
-
-SoftwareSerial VS1053_MIDI(0, 2); // TX only, do not use the 'rx' side
-// on a Mega/Leonardo you may have to change the pin to one that
-// software serial support uses OR use a hardware serial port!
+SoftwareSerial VS1053_MIDI(0, 2);
 
 void setup() {
   Serial.begin(9600);
   Serial.println("VS1053 MIDI test");
-
-  VS1053_MIDI.begin(31250); // MIDI uses a 'strange baud rate'
+  VS1053_MIDI.begin(31250);
 
   pinMode(VS1053_RESET, OUTPUT);
   digitalWrite(VS1053_RESET, LOW);
@@ -60,7 +34,7 @@ void setup() {
 
   midiSetChannelBank(0, VS1053_BANK_MELODY);
   midiSetInstrument(0, VS1053_GM1_OCARINA);
-  midiSetChannelVolume(0, 127);
+  midiSetChannelVolume(0, 64);
 }
 
 void loop() {
