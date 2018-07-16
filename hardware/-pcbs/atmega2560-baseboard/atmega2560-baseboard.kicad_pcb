@@ -2,7 +2,7 @@
 
   (general
     (links 62)
-    (no_connects 47)
+    (no_connects 62)
     (area 0 0 0 0)
     (thickness 1.6)
     (drawings 0)
@@ -296,7 +296,7 @@
   )
 
   (module Capacitors_SMD:C_0603_HandSoldering (layer F.Cu) (tedit 58AA848B) (tstamp 5B4CA7FC)
-    (at 148.5011 105.0036)
+    (at 200.146571 106.238)
     (descr "Capacitor SMD 0603, hand soldering")
     (tags "capacitor 0603")
     (path /5B4BC746)
@@ -332,7 +332,7 @@
   )
 
   (module Capacitors_SMD:C_0603_HandSoldering (layer F.Cu) (tedit 58AA848B) (tstamp 5B4CA80D)
-    (at 148.5011 105.0036)
+    (at 185.979428 122.038)
     (descr "Capacitor SMD 0603, hand soldering")
     (tags "capacitor 0603")
     (path /5B4B95A0)
@@ -368,7 +368,7 @@
   )
 
   (module Capacitors_SMD:C_0603_HandSoldering (layer F.Cu) (tedit 58AA848B) (tstamp 5B4CA81E)
-    (at 148.5011 105.0036)
+    (at 180.099428 127.188)
     (descr "Capacitor SMD 0603, hand soldering")
     (tags "capacitor 0603")
     (path /5B4B961F)
@@ -404,7 +404,7 @@
   )
 
   (module Capacitors_SMD:C_0603_HandSoldering (layer F.Cu) (tedit 58AA848B) (tstamp 5B4CA82F)
-    (at 148.5011 105.0036)
+    (at 190.093001 116.988)
     (descr "Capacitor SMD 0603, hand soldering")
     (tags "capacitor 0603")
     (path /5B4B996D)
@@ -440,7 +440,7 @@
   )
 
   (module Capacitors_SMD:C_0603_HandSoldering (layer F.Cu) (tedit 58AA848B) (tstamp 5B4CA840)
-    (at 148.5011 105.0036)
+    (at 195.929428 116.338)
     (descr "Capacitor SMD 0603, hand soldering")
     (tags "capacitor 0603")
     (path /5B4B9643)
@@ -476,7 +476,7 @@
   )
 
   (module Diodes_SMD:D_0603 (layer F.Cu) (tedit 590CE922) (tstamp 5B4CA858)
-    (at 148.5011 105.0036)
+    (at 176.203001 127.338)
     (descr "Diode SMD in 0603 package http://datasheets.avx.com/schottky.pdf")
     (tags "smd diode")
     (path /5B4BAB03)
@@ -519,7 +519,7 @@
   )
 
   (module LEDs:LED_0603_HandSoldering (layer F.Cu) (tedit 595FC9C0) (tstamp 5B4CA86D)
-    (at 148.5011 105.0036)
+    (at 168.043001 137.488)
     (descr "LED SMD 0603, hand soldering")
     (tags "LED 0603")
     (path /5B4BB809)
@@ -557,7 +557,7 @@
   )
 
   (module LEDs:LED_0603_HandSoldering (layer F.Cu) (tedit 595FC9C0) (tstamp 5B4CA882)
-    (at 148.5011 105.0036)
+    (at 172.403001 132.438)
     (descr "LED SMD 0603, hand soldering")
     (tags "LED 0603")
     (path /5B4BB5F6)
@@ -595,7 +595,7 @@
   )
 
   (module Pin_Headers:Pin_Header_Straight_2x12_Pitch2.54mm (layer F.Cu) (tedit 59650532) (tstamp 5B4CA8B0)
-    (at 148.5011 105.0036)
+    (at 161.283001 107.318)
     (descr "Through hole straight pin header, 2x12, 2.54mm pitch, double rows")
     (tags "Through hole pin header THT 2x12 2.54mm double row")
     (path /5B4BCB03)
@@ -681,7 +681,7 @@
   )
 
   (module Resistors_SMD:R_0603_HandSoldering (layer F.Cu) (tedit 58E0A804) (tstamp 5B4CA8C1)
-    (at 148.5011 105.0036)
+    (at 195.843001 111.488)
     (descr "Resistor SMD 0603, hand soldering")
     (tags "resistor 0603")
     (path /5B4C870E)
@@ -717,7 +717,7 @@
   )
 
   (module Resistors_SMD:R_0603_HandSoldering (layer F.Cu) (tedit 58E0A804) (tstamp 5B4CA8D2)
-    (at 148.5011 105.0036)
+    (at 185.893001 117.188)
     (descr "Resistor SMD 0603, hand soldering")
     (tags "resistor 0603")
     (path /5B4C8852)
@@ -753,7 +753,7 @@
   )
 
   (module Resistors_SMD:R_0603_HandSoldering (layer F.Cu) (tedit 58E0A804) (tstamp 5B4CA8E3)
-    (at 148.5011 105.0036)
+    (at 168.043001 132.438)
     (descr "Resistor SMD 0603, hand soldering")
     (tags "resistor 0603")
     (path /5B4B9879)
@@ -789,7 +789,7 @@
   )
 
   (module Resistors_SMD:R_0603_HandSoldering (layer F.Cu) (tedit 58E0A804) (tstamp 5B4CA8F4)
-    (at 148.5011 105.0036)
+    (at 172.403001 127.388)
     (descr "Resistor SMD 0603, hand soldering")
     (tags "resistor 0603")
     (path /5B4BB801)
@@ -825,7 +825,7 @@
   )
 
   (module Resistors_SMD:R_0603_HandSoldering (layer F.Cu) (tedit 58E0A804) (tstamp 5B4CA905)
-    (at 148.5011 105.0036)
+    (at 168.043001 127.388)
     (descr "Resistor SMD 0603, hand soldering")
     (tags "resistor 0603")
     (path /5B4BB53C)
@@ -861,7 +861,7 @@
   )
 
   (module Resistors_SMD:R_0603_HandSoldering (layer F.Cu) (tedit 58E0A804) (tstamp 5B4CA916)
-    (at 148.5011 105.0036)
+    (at 195.843001 106.438)
     (descr "Resistor SMD 0603, hand soldering")
     (tags "resistor 0603")
     (path /5B4BC2EE)
@@ -897,7 +897,7 @@
   )
 
   (module Buttons_Switches_THT:SW_PUSH_6mm (layer F.Cu) (tedit 5923F252) (tstamp 5B4CA935)
-    (at 148.5011 105.0036)
+    (at 185.433001 106.988)
     (descr https://www.omron.com/ecb/products/pdf/en-b3f.pdf)
     (tags "tact sw push 6mm")
     (path /5B4C824B)
@@ -948,7 +948,7 @@
   )
 
   (module Housings_QFP:TQFP-100_14x14mm_Pitch0.5mm (layer F.Cu) (tedit 58CC9A47) (tstamp 5B4CA9B0)
-    (at 148.5011 105.0036)
+    (at 174.783001 114.438)
     (descr "100-Lead Plastic Thin Quad Flatpack (PF) - 14x14x1 mm Body 2.00 mm Footprint [TQFP] (see Microchip Packaging Specification 00000049BS.pdf)")
     (tags "QFP 0.5")
     (path /5B4B7E8F)
@@ -1188,7 +1188,7 @@
   )
 
   (module CSTCE16M0V53-R0:OSC_CSTCE16M0V53-R0 (layer F.Cu) (tedit 0) (tstamp 5B4CA9BE)
-    (at 148.5011 105.0036)
+    (at 184.631501 127.138116)
     (path /5B4C8504)
     (attr smd)
     (fp_text reference Y1 (at -0.882758 -1.61337) (layer F.SilkS)
