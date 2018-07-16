@@ -1,4 +1,4 @@
-update=Monday, July 16, 2018 'AMt' 11:12:15 AM
+update=Monday, July 16, 2018 'PMt' 01:25:41 PM
 version=1
 last_client=kicad
 [pcbnew]
@@ -69,3 +69,4 @@ LibName27=atmel
 LibName28=contrib
 LibName29=valves
 LibName30=switches
+LibName31=footprints/CSTCE16M0V53-R0/CSTCE16M0V53-R0
