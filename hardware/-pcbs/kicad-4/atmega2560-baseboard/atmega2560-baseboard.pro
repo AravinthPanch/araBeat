@@ -1,4 +1,4 @@
-update=Monday, July 16, 2018 'PMt' 01:25:41 PM
+update=Tuesday, July 31, 2018 at 07:46:21 PM
 version=1
 last_client=kicad
 [pcbnew]
@@ -25,16 +25,6 @@ version=1
 NetIExt=net
 [general]
 version=1
-[schematic_editor]
-version=1
-PageLayoutDescrFile=
-PlotDirectoryName=
-SubpartIdSeparator=0
-SubpartFirstId=65
-NetFmtName=
-SpiceForceRefPrefix=0
-SpiceUseNetNumbers=0
-LabSize=60
 [eeschema]
 version=1
 LibDir=
@@ -70,3 +60,13 @@ LibName28=contrib
 LibName29=valves
 LibName30=switches
 LibName31=footprints/CSTCE16M0V53-R0/CSTCE16M0V53-R0
+[schematic_editor]
+version=1
+PageLayoutDescrFile=
+PlotDirectoryName=
+SubpartIdSeparator=0
+SubpartFirstId=65
+NetFmtName=
+SpiceAjustPassiveValues=0
+LabSize=60
+ERC_TestSimilarLabels=1
