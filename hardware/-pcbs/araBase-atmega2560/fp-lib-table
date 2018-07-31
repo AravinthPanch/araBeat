@@ -1,0 +1,3 @@
+(fp_lib_table
+  (lib (name LM3940IMP-3.3)(type Legacy)(uri ${KIPRJMOD}/libraries/LM3940IMP-3.3/LM3940IMP-3.3.mod)(options "")(descr ""))
+)
