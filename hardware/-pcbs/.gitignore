@@ -29,5 +29,6 @@ _autosave-*
 *.xml
 *.csv
 
+gerber/
 
 # End of https://www.gitignore.io/api/kicad
