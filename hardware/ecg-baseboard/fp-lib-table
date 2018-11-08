@@ -1,0 +1,3 @@
+(fp_lib_table
+  (lib (name ecg-baseboard)(type KiCad)(uri ${KIPRJMOD}/resources/ecg-baseboard.pretty)(options "")(descr ""))
+)
