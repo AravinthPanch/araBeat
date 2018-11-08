@@ -106,9 +106,9 @@ void loop()
 
     unsigned int RR = (unsigned int)rtor*8 ;  //8ms
 
-     Serial.print(RTOR_msb);
-     Serial.print(",");
-     Serial.println(RTOR_lsb);
+//     Serial.print(RTOR_msb);
+//     Serial.print(",");
+//     Serial.println(RTOR_lsb);
 //     Serial.print(",");
 //     Serial.print(rtor); 
 //     Serial.print(",");
@@ -142,7 +142,7 @@ void loop()
   
       for(i=0; i<19; i++) // transmit the data
       {
-//        Serial.write(DataPacketHeader[i]);
+        Serial.write(DataPacketHeader[i]);
   
        }    
 
