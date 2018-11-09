@@ -293,4 +293,8 @@ Wire Wire Line
 	7800 4100 8200 4100
 NoConn ~ 8200 4300
 NoConn ~ 8200 4400
+Text Label 9450 3800 0    50   ~ 0
+VCC
+Text Label 9800 3550 0    50   ~ 0
+GND
 $EndSCHEMATC
