@@ -15,22 +15,11 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 $Comp
-L MCU_Module:Arduino_Nano_v3.x A1
-U 1 1 5BD88A95
-P 8700 4400
-F 0 "A1" H 8650 5750 50  0000 C CNN
-F 1 "Arduino_Nano_v3.x" H 8650 5600 50  0000 C CNN
-F 2 "Module:Arduino_Nano" H 8850 3450 50  0001 L CNN
-F 3 "http://www.mouser.com/pdfdocs/Gravitech_Arduino_Nano3_0.pdf" H 8700 3400 50  0001 C CNN
-	1    8700 4400
-	1    0    0    -1  
-$EndComp
-$Comp
-L Connector_Generic:Conn_01x10 J1
+L Connector_Generic:Conn_01x10 J2
 U 1 1 5BD88FD2
 P 10050 4500
-F 0 "J1" V 10750 4500 50  0000 C CNN
-F 1 "Protocentral MAX30003" V 10600 4500 50  0000 C CNN
+F 0 "J2" V 10650 4500 50  0000 C CNN
+F 1 "Protocentral MAX30003" V 10500 4500 50  0000 C CNN
 F 2 "Connector_PinSocket_2.54mm:PinSocket_1x10_P2.54mm_Vertical" H 10050 4500 50  0001 C CNN
 F 3 "~" H 10050 4500 50  0001 C CNN
 	1    10050 4500
@@ -65,7 +54,7 @@ SCK
 Text Label 8550 4500 0    50   ~ 0
 CSB
 Wire Wire Line
-	9850 4200 9450 4200
+	9850 4200 9800 4200
 Wire Wire Line
 	9450 3350 8900 3350
 Wire Wire Line
@@ -123,13 +112,7 @@ Wire Wire Line
 	9700 4300 9450 4300
 Wire Wire Line
 	8700 5400 8700 5550
-NoConn ~ 8200 3800
-NoConn ~ 8200 3900
-NoConn ~ 8200 4000
-NoConn ~ 8200 4100
 NoConn ~ 8200 4200
-NoConn ~ 8200 4300
-NoConn ~ 8200 4400
 NoConn ~ 8200 4600
 NoConn ~ 8200 4700
 NoConn ~ 8200 4800
@@ -138,8 +121,6 @@ NoConn ~ 8800 3400
 NoConn ~ 9200 3800
 NoConn ~ 9200 3900
 NoConn ~ 9200 4200
-NoConn ~ 9200 4400
-NoConn ~ 9200 4500
 NoConn ~ 9200 4600
 NoConn ~ 9200 4700
 NoConn ~ 9200 4800
@@ -150,10 +131,10 @@ NoConn ~ 9850 4400
 NoConn ~ 9850 4500
 NoConn ~ 9850 4600
 $Comp
-L power:GND #PWR0101
+L power:GND #PWR01
 U 1 1 5BE5643F
 P 8800 5800
-F 0 "#PWR0101" H 8800 5550 50  0001 C CNN
+F 0 "#PWR01" H 8800 5550 50  0001 C CNN
 F 1 "GND" H 8805 5627 50  0000 C CNN
 F 2 "" H 8800 5800 50  0001 C CNN
 F 3 "" H 8800 5800 50  0001 C CNN
@@ -170,10 +151,10 @@ Wire Wire Line
 Wire Wire Line
 	8800 5550 8800 5400
 $Comp
-L power:PWR_FLAG #FLG0101
+L power:PWR_FLAG #FLG01
 U 1 1 5BE57418
 P 8450 5800
-F 0 "#FLG0101" H 8450 5875 50  0001 C CNN
+F 0 "#FLG01" H 8450 5875 50  0001 C CNN
 F 1 "PWR_FLAG" H 8450 5973 50  0000 C CNN
 F 2 "" H 8450 5800 50  0001 C CNN
 F 3 "~" H 8450 5800 50  0001 C CNN
@@ -185,4 +166,131 @@ Wire Wire Line
 Connection ~ 8800 5800
 Wire Wire Line
 	9450 3350 9450 4200
+$Comp
+L Connector:Screw_Terminal_01x04 J1
+U 1 1 5BE5A960
+P 10050 3650
+F 0 "J1" V 10650 3700 50  0000 L CNN
+F 1 "Screw_Terminal_01x04" V 10500 3350 50  0000 L CNN
+F 2 "TerminalBlock_RND:TerminalBlock_RND_205-00047_1x04_P5.00mm_Horizontal" H 10050 3650 50  0001 C CNN
+F 3 "~" H 10050 3650 50  0001 C CNN
+	1    10050 3650
+	1    0    0    -1  
+$EndComp
+Text Label 10150 3600 0    50   ~ 0
+GND
+Text Label 10150 3700 0    50   ~ 0
+VCC
+Text Label 10150 3800 0    50   ~ 0
+D2
+Text Label 10150 3900 0    50   ~ 0
+A0
+Wire Wire Line
+	9700 4100 9700 3550
+Wire Wire Line
+	9700 3550 9850 3550
+Connection ~ 9700 4100
+Wire Wire Line
+	9850 3650 9800 3650
+Wire Wire Line
+	9800 3650 9800 4200
+Connection ~ 9800 4200
+Wire Wire Line
+	9800 4200 9450 4200
+$Comp
+L Connector_Generic:Conn_01x06 J3
+U 1 1 5BE756C8
+P 10050 5400
+F 0 "J3" H 10600 5400 50  0000 L CNN
+F 1 "Conn_01x06" V 10500 5150 50  0000 L CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Vertical" H 10050 5400 50  0001 C CNN
+F 3 "~" H 10050 5400 50  0001 C CNN
+	1    10050 5400
+	1    0    0    -1  
+$EndComp
+Text Label 10150 5200 0    50   ~ 0
+TX
+Text Label 10150 5300 0    50   ~ 0
+RX
+Text Label 10150 5400 0    50   ~ 0
+D3
+Text Label 10150 5500 0    50   ~ 0
+A1
+Text Label 10150 5600 0    50   ~ 0
+GND
+Text Label 10150 5700 0    50   ~ 0
+VCC
+Wire Wire Line
+	9850 5600 9700 5600
+Wire Wire Line
+	9700 5600 9700 4300
+Wire Wire Line
+	9850 5700 9800 5700
+Wire Wire Line
+	9800 5700 9800 4200
+Wire Wire Line
+	9850 5500 9300 5500
+Wire Wire Line
+	9300 5500 9300 4500
+Wire Wire Line
+	9300 4500 9200 4500
+Wire Wire Line
+	9850 3850 9300 3850
+Wire Wire Line
+	9300 3850 9300 4400
+Wire Wire Line
+	9300 4400 9200 4400
+$Comp
+L MCU_Module:Arduino_Nano_v3.x A1
+U 1 1 5BD88A95
+P 8700 4400
+F 0 "A1" H 8700 5750 50  0000 C CNN
+F 1 "Arduino_Nano_v3.x" H 8700 5650 50  0000 C CNN
+F 2 "Module:Arduino_Nano" H 8850 3450 50  0001 L CNN
+F 3 "http://www.mouser.com/pdfdocs/Gravitech_Arduino_Nano3_0.pdf" H 8700 3400 50  0001 C CNN
+	1    8700 4400
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9850 3750 9500 3750
+Wire Wire Line
+	9500 3750 9500 3300
+Wire Wire Line
+	9500 3300 8100 3300
+Wire Wire Line
+	8100 3300 8100 4000
+Wire Wire Line
+	8100 4000 8200 4000
+Wire Wire Line
+	9850 5300 9750 5300
+Wire Wire Line
+	9750 5300 9750 5450
+Wire Wire Line
+	9750 5450 7900 5450
+Wire Wire Line
+	7900 5450 7900 3800
+Wire Wire Line
+	7900 3800 8200 3800
+Wire Wire Line
+	9850 5200 9250 5200
+Wire Wire Line
+	9250 5200 9250 5500
+Wire Wire Line
+	9250 5500 7850 5500
+Wire Wire Line
+	7850 5500 7850 3900
+Wire Wire Line
+	7850 3900 8200 3900
+Wire Wire Line
+	9850 5400 9350 5400
+Wire Wire Line
+	9350 5400 9350 3250
+Wire Wire Line
+	9350 3250 7800 3250
+Wire Wire Line
+	7800 3250 7800 4100
+Wire Wire Line
+	7800 4100 8200 4100
+NoConn ~ 8200 4300
+NoConn ~ 8200 4400
 $EndSCHEMATC
