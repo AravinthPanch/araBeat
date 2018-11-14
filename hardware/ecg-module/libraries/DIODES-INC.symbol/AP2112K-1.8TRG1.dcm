@@ -1,0 +1,8 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP AP2112K-1.8TRG1
+D 600mA 1.8V LDO Regulator Enable SOT23-5
+F https://www.diodes.com/assets/Datasheets/AP2112.pdf
+$ENDCMP
+#
+#End Doc Library

@@ -1,3 +1,4 @@
 (sym_lib_table
-  (lib (name MAXIM)(type Legacy)(uri ${KIPRJMOD}/resources/MAXIM.symbol/MAXIM.lib)(options "")(descr ""))
+  (lib (name MAX30003CTI)(type Legacy)(uri ${KIPRJMOD}/libraries/MAXIM.symbol/MAX30003CTI.lib)(options "")(descr ""))
+  (lib (name AP2112K-1.8TRG1)(type Legacy)(uri ${KIPRJMOD}/libraries/DIODES-INC.symbol/AP2112K-1.8TRG1.lib)(options "")(descr ""))
 )
