@@ -32,3 +32,5 @@ _autosave-*
 gerber/
 
 # End of https://www.gitignore.io/api/kicad
+
+fp-info-cache
