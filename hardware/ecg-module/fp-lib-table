@@ -1,4 +1,6 @@
 (fp_lib_table
   (lib (name MAXIM)(type KiCad)(uri ${KIPRJMOD}/libraries/MAXIM.pretty)(options "")(descr ""))
   (lib (name TI)(type KiCad)(uri ${KIPRJMOD}/libraries/TI.pretty)(options "")(descr ""))
+  (lib (name SWITCHCRAFT)(type KiCad)(uri ${KIPRJMOD}/libraries/SWITCHCRAFT.pretty)(options "")(descr ""))
+  (lib (name DIODES-INC)(type KiCad)(uri ${KIPRJMOD}/libraries/DIODES-INC.pretty)(options "")(descr ""))
 )
