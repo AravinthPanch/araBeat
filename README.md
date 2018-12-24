@@ -1,6 +1,8 @@
 # araBeat
 An interactive New Media Art system to translate the Heartbeat of the Visitor to an artistic form of sound and light in real-time.
 
+This is a permanent public installation, therefore it is built to withstand a harsh environment where the temperature goes to -20°C.
+
 ## ARTISTS
 
 - Aravinth Panch < http://aravinth.info >
@@ -12,7 +14,14 @@ An interactive New Media Art system to translate the Heartbeat of the Visitor to
 - Felix Christmann - Industrial Design
 - Alessandro Aresta - Sound Engineering
 - Len Goodman - Graphic Design
-- Hart John, Randi Johnson, John Bean - Fibre Glass & Structural Construction
+- Hart John, Randi Johnson, John Bean - Structure Design
+
+## STUDIOS AND MANUFACTURERS
+- nLab Berlin - Interaction Technology Design & Development
+- MotionLab Berlin - CNC Machining
+- Tivoli Too Minneapolis - Fiberglass and Steel Structure Construction
+- Seeed Studio Shenzhen - PCB Manufacturing
+- TroubleMaker Shenzhen - Prototyping
 
 ## DESIGN
 
@@ -25,18 +34,29 @@ An interactive New Media Art system to translate the Heartbeat of the Visitor to
 ### Installation
 
 <p align="center">
-<img src="./images/mosaic-installation/mozaic-heart-design-2.jpg" width=60%/>
+<img src="./images/installation/design-1.jpg" width=60%/>
 </p>
 
 ## DEVELOPMENT
 
 ### Installation
 
-- #### Stage 1
+- #### Mosaic Installation Stage 1 Completion
 
 <p align="center">
-<img src="./images/mosaic-installation/heart-installation.jpg" width=60%/>
+<img src="./images/installation/installation-3.jpg" width=60%/>
+<img src="./images/installation/installation-1.jpg" width=45%/>
+<img src="./images/installation/installation-2.jpg" width=45%/>
 </p>
+
+- #### Electronics and Acoustic Chambers
+
+<p align="center">
+<img src="./images/chambers/chamber-1.jpg" width=60%/>
+<img src="./images/chambers/chamber-2.jpg" width=45%/>
+<img src="./images/chambers/chamber-3.jpg" width=45%/>
+</p>
+
 
 ### Interaction Technology
 
@@ -70,7 +90,7 @@ An interactive New Media Art system to translate the Heartbeat of the Visitor to
 - #### Sensor Frontend Design
 
 <p align="center">
-<img src="./images/sensor-frontend/organic-interaction-design-1.jpg" width=60%/>
+<img src="./images/sensor-frontend/design-1.jpg" width=60%/>
 </p>
 
 - #### Sensor Frontend Prototype
