@@ -5,8 +5,8 @@ This is a permanent public installation, therefore it is built to withstand a ha
 
 ## ARTISTS
 
-- Aravinth Panch < http://aravinth.info >
-- Stacia Goodman < http://staciagoodman.com >
+- Aravinth Panch < http://aravinth.info > New Media Art
+- Stacia Goodman < http://staciagoodman.com > Mosaic Art
 
 ## COLLABORATORS
 - Marc Basara - Project Management
@@ -22,6 +22,7 @@ This is a permanent public installation, therefore it is built to withstand a ha
 - TivoliToo Minneapolis - Fiberglass and Steel Structure Construction
 - SeeedStudio Shenzhen - PCB Manufacturing
 - TroubleMaker Shenzhen - Prototyping
+- HLH Prototypes Shenzhen - Stainless CNC Machining
 
 ## DESIGN
 
@@ -45,16 +46,21 @@ This is a permanent public installation, therefore it is built to withstand a ha
 
 <p align="center">
 <img src="./images/installation/installation-3.jpg" width=60%/>
-<img src="./images/installation/installation-1.jpg" width=45%/>
+<img src="./images/installation/installation-1.jpg" width=40%/>
 <img src="./images/installation/installation-2.jpg" width=45%/>
 </p>
 
-- #### Electronics and Acoustic Chambers
+- #### Electronics Chamber
 
 <p align="center">
 <img src="./images/chambers/chamber-1.jpg" width=60%/>
-<img src="./images/chambers/chamber-2.jpg" width=45%/>
-<img src="./images/chambers/chamber-3.jpg" width=45%/>
+<img src="./images/chambers/chamber-2.jpg" width=30%/>
+</p>
+
+- #### Acoustic Chamber
+
+<p align="center">
+<img src="./images/chambers/chamber-3.jpg" width=40%/>
 </p>
 
 
@@ -70,7 +76,7 @@ This is a permanent public installation, therefore it is built to withstand a ha
 - #### System Prototype 1
 
 <p align="center">
-<img src="./images/prototypes/proto-3.jpg" width=60%/>
+<img src="./images/prototypes/proto-3.jpg" width=40%/>
 </p>
 
 
@@ -90,22 +96,31 @@ This is a permanent public installation, therefore it is built to withstand a ha
 - #### Sensor Frontend Design
 
 <p align="center">
-<img src="./images/sensor-frontend/design-1.jpg" width=60%/>
+<img src="./images/sensor-frontend/design/design-1.jpg" width=60%/>
 </p>
 
 - #### Sensor Frontend Prototype
 
 <p align="center">
-<img src="./images/sensor-frontend/foam-milling-1.jpg" width=45%/>
-<img src="./images/sensor-frontend/foam-milling-2.jpg" width=45%/>
+<img src="./images/sensor-frontend/prototype/foam-milling-2.jpg" width=45%/>
+<img src="./images/sensor-frontend/prototype/foam-milling-4.jpg" width=45%/>
 </p>
 <p align="center">
-<img src="./images/sensor-frontend/foam-milling-4.jpg" width=45%/>
-<img src="./images/sensor-frontend/foam-milling-5.jpg" width=45%/>
+<img src="./images/sensor-frontend/prototype/foam-milling-1.jpg" width=45%/>
+<img src="./images/sensor-frontend/prototype/foam-milling-5.jpg" width=42%/>
 </p>
 
 - #### ECG Module Prototype
 
 <p align="center">
-<img src="./images/ecg-module/ecg-module.jpg" width=60%/>
+<img src="./images/ecg-module/ecg-module-1.jpg" width=42%/>
+<img src="./images/ecg-module/ecg-module-2.jpg" width=48%/>
+</p>
+
+- #### Testing the Production-Sensor-Frontend
+
+<p align="center">
+<img src="./images/sensor-frontend/sensor-frontend-5.jpg" width=45%/>
+<img src="./images/prototypes/proto-5.jpg" width=42%/>
+<img src="./images/sensor-frontend/sensor-frontend-4.jpg" width=50%/>
 </p>
