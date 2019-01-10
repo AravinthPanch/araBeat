@@ -29,13 +29,19 @@ This is a permanent public installation, therefore it is built to withstand a ha
 ### Interaction Technology
 
 <p align="center">
-<img src="./design/system-design/araBeat.jpg" width=60%/>
+<img src="./design/system-design/system-1.jpg" width=60%/>
 </p>
 
 ### Installation
 
 <p align="center">
 <img src="./images/installation/design-1.jpg" width=60%/>
+</p>
+
+### Wiring Design
+
+<p align="center">
+<img src="./design/system-design/system-3.png" width=60%/>
 </p>
 
 ## DEVELOPMENT
