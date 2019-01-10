@@ -1,7 +1,11 @@
+<p align="center">
+<img src="./design/logos/arabeat.png" width=60%/>
+</p>
+
 # araBeat
 An interactive New Media Art system to translate the heartbeat of the visitor to an artistic form of sound and light in real-time.
 
-This is a permanent public installation, therefore it is built to withstand a harsh environment where the temperature goes to -20°C.
+This is a 12-feet-tall-permanent-public-installation, therefore it is built to withstand a harsh environment where the temperature goes to -20°C.
 
 ## ARTISTS
 
@@ -18,11 +22,11 @@ This is a permanent public installation, therefore it is built to withstand a ha
 
 ## STUDIOS AND MANUFACTURERS
 - nLab Berlin - Interaction Technology Design & Development
-- MotionLab Berlin - CNC Machining
-- TivoliToo Minneapolis - Fiberglass and Steel Structure Construction
-- SeeedStudio Shenzhen - PCB Manufacturing
+- MotionLab Berlin - Prototype CNC Machining
+- Tivoli Too Minneapolis - Fiberglass and Steel Structure Construction
+- Seeed Studio Shenzhen - PCB Manufacturing
 - TroubleMaker Shenzhen - Prototyping
-- HLH Prototypes Shenzhen - Stainless CNC Machining
+- HLH Prototypes Shenzhen - Stainless Steel CNC Machining
 
 ## DESIGN
 
