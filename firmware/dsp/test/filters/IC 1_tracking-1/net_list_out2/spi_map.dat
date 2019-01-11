@@ -1,0 +1,14 @@
+DCInpAlg1_1 0
+sin_lookupAlg19401mask_2 1
+sin_lookupAlg19401increment_2 2
+sin_lookupAlg19401ison_2 3
+sin_lookupAlg19403mask_3 4
+sin_lookupAlg19403increment_3 5
+sin_lookupAlg19403ison_3 6
+DCInpAlg2_4 7
+SwitchAlg1ison_5 8
+sin_lookupAlg19402mask_6 9
+sin_lookupAlg19402increment_6 10
+sin_lookupAlg19402ison_6 11
+BufferAlg1output1 12
+Gain1940AlgNS1_10 13

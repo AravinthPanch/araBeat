@@ -1,0 +1,7 @@
+0 GPIAlg1 O_C7_A0_P1_out Link2
+1 sin_lookupAlg19401 O_C12_A0_P1_out Link1
+2 DCInpAlg1 O_C21_A0_P1_out Link0
+3 BufferAlg1 I_C9_A0_P1_in Link2 O_C9_A0_P2_out Link3
+4 DCinputmuxAlg1 I_C23_A0_P2_in Link3 I_C23_A0_P3_in Link1 I_C23_A0_P4_in Link0 O_C23_A0_P1_out Link4
+5 ICSigma100Out2 I_C19_A0_P1_in Link4
+6 ICSigma100Out1 I_C17_A0_P1_in Link4
