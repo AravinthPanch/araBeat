@@ -14,7 +14,7 @@ This is a 12-feet-tall-permanent-public-installation, therefore it is built to w
 
 ## COLLABORATORS
 - Marc Basara - Project Management
-- David Riding - Hardware Engineering
+- David Riding - Electrical Engineering
 - Felix Christmann - Industrial Design
 - Alessandro Aresta - Sound Engineering
 - Len Goodman - Graphic Design
@@ -25,7 +25,7 @@ This is a 12-feet-tall-permanent-public-installation, therefore it is built to w
 - MotionLab Berlin - Prototype CNC Machining
 - Tivoli Too Minneapolis - Fiberglass and Steel Structure Construction
 - Seeed Studio Shenzhen - PCB Manufacturing
-- TroubleMaker Shenzhen - Prototyping
+- Troublemaker Shenzhen - Prototyping
 - HLH Prototypes Shenzhen - Stainless Steel CNC Machining
 
 ## DESIGN
