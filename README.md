@@ -10,7 +10,7 @@ This is a 12-feet-tall-permanent-public-installation, therefore it is built to w
 ## ARTISTS
 
 - Aravinth Panch < http://aravinth.info > New Media Art
-- Stacia Goodman < http://staciagoodman.com > Mosaic Art
+- Stacia Goodman < http://www.staciagoodmanmosaics.com > Mosaic Art
 
 ## COLLABORATORS
 - Marc Basara - Project Management
@@ -18,7 +18,7 @@ This is a 12-feet-tall-permanent-public-installation, therefore it is built to w
 - Felix Christmann - Industrial Design
 - Alessandro Aresta - Sound Engineering
 - Len Goodman - Graphic Design
-- Hart John, Randi Johnson, John Bean - Structure Design
+- Hart John, Randi Johnson, John Bean, Pavel - Structural Design & Construction
 
 ## STUDIOS AND MANUFACTURERS
 - nLab Berlin - Interaction Technology Design & Development
@@ -73,6 +73,12 @@ This is a 12-feet-tall-permanent-public-installation, therefore it is built to w
 <img src="./images/chambers/chamber-3.jpg" width=40%/>
 </p>
 
+- #### Mosaic Installation Stage 2 Completion
+
+<p align="center">
+<img src="./images/installation/installation-4.jpg" width=40%/>
+<img src="./images/sensor-frontend/sensor-frontend-6.jpg" width=40%/>
+</p>
 
 ### Interaction Technology
 
@@ -133,4 +139,11 @@ This is a 12-feet-tall-permanent-public-installation, therefore it is built to w
 <img src="./images/sensor-frontend/sensor-frontend-5.jpg" width=45%/>
 <img src="./images/prototypes/proto-5.jpg" width=42%/>
 <img src="./images/sensor-frontend/sensor-frontend-4.jpg" width=50%/>
+</p>
+
+- #### Audio Setup
+
+<p align="center">
+<img src="./images/audio/audio-1.jpg" width=40%/>
+<img src="./images/audio/audio-2.jpg" width=40%/>
 </p>
