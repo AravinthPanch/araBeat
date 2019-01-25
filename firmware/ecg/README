@@ -1,0 +1,31 @@
+//////////////////////////////////////////////////////////////////////////////////////////
+//
+//    Demo code for the MAX30003 breakout board
+//
+//    This example plots the ecg through serial UART on rtoProtocentral max30003 gui with sampling rate of 128 sps
+//
+//    Arduino connections:
+//
+//  |MAX30003 pin label| Pin Function         |Arduino Connection|
+//  |-----------------|:--------------------:|-----------------:|
+//  | MISO            | Slave Out            |  D12             |
+//  | MOSI            | Slave In             |  D11             |
+//  | SCLK            | Serial Clock         |  D13             |
+//  | CS              | Chip Select          |  D7              |
+//  | VCC             | Digital VDD          |  +5V             |
+//  | GND             | Digital Gnd          |  Gnd             |
+//  | FCLK            | 32K CLOCK            |  -               |
+//  | INT1            | Interrupt1           |  -               |
+//  | INT2            | Interrupt2           |  -               |
+//
+//    This software is licensed under the MIT License(http://opensource.org/licenses/MIT).
+//
+//   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
+//   NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+//   IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+//   WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+//   SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+//
+//   For information on how to use, visit https://github.com/Protocentral/protocentral_max30003
+//
+/////////////////////////////////////////////////////////////////////////////////////////
