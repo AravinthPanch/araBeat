@@ -1,0 +1,4 @@
+[submodule "research/ecg/protocentral_max30003"]
+	path = research/ecg/protocentral_max30003
+	url = git@github.com:Protocentral/protocentral_max30003.git
+	branch = master
