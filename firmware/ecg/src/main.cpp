@@ -7,178 +7,105 @@
 /*******************************************************************************
  * Includes
  ********************************************************************************/
-#include "MAX.h"
 #include <Arduino.h>
-#include <SPI.h>
+#include <MAX30003.h>
+
 
 /*******************************************************************************
  * Variable declarations
  ********************************************************************************/
-#define MAX30003_CS_PIN 7
 uint8_t DataPacketHeader[20];
 signed long ecgdata;
 unsigned long data;
-char SPI_temp_32b[4];
-char SPI_temp_Burst[100];
+MAX30003 ecg;
 
 /*******************************************************************************
  * Functions
  ********************************************************************************/
-void MAX30003_Reg_Write(unsigned char WRITE_ADDRESS, unsigned long data) {
+void setup()
+{
+    Serial.begin(115200);
 
-  // now combine the register address and the command into one byte:
-  byte dataToSend = (WRITE_ADDRESS << 1) | WREG;
+    pinMode(MAX30003_CS_PIN, OUTPUT);
+    digitalWrite(MAX30003_CS_PIN, HIGH); // disable device
 
-  // take the chip select low to select the device:
-  digitalWrite(MAX30003_CS_PIN, LOW);
+    SPI.begin();
+    SPI.setBitOrder(MSBFIRST);
+    SPI.setDataMode(SPI_MODE0);
 
-  delay(2);
-  SPI.transfer(dataToSend); // Send register location
-  SPI.transfer(data >> 16); // number of register to wr
-  SPI.transfer(data >> 8);  // number of register to wr
-  SPI.transfer(data);       // Send value to record into register
-  delay(2);
 
-  // take the chip select high to de-select:
-  digitalWrite(MAX30003_CS_PIN, HIGH);
-}
-
-void max30003_sw_reset(void) {
-  MAX30003_Reg_Write(SW_RST, 0x000000);
-  delay(100);
-}
-
-void max30003_synch(void) { MAX30003_Reg_Write(SYNCH, 0x000000); }
-
-void MAX30003_Reg_Read(uint8_t Reg_address) {
-  uint8_t SPI_TX_Buff;
-
-  digitalWrite(MAX30003_CS_PIN, LOW);
-
-  SPI_TX_Buff = (Reg_address << 1) | RREG;
-  SPI.transfer(SPI_TX_Buff); // Send register location
-
-  for (int i = 0; i < 3; i++) {
-    SPI_temp_32b[i] = SPI.transfer(0xff);
-  }
-
-  digitalWrite(MAX30003_CS_PIN, HIGH);
-}
-
-void MAX30003_Read_Data(int num_samples) {
-  uint8_t SPI_TX_Buff;
-
-  digitalWrite(MAX30003_CS_PIN, LOW);
-
-  SPI_TX_Buff = (ECG_FIFO_BURST << 1) | RREG;
-  SPI.transfer(SPI_TX_Buff); // Send register location
-
-  for (int i = 0; i < num_samples * 3; ++i) {
-    SPI_temp_Burst[i] = SPI.transfer(0x00);
-  }
-
-  digitalWrite(MAX30003_CS_PIN, HIGH);
-}
-
-void MAX30003_begin() {
-  max30003_sw_reset();
-  delay(100);
-  MAX30003_Reg_Write(CNFG_GEN, 0x081007);
-  delay(100);
-  MAX30003_Reg_Write(CNFG_CAL, 0x720000); // 0x700000
-  delay(100);
-  MAX30003_Reg_Write(CNFG_EMUX, 0x0B0000);
-  delay(100);
-  MAX30003_Reg_Write(CNFG_ECG,
-                     0x805000); // d23 - d22 : 10 for 250sps , 00:500 sps
-  delay(100);
-
-  MAX30003_Reg_Write(CNFG_RTOR1, 0x3fc600);
-  max30003_synch();
-  delay(100);
+    ecg.MAX30003_begin(); // initialize MAX30003
 }
 
 /*******************************************************************************
  * ECG Readout
  ********************************************************************************/
-void setup() {
-  Serial.begin(115200);
+void loop()
+{
+    ecg.MAX30003_Reg_Read(ECG_FIFO);
 
-  pinMode(MAX30003_CS_PIN, OUTPUT);
-  digitalWrite(MAX30003_CS_PIN, HIGH); // disable device
+    unsigned long data0 = (unsigned long)(SPI_temp_32b[0]);
+    data0 = data0 << 24;
+    unsigned long data1 = (unsigned long)(SPI_temp_32b[1]);
+    data1 = data1 << 16;
+    unsigned long data2 = (unsigned long)(SPI_temp_32b[2]);
+    data2 = data2 >> 6;
+    data2 = data2 & 0x03;
 
-  SPI.begin();
-  SPI.setBitOrder(MSBFIRST);
-  SPI.setDataMode(SPI_MODE0);
+    data = (unsigned long)(data0 | data1 | data2);
+    ecgdata = (signed long)(data);
 
-  MAX30003_begin(); // initialize MAX30003
-}
+    ecg.MAX30003_Reg_Read(RTOR);
+    unsigned long RTOR_msb = (unsigned long)(SPI_temp_32b[0]);
+    // RTOR_msb = RTOR_msb <<8;
+    unsigned char RTOR_lsb = (unsigned char)(SPI_temp_32b[1]);
 
-void loop() {
-  MAX30003_Reg_Read(ECG_FIFO);
+    unsigned long rtor = (RTOR_msb << 8 | RTOR_lsb);
+    rtor = ((rtor >> 2) & 0x3fff);
 
-  unsigned long data0 = (unsigned long)(SPI_temp_32b[0]);
-  data0 = data0 << 24;
-  unsigned long data1 = (unsigned long)(SPI_temp_32b[1]);
-  data1 = data1 << 16;
-  unsigned long data2 = (unsigned long)(SPI_temp_32b[2]);
-  data2 = data2 >> 6;
-  data2 = data2 & 0x03;
+    float hr = 60 / ((float)rtor * 0.008);
+    unsigned int HR = (unsigned int)hr; // type cast to int
 
-  data = (unsigned long)(data0 | data1 | data2);
-  ecgdata = (signed long)(data);
+    unsigned int RR = (unsigned int)rtor * 8; // 8ms
 
-  MAX30003_Reg_Read(RTOR);
-  unsigned long RTOR_msb = (unsigned long)(SPI_temp_32b[0]);
-  // RTOR_msb = RTOR_msb <<8;
-  unsigned char RTOR_lsb = (unsigned char)(SPI_temp_32b[1]);
+    /*Serial.print(RTOR_msb);
+    Serial.print(",");
+    Serial.print(RTOR_lsb);
+    Serial.print(",");
+    Serial.print(rtor);
+    Serial.print(",");
+    Serial.print(rr);
+    Serial.print(",");
+    Serial.println(hr);      */
 
-  unsigned long rtor = (RTOR_msb << 8 | RTOR_lsb);
-  rtor = ((rtor >> 2) & 0x3fff);
+    DataPacketHeader[0] = 0x0A;
+    DataPacketHeader[1] = 0xFA;
+    DataPacketHeader[2] = 0x0C;
+    DataPacketHeader[3] = 0;
+    DataPacketHeader[4] = 0x02;
 
-  float hr = 60 / ((float)rtor * 0.008);
-  unsigned int HR = (unsigned int)hr; // type cast to int
+    DataPacketHeader[5] = ecgdata;
+    DataPacketHeader[6] = ecgdata >> 8;
+    DataPacketHeader[7] = ecgdata >> 16;
+    DataPacketHeader[8] = ecgdata >> 24;
 
-  unsigned int RR = (unsigned int)rtor * 8; // 8ms
+    DataPacketHeader[9] = RR;
+    DataPacketHeader[10] = RR >> 8;
+    DataPacketHeader[11] = 0x00;
+    DataPacketHeader[12] = 0x00;
 
-  /*Serial.print(RTOR_msb);
-  Serial.print(",");
-  Serial.print(RTOR_lsb);
-  Serial.print(",");
-  Serial.print(rtor);
-  Serial.print(",");
-  Serial.print(rr);
-  Serial.print(",");
-  Serial.println(hr);      */
+    DataPacketHeader[13] = HR;
+    DataPacketHeader[14] = HR >> 8;
+    DataPacketHeader[15] = 0x00;
+    DataPacketHeader[16] = 0x00;
 
-  DataPacketHeader[0] = 0x0A;
-  DataPacketHeader[1] = 0xFA;
-  DataPacketHeader[2] = 0x0C;
-  DataPacketHeader[3] = 0;
-  DataPacketHeader[4] = 0x02;
+    DataPacketHeader[17] = 0x00;
+    DataPacketHeader[18] = 0x0b;
 
-  DataPacketHeader[5] = ecgdata;
-  DataPacketHeader[6] = ecgdata >> 8;
-  DataPacketHeader[7] = ecgdata >> 16;
-  DataPacketHeader[8] = ecgdata >> 24;
+    for (int i = 0; i < 19; i++) // transmit the data
+    {
+        Serial.write(DataPacketHeader[i]);
+    }
 
-  DataPacketHeader[9] = RR;
-  DataPacketHeader[10] = RR >> 8;
-  DataPacketHeader[11] = 0x00;
-  DataPacketHeader[12] = 0x00;
-
-  DataPacketHeader[13] = HR;
-  DataPacketHeader[14] = HR >> 8;
-  DataPacketHeader[15] = 0x00;
-  DataPacketHeader[16] = 0x00;
-
-  DataPacketHeader[17] = 0x00;
-  DataPacketHeader[18] = 0x0b;
-
-  for (int i = 0; i < 19; i++) // transmit the data
-  {
-    Serial.write(DataPacketHeader[i]);
-  }
-
-  delay(8);
+    delay(8);
 }
