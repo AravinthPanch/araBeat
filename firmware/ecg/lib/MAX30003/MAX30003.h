@@ -2,8 +2,8 @@
  *    @brief    MAX30003 header
  *
  ********************************************************************************/
-#ifndef _MAX_H_
-#define _MAX_H_
+#ifndef _MAX30003_H_
+#define _MAX30003_H_
 
 /*******************************************************************************
  * Includes
@@ -42,16 +42,16 @@
 #define RTOR 0x25
 #define NO_OP 0x7F
 
-class MAX30003
+class max30003
 {
 public:
     // constructor
-    MAX30003();
+    max30003();
 
     // public functions
-    void MAX30003_begin();
-    void MAX30003_Reg_Read(uint8_t Reg_address);
-    void MAX30003_Reg_Write(unsigned char WRITE_ADDRESS, unsigned long data);
+    void max30003_begin();
+    uint32_t max30003_read_register(uint8_t reg_address);
+    void max30003_write_register(unsigned char WRITE_ADDRESS, unsigned long data);
 };
 
-#endif /*_MAX_H_*/
+#endif /*_MAX30003_H_*/

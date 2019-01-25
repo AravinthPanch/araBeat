@@ -7,23 +7,22 @@
 /*******************************************************************************
  * Includes
  ********************************************************************************/
-#include "MAX30003.h"
+#include "max30003.h"
 
 /*******************************************************************************
  * Variable declarations
  ********************************************************************************/
 char SPI_temp_32b[4];
-char SPI_temp_Burst[100];
 
 /*******************************************************************************
  * Functions
  ********************************************************************************/
 
 // constructor
-MAX30003::MAX30003(){};
+max30003::max30003(){};
 
 // write SPI registers
-void MAX30003::MAX30003_Reg_Write(unsigned char WRITE_ADDRESS, unsigned long data)
+void max30003::max30003_write_register(unsigned char WRITE_ADDRESS, unsigned long data)
 {
     // now combine the register address and the command into one byte:
     byte dataToSend = (WRITE_ADDRESS << 1) | WREG;
@@ -42,40 +41,43 @@ void MAX30003::MAX30003_Reg_Write(unsigned char WRITE_ADDRESS, unsigned long dat
     digitalWrite(MAX30003_CS_PIN, HIGH);
 }
 
-// read SPI registers
-void MAX30003::MAX30003_Reg_Read(uint8_t Reg_address)
+// read SPI registers of max30003
+uint32_t max30003::max30003_read_register(uint8_t reg_address)
 {
-    uint8_t SPI_TX_Buff;
+    uint32_t data = 0;
 
+    // chip select
     digitalWrite(MAX30003_CS_PIN, LOW);
 
-    SPI_TX_Buff = (Reg_address << 1) | RREG;
-    SPI.transfer(SPI_TX_Buff); // Send register location
+    // select the register to read
+    SPI.transfer((reg_address << 1) | RREG);
 
-    for (int i = 0; i < 3; i++)
-    {
-        SPI_temp_32b[i] = SPI.transfer(0xff);
-    }
+    // read 24 bits (3 bytes) of data from max30003 register
+    data |= (SPI.transfer(0xff) << 16);
+    data |= (SPI.transfer(0xff) << 8);
+    data |= SPI.transfer(0xff);
 
+    // chip deselect
     digitalWrite(MAX30003_CS_PIN, HIGH);
+
+    return data;
 }
 
-// init MAX30003
-void MAX30003::MAX30003_begin()
+// init max30003
+void max30003::max30003_begin()
 {
-    MAX30003_Reg_Write(SW_RST, 0x000000);
+    max30003_write_register(SW_RST, 0x000000);
     delay(100);
-    MAX30003_Reg_Write(CNFG_GEN, 0x081007);
+    max30003_write_register(CNFG_GEN, 0x081007);
     delay(100);
-    MAX30003_Reg_Write(CNFG_CAL, 0x720000); // 0x700000
+    max30003_write_register(CNFG_CAL, 0x720000); // 0x700000
     delay(100);
-    MAX30003_Reg_Write(CNFG_EMUX, 0x0B0000);
+    max30003_write_register(CNFG_EMUX, 0x0B0000);
     delay(100);
-    MAX30003_Reg_Write(CNFG_ECG,
-                       0x805000); // d23 - d22 : 10 for 250sps , 00:500 sps
+    // d23 - d22 : 10 for 250sps , 00:500 sps
+    max30003_write_register(CNFG_ECG, 0x805000);
     delay(100);
-
-    MAX30003_Reg_Write(CNFG_RTOR1, 0x3fc600);
-    MAX30003_Reg_Write(SYNCH, 0x000000);
+    max30003_write_register(CNFG_RTOR1, 0x3fc600);
+    max30003_write_register(SYNCH, 0x000000);
     delay(100);
 }
