@@ -15,6 +15,9 @@
  ********************************************************************************/
 max30003 ecg;
 
+const int RTOR_REG_OFFSET = 10;
+const float RTOR_LSB_RES = 0.0078125f;
+
 /*******************************************************************************
  * Functions
  ********************************************************************************/
@@ -42,6 +45,8 @@ void setup()
     // };
 }
 
+// send data to Protocental GUI
+// it works only with ECG Gain 20V/V, otherwise too noisy
 void send_data_to_pde_plot(int16_t ecg_sample)
 {
     uint8_t data_bytes[20];
@@ -96,6 +101,18 @@ void loop()
     // print ecg voltage to display in serial plotter
     Serial.println(ecg_sample);
     // send_data_to_pde_plot(ecg_sample);
+
+    // read r-to-r data from max30003
+    uint32_t r_to_r = ecg.max30003_read_register(max30003::RTOR);
+
+    // extract 14 bits data from r_to_r register
+    r_to_r = r_to_r >> RTOR_REG_OFFSET;
+
+    // calculate BPM
+    float bpm = 1.0f / (r_to_r * RTOR_LSB_RES / 60.0f);
+
+    // print
+    // Serial.println(bpm);
 
     delay(8);
 }

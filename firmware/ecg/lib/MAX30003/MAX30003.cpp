@@ -119,13 +119,16 @@ void max30003::max30003_init()
 
     // R-to-R configuration
     max30003::RtoR1Configuration_u CNFG_RTOR_r;
-    CNFG_RTOR_r.bits.en_rtor = 1; // Enable R-to-R detection
+    CNFG_RTOR_r.bits.wndw = 0b0011;  // WNDW = 96ms
+    CNFG_RTOR_r.bits.rgain = 0b1111; // Auto-scale gain
+    CNFG_RTOR_r.bits.pavg = 0b11;    // 16-average
+    CNFG_RTOR_r.bits.ptsf = 0b0011;  // PTSF = 4/16
+    CNFG_RTOR_r.bits.en_rtor = 1;    // Enable R-to-R detection
     max30003_write_register(max30003::CNFG_RTOR1, CNFG_RTOR_r.all);
     delay(100);
     // Serial.println("CNFG_RTOR_r");
     // Serial.println(CNFG_RTOR_r.all, BIN);
     // Serial.println(CNFG_RTOR_r.all, HEX);
-
 
     // Synchronize to begin new ecg recording
     max30003_write_register(max30003::SYNCH, 0);
