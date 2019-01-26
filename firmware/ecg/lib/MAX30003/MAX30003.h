@@ -49,9 +49,9 @@ public:
     max30003();
 
     // public functions
-    void max30003_begin();
+    void max30003_init();
     uint32_t max30003_read_register(uint8_t reg_address);
-    void max30003_write_register(unsigned char WRITE_ADDRESS, unsigned long data);
+    void max30003_write_register(uint8_t reg_address, uint32_t data);
 };
 
 #endif /*_MAX30003_H_*/

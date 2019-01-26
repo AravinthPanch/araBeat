@@ -20,6 +20,7 @@ max30003 ecg;
  ********************************************************************************/
 void setup()
 {
+    // setup serial port for plotting
     Serial.begin(115200);
 
     // setup chipselect pin
@@ -28,16 +29,20 @@ void setup()
     // chip deselect
     digitalWrite(MAX30003_CS_PIN, HIGH);
 
+    // setup SPI
     SPI.begin();
     SPI.setBitOrder(MSBFIRST);
     SPI.setDataMode(SPI_MODE0);
 
-    // initialize MAX30003
-    ecg.max30003_begin();
+    // initialize max30003 chip
+    ecg.max30003_init();
 }
 
 /*******************************************************************************
  * ECG voltage readout for serial plotting
+ *
+ * R-R is always above 0 in the serial plotter, when no ac noise is present
+ * ac noise in the system comes from laptop charger, monitor HDMI
  ********************************************************************************/
 void loop()
 {
@@ -51,7 +56,6 @@ void loop()
     ecg_sample = ecg_fifo >> 6;
 
     // print ecg voltage to display in serial plotter
-    // R-R is always above 0
     Serial.println(ecg_sample);
 
     delay(8);

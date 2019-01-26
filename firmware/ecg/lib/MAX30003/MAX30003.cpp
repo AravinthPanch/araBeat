@@ -12,7 +12,6 @@
 /*******************************************************************************
  * Variable declarations
  ********************************************************************************/
-char SPI_temp_32b[4];
 
 /*******************************************************************************
  * Functions
@@ -21,23 +20,23 @@ char SPI_temp_32b[4];
 // constructor
 max30003::max30003(){};
 
-// write SPI registers
-void max30003::max30003_write_register(unsigned char WRITE_ADDRESS, unsigned long data)
+// write SPI registers of max30003
+void max30003::max30003_write_register(uint8_t reg_address, uint32_t data)
 {
-    // now combine the register address and the command into one byte:
-    byte dataToSend = (WRITE_ADDRESS << 1) | WREG;
-
-    // take the chip select low to select the device:
+    // chip select
     digitalWrite(MAX30003_CS_PIN, LOW);
-
-    delay(2);
-    SPI.transfer(dataToSend); // Send register location
-    SPI.transfer(data >> 16); // number of register to wr
-    SPI.transfer(data >> 8);  // number of register to wr
-    SPI.transfer(data);       // Send value to record into register
     delay(2);
 
-    // take the chip select high to de-select:
+    // select the register to write
+    SPI.transfer((reg_address << 1) | WREG);
+
+    // write 24 bits (3 bytes) of data
+    SPI.transfer(data >> 16);
+    SPI.transfer(data >> 8);
+    SPI.transfer(data);
+
+    // chip deselect
+    delay(2);
     digitalWrite(MAX30003_CS_PIN, HIGH);
 }
 
@@ -63,8 +62,8 @@ uint32_t max30003::max30003_read_register(uint8_t reg_address)
     return data;
 }
 
-// init max30003
-void max30003::max30003_begin()
+// initialize max30003 chip
+void max30003::max30003_init()
 {
     max30003_write_register(SW_RST, 0x000000);
     delay(100);
