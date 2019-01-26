@@ -36,6 +36,44 @@ void setup()
 
     // initialize max30003 chip
     ecg.max30003_init();
+
+    // while (1)
+    // {
+    // };
+}
+
+void send_data_to_pde_plot(int16_t ecg_sample)
+{
+    uint8_t data_bytes[20];
+
+    data_bytes[0] = 0x0A;
+    data_bytes[1] = 0xFA;
+    data_bytes[2] = 0x0C;
+    data_bytes[3] = 0;
+    data_bytes[4] = 0x02;
+
+    data_bytes[5] = ecg_sample >> 24;
+    data_bytes[6] = ecg_sample >> 16;
+    data_bytes[7] = ecg_sample >> 8;
+    data_bytes[8] = ecg_sample;
+
+    data_bytes[9] = 0x00;
+    data_bytes[10] = 0x00;
+    data_bytes[11] = 0x00;
+    data_bytes[12] = 0x00;
+
+    data_bytes[13] = 0x00;
+    data_bytes[14] = 0x00;
+    data_bytes[15] = 0x00;
+    data_bytes[16] = 0x00;
+
+    data_bytes[17] = 0x00;
+    data_bytes[18] = 0x0b;
+
+    for (int i = 0; i < 19; i++)
+    {
+        Serial.write(data_bytes[i]);
+    }
 }
 
 /*******************************************************************************
@@ -46,7 +84,7 @@ void setup()
  ********************************************************************************/
 void loop()
 {
-    // read data from max30003 fifo
+    // read ecg data from max30003 fifo
     uint32_t ecg_fifo = ecg.max30003_read_register(max30003::ECG_FIFO);
 
     // extract 24 bits data from fifo as signed integer for plotting
@@ -57,6 +95,7 @@ void loop()
 
     // print ecg voltage to display in serial plotter
     Serial.println(ecg_sample);
+    // send_data_to_pde_plot(ecg_sample);
 
     delay(8);
 }
