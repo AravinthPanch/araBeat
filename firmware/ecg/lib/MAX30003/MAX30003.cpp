@@ -117,7 +117,16 @@ void max30003::max30003_init()
     Serial.println(CNFG_ECG_r.all, BIN);
     Serial.println(CNFG_ECG_r.all, HEX);
 
-    max30003_write_register(max30003::CNFG_RTOR1, 0x3fc600);
-    max30003_write_register(max30003::SYNCH, 0x000000);
+    // R-to-R configuration
+    max30003::RtoR1Configuration_u CNFG_RTOR_r;
+    CNFG_RTOR_r.bits.en_rtor = 1; // Enable R-to-R detection
+    max30003_write_register(max30003::CNFG_RTOR1, CNFG_RTOR_r.all);
+    Serial.println("CNFG_RTOR_r");
+    Serial.println(CNFG_RTOR_r.all, BIN);
+    Serial.println(CNFG_RTOR_r.all, HEX);
+    delay(100);
+
+    // Synchronize to begin new ecg recording
+    max30003_write_register(max30003::SYNCH, 0);
     delay(100);
 }
