@@ -80,13 +80,30 @@ void max30003::max30003_init()
     // CNFG_GEN_r.bits.vth = 3;    // DC Lead-Off Voltage Threshold Selection VMID ± 500mV
     max30003_write_register(max30003::CNFG_GEN, CNFG_GEN_r.all);
     delay(100);
+    Serial.println("CNFG_GEN_r");
+    Serial.println(CNFG_GEN_r.all, BIN);
+    Serial.println(CNFG_GEN_r.all, HEX);
 
-    // 0x700000
-    max30003_write_register(max30003::CNFG_ALL, 0x720000);
+    // Calibration config register setting
+    max30003::CalConfiguration_u CNFG_CAL_r;
+    CNFG_CAL_r.bits.en_vcal = 1; // Calibration Source (VCALP and VCALN) Enable
+    CNFG_CAL_r.bits.vmode = 1;   // Calibration Source Mode Selection = Bipolar
+    CNFG_CAL_r.bits.vmag = 1; // Calibration Source Magnitude Selection (VMAG) = 0.50mV
+    max30003_write_register(max30003::CNFG_CAL, CNFG_CAL_r.all);
     delay(100);
+    Serial.println("CNFG_CAL_r");
+    Serial.println(CNFG_CAL_r.all, BIN);
+    Serial.println(CNFG_CAL_r.all, HEX);
 
-    max30003_write_register(max30003::CNFG_EMUX, 0x0B0000);
+    // MUX config register setting
+    max30003::MuxConfiguration_u CNFG_EMUX_r;
+    CNFG_EMUX_r.bits.caln_sel = 3; // Input is connected to VCALN
+    CNFG_EMUX_r.bits.calp_sel = 2; // Input is connected to VCALP
+    max30003_write_register(max30003::CNFG_EMUX, CNFG_EMUX_r.all);
     delay(100);
+    Serial.println("CNFG_EMUX_r");
+    Serial.println(CNFG_EMUX_r.all, BIN);
+    Serial.println(CNFG_EMUX_r.all, HEX);
 
     // d23 - d22 : 10 for 250sps , 00:500 sps
     max30003_write_register(max30003::CNFG_ECG, 0x805000);

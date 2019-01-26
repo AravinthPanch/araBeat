@@ -38,7 +38,7 @@ public:
         FIFO_RST = 0x0A,
         INFO = 0x0F,
         CNFG_GEN = 0x10,
-        CNFG_ALL = 0x12,
+        CNFG_CAL = 0x12,
         CNFG_EMUX = 0x14,
         CNFG_ECG = 0x15,
         CNFG_RTOR1 = 0x1D,
