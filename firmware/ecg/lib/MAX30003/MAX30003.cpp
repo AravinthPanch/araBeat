@@ -105,9 +105,17 @@ void max30003::max30003_init()
     Serial.println(CNFG_EMUX_r.all, BIN);
     Serial.println(CNFG_EMUX_r.all, HEX);
 
-    // d23 - d22 : 10 for 250sps , 00:500 sps
-    max30003_write_register(max30003::CNFG_ECG, 0x805000);
+    // ECG Config register setting
+    max30003::ECGConfiguration_u CNFG_ECG_r;
+    CNFG_ECG_r.bits.dlpf = 1; // Digital LPF cutoff = 40Hz
+    CNFG_ECG_r.bits.dhpf = 1; // Digital HPF cutoff = 0.5Hz
+    CNFG_ECG_r.bits.gain = 2; // ECG gain = 80V/V
+    CNFG_ECG_r.bits.rate = 2; // Sample rate = 128 sps for fMSTR = 32768Hz
+    max30003_write_register(max30003::CNFG_ECG, CNFG_ECG_r.all);
     delay(100);
+    Serial.println("CNFG_ECG_r");
+    Serial.println(CNFG_ECG_r.all, BIN);
+    Serial.println(CNFG_ECG_r.all, HEX);
 
     max30003_write_register(max30003::CNFG_RTOR1, 0x3fc600);
     max30003_write_register(max30003::SYNCH, 0x000000);

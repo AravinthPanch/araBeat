@@ -41,8 +41,8 @@ void setup()
 /*******************************************************************************
  * ECG voltage readout for serial plotting
  *
- * R-R is always above 0 in the serial plotter, when no ac noise is present
- * ac noise in the system comes from laptop charger, monitor HDMI
+ * R-R is always above 0 at 20V/V ECG Gain in the serial plotter, when no ac
+ * noise is present ac noise in the system comes from laptop charger, monitor HDMI
  ********************************************************************************/
 void loop()
 {
