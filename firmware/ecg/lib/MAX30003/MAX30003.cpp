@@ -80,9 +80,9 @@ void max30003::max30003_init()
     // CNFG_GEN_r.bits.vth = 3;    // DC Lead-Off Voltage Threshold Selection VMID ± 500mV
     max30003_write_register(max30003::CNFG_GEN, CNFG_GEN_r.all);
     delay(100);
-    Serial.println("CNFG_GEN_r");
-    Serial.println(CNFG_GEN_r.all, BIN);
-    Serial.println(CNFG_GEN_r.all, HEX);
+    // Serial.println("CNFG_GEN_r");
+    // Serial.println(CNFG_GEN_r.all, BIN);
+    // Serial.println(CNFG_GEN_r.all, HEX);
 
     // Calibration config register setting
     max30003::CalConfiguration_u CNFG_CAL_r;
@@ -91,9 +91,9 @@ void max30003::max30003_init()
     CNFG_CAL_r.bits.vmag = 1; // Calibration Source Magnitude Selection (VMAG) = 0.50mV
     max30003_write_register(max30003::CNFG_CAL, CNFG_CAL_r.all);
     delay(100);
-    Serial.println("CNFG_CAL_r");
-    Serial.println(CNFG_CAL_r.all, BIN);
-    Serial.println(CNFG_CAL_r.all, HEX);
+    // Serial.println("CNFG_CAL_r");
+    // Serial.println(CNFG_CAL_r.all, BIN);
+    // Serial.println(CNFG_CAL_r.all, HEX);
 
     // MUX config register setting
     max30003::MuxConfiguration_u CNFG_EMUX_r;
@@ -101,9 +101,9 @@ void max30003::max30003_init()
     CNFG_EMUX_r.bits.calp_sel = 2; // Input is connected to VCALP
     max30003_write_register(max30003::CNFG_EMUX, CNFG_EMUX_r.all);
     delay(100);
-    Serial.println("CNFG_EMUX_r");
-    Serial.println(CNFG_EMUX_r.all, BIN);
-    Serial.println(CNFG_EMUX_r.all, HEX);
+    // Serial.println("CNFG_EMUX_r");
+    // Serial.println(CNFG_EMUX_r.all, BIN);
+    // Serial.println(CNFG_EMUX_r.all, HEX);
 
     // ECG Config register setting
     max30003::ECGConfiguration_u CNFG_ECG_r;
@@ -113,18 +113,19 @@ void max30003::max30003_init()
     CNFG_ECG_r.bits.rate = 2; // Sample rate = 128 sps for fMSTR = 32768Hz
     max30003_write_register(max30003::CNFG_ECG, CNFG_ECG_r.all);
     delay(100);
-    Serial.println("CNFG_ECG_r");
-    Serial.println(CNFG_ECG_r.all, BIN);
-    Serial.println(CNFG_ECG_r.all, HEX);
+    // Serial.println("CNFG_ECG_r");
+    // Serial.println(CNFG_ECG_r.all, BIN);
+    // Serial.println(CNFG_ECG_r.all, HEX);
 
     // R-to-R configuration
     max30003::RtoR1Configuration_u CNFG_RTOR_r;
     CNFG_RTOR_r.bits.en_rtor = 1; // Enable R-to-R detection
     max30003_write_register(max30003::CNFG_RTOR1, CNFG_RTOR_r.all);
-    Serial.println("CNFG_RTOR_r");
-    Serial.println(CNFG_RTOR_r.all, BIN);
-    Serial.println(CNFG_RTOR_r.all, HEX);
     delay(100);
+    // Serial.println("CNFG_RTOR_r");
+    // Serial.println(CNFG_RTOR_r.all, BIN);
+    // Serial.println(CNFG_RTOR_r.all, HEX);
+
 
     // Synchronize to begin new ecg recording
     max30003_write_register(max30003::SYNCH, 0);
