@@ -65,10 +65,20 @@ uint32_t max30003::max30003_read_register(uint8_t reg_address)
 // initialize max30003 chip
 void max30003::max30003_init()
 {
-    max30003_write_register(max30003::SW_RST, 0x000000);
+    // Reset ECG to clear registers
+    max30003_write_register(max30003::SW_RST, 0);
     delay(100);
 
-    max30003_write_register(max30003::CNFG_GEN, 0x081007);
+    // General config register setting
+    max30003::GeneralConfiguration_u CNFG_GEN_r;
+    CNFG_GEN_r.bits.en_ecg = 1;    // Enable ECG channel
+    CNFG_GEN_r.bits.rbiasn = 1;    // Enable resistive bias on negative input
+    CNFG_GEN_r.bits.rbiasp = 1;    // Enable resistive bias on positive input
+    CNFG_GEN_r.bits.en_rbias = 1;  // Enable resistive bias
+    CNFG_GEN_r.bits.imag = 5;      // Current magnitude = 100nA
+    CNFG_GEN_r.bits.en_dcloff = 1; // Enable DC lead-off detection
+    // CNFG_GEN_r.bits.vth = 3;    // DC Lead-Off Voltage Threshold Selection VMID ± 500mV
+    max30003_write_register(max30003::CNFG_GEN, CNFG_GEN_r.all);
     delay(100);
 
     // 0x700000
