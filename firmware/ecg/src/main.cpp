@@ -47,7 +47,7 @@ void setup()
 void loop()
 {
     // read data from max30003 fifo
-    uint32_t ecg_fifo = ecg.max30003_read_register(ECG_FIFO);
+    uint32_t ecg_fifo = ecg.max30003_read_register(max30003::ECG_FIFO);
 
     // extract 24 bits data from fifo as signed integer for plotting
     int16_t ecg_sample = ecg_fifo >> 8;

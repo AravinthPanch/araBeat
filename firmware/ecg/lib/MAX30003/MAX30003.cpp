@@ -65,18 +65,24 @@ uint32_t max30003::max30003_read_register(uint8_t reg_address)
 // initialize max30003 chip
 void max30003::max30003_init()
 {
-    max30003_write_register(SW_RST, 0x000000);
+    max30003_write_register(max30003::SW_RST, 0x000000);
     delay(100);
-    max30003_write_register(CNFG_GEN, 0x081007);
+
+    max30003_write_register(max30003::CNFG_GEN, 0x081007);
     delay(100);
-    max30003_write_register(CNFG_CAL, 0x720000); // 0x700000
+
+    // 0x700000
+    max30003_write_register(max30003::CNFG_ALL, 0x720000);
     delay(100);
-    max30003_write_register(CNFG_EMUX, 0x0B0000);
+
+    max30003_write_register(max30003::CNFG_EMUX, 0x0B0000);
     delay(100);
+
     // d23 - d22 : 10 for 250sps , 00:500 sps
-    max30003_write_register(CNFG_ECG, 0x805000);
+    max30003_write_register(max30003::CNFG_ECG, 0x805000);
     delay(100);
-    max30003_write_register(CNFG_RTOR1, 0x3fc600);
-    max30003_write_register(SYNCH, 0x000000);
+
+    max30003_write_register(max30003::CNFG_RTOR1, 0x3fc600);
+    max30003_write_register(max30003::SYNCH, 0x000000);
     delay(100);
 }
