@@ -79,11 +79,12 @@ void max30003::max30003_init()
     CNFG_GEN_r.bits.rbiasn = 1;    // Enable resistive bias on negative input
     CNFG_GEN_r.bits.rbiasp = 1;    // Enable resistive bias on positive input
     CNFG_GEN_r.bits.en_rbias = 1;  // Enable resistive bias
-    CNFG_GEN_r.bits.imag = 5;      // Current magnitude = 100nA
+    CNFG_GEN_r.bits.imag = 2;      // Current magnitude = 10nA
     CNFG_GEN_r.bits.en_dcloff = 1; // Enable DC lead-off detection
     // CNFG_GEN_r.bits.vth = 3;    // DC Lead-Off Voltage Threshold Selection VMID ± 500mV
-    // VMID ± 500mV max30003_write_register(max30003::CNFG_GEN, CNFG_GEN_r.all);
-    max30003_write_register(max30003::CNFG_GEN, 0x081007);
+    // VMID ± 500mV
+    max30003_write_register(max30003::CNFG_GEN, CNFG_GEN_r.all);
+    // max30003_write_register(max30003::CNFG_GEN, 0x081007);
     delay(100);
     // Serial.println("CNFG_GEN_r");
     // Serial.println(CNFG_GEN_r.all, BIN);
@@ -94,8 +95,8 @@ void max30003::max30003_init()
     CNFG_CAL_r.bits.en_vcal = 1; // Calibration Source (VCALP and VCALN) Enable
     CNFG_CAL_r.bits.vmode = 1;   // Calibration Source Mode Selection = Bipolar
     CNFG_CAL_r.bits.vmag = 1; // Calibration Source Magnitude Selection (VMAG) = 0.50mV
-    // max30003_write_register(max30003::CNFG_CAL, CNFG_CAL_r.all);
-    max30003_write_register(max30003::CNFG_CAL, 0x720000);
+    max30003_write_register(max30003::CNFG_CAL, CNFG_CAL_r.all);
+    // max30003_write_register(max30003::CNFG_CAL, 0x720000);
     delay(100);
     // Serial.println("CNFG_CAL_r");
     // Serial.println(CNFG_CAL_r.all, BIN);
@@ -105,8 +106,8 @@ void max30003::max30003_init()
     max30003::MuxConfiguration_u CNFG_EMUX_r;
     CNFG_EMUX_r.bits.caln_sel = 3; // Input is connected to VCALN
     CNFG_EMUX_r.bits.calp_sel = 2; // Input is connected to VCALP
-    // max30003_write_register(max30003::CNFG_EMUX, CNFG_EMUX_r.all);
-    max30003_write_register(max30003::CNFG_EMUX, 0x0B0000);
+    max30003_write_register(max30003::CNFG_EMUX, CNFG_EMUX_r.all);
+    // max30003_write_register(max30003::CNFG_EMUX, 0x0B0000);
     delay(100);
     // Serial.println("CNFG_EMUX_r");
     // Serial.println(CNFG_EMUX_r.all, BIN);
@@ -116,10 +117,10 @@ void max30003::max30003_init()
     max30003::ECGConfiguration_u CNFG_ECG_r;
     CNFG_ECG_r.bits.dlpf = 1; // Digital LPF cutoff = 40Hz
     CNFG_ECG_r.bits.dhpf = 1; // Digital HPF cutoff = 0.5Hz
-    CNFG_ECG_r.bits.gain = 2; // ECG gain = 80V/V
+    CNFG_ECG_r.bits.gain = 0; // ECG gain = 20V/V
     CNFG_ECG_r.bits.rate = 2; // Sample rate = 128 sps for fMSTR = 32768Hz
-    // max30003_write_register(max30003::CNFG_ECG, CNFG_ECG_r.all);
-    max30003_write_register(max30003::CNFG_ECG, 0x805000);
+    max30003_write_register(max30003::CNFG_ECG, CNFG_ECG_r.all);
+    // max30003_write_register(max30003::CNFG_ECG, 0x805000);
     delay(100);
     // Serial.println("CNFG_ECG_r");
     // Serial.println(CNFG_ECG_r.all, BIN);
@@ -132,8 +133,8 @@ void max30003::max30003_init()
     CNFG_RTOR_r.bits.pavg = 0b11;    // 16-average
     CNFG_RTOR_r.bits.ptsf = 0b0011;  // PTSF = 4/16
     CNFG_RTOR_r.bits.en_rtor = 1;    // Enable R-to-R detection
-    // max30003_write_register(max30003::CNFG_RTOR1, CNFG_RTOR_r.all);
-    max30003_write_register(max30003::CNFG_RTOR1, 0x3fc600);
+    max30003_write_register(max30003::CNFG_RTOR1, CNFG_RTOR_r.all);
+    // max30003_write_register(max30003::CNFG_RTOR1, 0x3fc600);
     delay(100);
     // Serial.println("CNFG_RTOR_r");
     // Serial.println(CNFG_RTOR_r.all, BIN);
