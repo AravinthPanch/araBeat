@@ -15,7 +15,6 @@
  ********************************************************************************/
 max30003 ecg;
 
-const int RTOR_REG_OFFSET = 10;
 const float RTOR_LSB_RES = 0.0078125f;
 
 /*******************************************************************************
@@ -47,7 +46,7 @@ void setup()
 
 // send data to Protocental GUI
 // it works only with ECG Gain 20V/V, otherwise too noisy
-void send_data_to_pde_plot(int16_t ecg_sample)
+void send_data_to_pde_plot(int16_t ecg_sample, uint16_t r_to_r, uint16_t bpm)
 {
     uint8_t data_bytes[20];
 
@@ -62,13 +61,13 @@ void send_data_to_pde_plot(int16_t ecg_sample)
     data_bytes[7] = ecg_sample >> 8;
     data_bytes[8] = ecg_sample;
 
-    data_bytes[9] = 0x00;
-    data_bytes[10] = 0x00;
+    data_bytes[9] = r_to_r;
+    data_bytes[10] = r_to_r >> 8;
     data_bytes[11] = 0x00;
     data_bytes[12] = 0x00;
 
-    data_bytes[13] = 0x00;
-    data_bytes[14] = 0x00;
+    data_bytes[13] = bpm;
+    data_bytes[14] = bpm >> 8;
     data_bytes[15] = 0x00;
     data_bytes[16] = 0x00;
 
@@ -97,20 +96,23 @@ void loop()
     int16_t ecg_sample = ecg_fifo >> 6;
 
     // print ecg voltage to display in serial plotter
-    Serial.println(ecg_sample);
-    // send_data_to_pde_plot(ecg_sample);
+    // Serial.println(ecg_sample);
 
     // read r-to-r data from max30003
     uint32_t r_to_r = ecg.max30003_read_register(max30003::RTOR);
 
     // extract 14 bits data from r_to_r register
-    r_to_r = r_to_r >> RTOR_REG_OFFSET;
+    r_to_r = ((r_to_r >> 10) & 0x3fff);
+    // Serial.print(r_to_r * 8);
+    // Serial.print(",");
 
     // calculate BPM
     float bpm = 1.0f / (r_to_r * RTOR_LSB_RES / 60.0f);
-
-    // print
     // Serial.println(bpm);
+
+    // r_to_r must be multiplied by 8 to get the time interval in millisecond
+    // 8ms resolution is for 32768Hz master clock
+    send_data_to_pde_plot(ecg_sample, (uint16_t)r_to_r * 8, (int16_t)bpm);
 
     delay(8);
 }
