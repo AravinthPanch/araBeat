@@ -44,6 +44,9 @@ void max30003::max30003_write_register(uint8_t reg_address, uint32_t data)
 uint32_t max30003::max30003_read_register(uint8_t reg_address)
 {
     uint32_t data = 0;
+    uint32_t data0 = 0;
+    uint32_t data1 = 0;
+    uint32_t data2 = 0;
 
     // chip select
     digitalWrite(MAX30003_CS_PIN, LOW);
@@ -52,9 +55,10 @@ uint32_t max30003::max30003_read_register(uint8_t reg_address)
     SPI.transfer((reg_address << 1) | RREG);
 
     // read 24 bits (3 bytes) of data from max30003 register
-    data |= (SPI.transfer(0xff) << 16);
-    data |= (SPI.transfer(0xff) << 8);
-    data |= SPI.transfer(0xff);
+    data0 = SPI.transfer(0xff);
+    data1 = SPI.transfer(0xff);
+    data2 = SPI.transfer(0xff);
+    data = (data0 << 16 | data1 << 8 | data2);
 
     // chip deselect
     digitalWrite(MAX30003_CS_PIN, HIGH);
@@ -66,7 +70,7 @@ uint32_t max30003::max30003_read_register(uint8_t reg_address)
 void max30003::max30003_init()
 {
     // Reset ECG to clear registers
-    max30003_write_register(max30003::SW_RST, 0);
+    max30003_write_register(max30003::SW_RST, 0x000000);
     delay(100);
 
     // General config register setting
@@ -78,7 +82,8 @@ void max30003::max30003_init()
     CNFG_GEN_r.bits.imag = 5;      // Current magnitude = 100nA
     CNFG_GEN_r.bits.en_dcloff = 1; // Enable DC lead-off detection
     // CNFG_GEN_r.bits.vth = 3;    // DC Lead-Off Voltage Threshold Selection VMID ± 500mV
-    max30003_write_register(max30003::CNFG_GEN, CNFG_GEN_r.all);
+    // VMID ± 500mV max30003_write_register(max30003::CNFG_GEN, CNFG_GEN_r.all);
+    max30003_write_register(max30003::CNFG_GEN, 0x081007);
     delay(100);
     // Serial.println("CNFG_GEN_r");
     // Serial.println(CNFG_GEN_r.all, BIN);
@@ -89,7 +94,8 @@ void max30003::max30003_init()
     CNFG_CAL_r.bits.en_vcal = 1; // Calibration Source (VCALP and VCALN) Enable
     CNFG_CAL_r.bits.vmode = 1;   // Calibration Source Mode Selection = Bipolar
     CNFG_CAL_r.bits.vmag = 1; // Calibration Source Magnitude Selection (VMAG) = 0.50mV
-    max30003_write_register(max30003::CNFG_CAL, CNFG_CAL_r.all);
+    // max30003_write_register(max30003::CNFG_CAL, CNFG_CAL_r.all);
+    max30003_write_register(max30003::CNFG_CAL, 0x720000);
     delay(100);
     // Serial.println("CNFG_CAL_r");
     // Serial.println(CNFG_CAL_r.all, BIN);
@@ -99,7 +105,8 @@ void max30003::max30003_init()
     max30003::MuxConfiguration_u CNFG_EMUX_r;
     CNFG_EMUX_r.bits.caln_sel = 3; // Input is connected to VCALN
     CNFG_EMUX_r.bits.calp_sel = 2; // Input is connected to VCALP
-    max30003_write_register(max30003::CNFG_EMUX, CNFG_EMUX_r.all);
+    // max30003_write_register(max30003::CNFG_EMUX, CNFG_EMUX_r.all);
+    max30003_write_register(max30003::CNFG_EMUX, 0x0B0000);
     delay(100);
     // Serial.println("CNFG_EMUX_r");
     // Serial.println(CNFG_EMUX_r.all, BIN);
@@ -111,7 +118,8 @@ void max30003::max30003_init()
     CNFG_ECG_r.bits.dhpf = 1; // Digital HPF cutoff = 0.5Hz
     CNFG_ECG_r.bits.gain = 2; // ECG gain = 80V/V
     CNFG_ECG_r.bits.rate = 2; // Sample rate = 128 sps for fMSTR = 32768Hz
-    max30003_write_register(max30003::CNFG_ECG, CNFG_ECG_r.all);
+    // max30003_write_register(max30003::CNFG_ECG, CNFG_ECG_r.all);
+    max30003_write_register(max30003::CNFG_ECG, 0x805000);
     delay(100);
     // Serial.println("CNFG_ECG_r");
     // Serial.println(CNFG_ECG_r.all, BIN);
@@ -124,13 +132,14 @@ void max30003::max30003_init()
     CNFG_RTOR_r.bits.pavg = 0b11;    // 16-average
     CNFG_RTOR_r.bits.ptsf = 0b0011;  // PTSF = 4/16
     CNFG_RTOR_r.bits.en_rtor = 1;    // Enable R-to-R detection
-    max30003_write_register(max30003::CNFG_RTOR1, CNFG_RTOR_r.all);
+    // max30003_write_register(max30003::CNFG_RTOR1, CNFG_RTOR_r.all);
+    max30003_write_register(max30003::CNFG_RTOR1, 0x3fc600);
     delay(100);
     // Serial.println("CNFG_RTOR_r");
     // Serial.println(CNFG_RTOR_r.all, BIN);
     // Serial.println(CNFG_RTOR_r.all, HEX);
 
     // Synchronize to begin new ecg recording
-    max30003_write_register(max30003::SYNCH, 0);
+    max30003_write_register(max30003::SYNCH, 0x000000);
     delay(100);
 }

@@ -92,11 +92,9 @@ void loop()
     // read ecg data from max30003 fifo
     uint32_t ecg_fifo = ecg.max30003_read_register(max30003::ECG_FIFO);
 
-    // extract 24 bits data from fifo as signed integer for plotting
-    int16_t ecg_sample = ecg_fifo >> 8;
-
-    // shift out ETG[5:3] & PTG[2:0] bits
-    ecg_sample = ecg_fifo >> 6;
+    // shift out ETG[5:3] & PTG[2:0] bits & extract 18 bits data as signed
+    // integer for serial plotting
+    int16_t ecg_sample = ecg_fifo >> 6;
 
     // print ecg voltage to display in serial plotter
     Serial.println(ecg_sample);
