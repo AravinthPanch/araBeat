@@ -18,12 +18,13 @@ const byte int1_pin = 2;
 // D3 on Arduino Nano
 const byte int2_pin = 3;
 
-const int EINT_STATUS_MASK = 1 << 23;
-const int FIFO_OVF_MASK = 0x7;
-const int FIFO_VALID_SAMPLE_MASK = 0x0;
-const int FIFO_FAST_SAMPLE_MASK = 0x1;
-const int ETAG_BITS_MASK = 0x7;
-const int RTOR_STATUS_MASK = 1 << 10;
+const uint32_t EINT_STATUS_MASK = 0x800000;   // D[23] bit
+const uint32_t DCLOFF_STATUS_MASK = 0x100000; // D[20] bit
+const uint32_t RTOR_STATUS_MASK = 0x400;      // D[11] bit
+const uint8_t FIFO_OVF_MASK = 0x7;
+const uint8_t FIFO_VALID_SAMPLE_MASK = 0x0;
+const uint8_t FIFO_FAST_SAMPLE_MASK = 0x1;
+const uint8_t ETAG_BITS_MASK = 0x7;
 const float RTOR_LSB_RES = 0.0078125f;
 
 max30003 ecg;
@@ -116,11 +117,20 @@ void loop()
     {
         ecg_int_flag = 0;
         uint32_t status = ecg.max30003_read_register(max30003::STATUS);
+        // Serial.print("#");
         // Serial.println(status, BIN);
+
+        // DC Lead-off detection
+        if ((status & DCLOFF_STATUS_MASK) == DCLOFF_STATUS_MASK)
+        {
+            // Serial.println("DC Lead-off detected");
+        }
 
         // R-to-R readout
         if ((status & RTOR_STATUS_MASK) == RTOR_STATUS_MASK)
         {
+            // Serial.println("R-to-R readout");
+
             // Read RtoR register
             r_to_r = ecg.max30003_read_register(max30003::RTOR);
 
@@ -136,6 +146,8 @@ void loop()
         // ECG readout
         if ((status & EINT_STATUS_MASK) == EINT_STATUS_MASK)
         {
+            // Serial.println("ECG readout");
+
             // reset sample counter
             sample_count = 0;
 
@@ -167,7 +179,8 @@ void loop()
             {
                 // r_to_r must be multiplied by 8 to get the time interval in
                 // millisecond 8ms resolution is for 32768Hz master clock
-                send_data_to_pde_plot(ecg_sample[i], (uint16_t)r_to_r * 8, (int16_t)bpm);
+                // send_data_to_pde_plot(ecg_sample[i], (uint16_t)r_to_r * 8, (int16_t)bpm);
+                Serial.println(ecg_sample[i]);
             }
         }
     }

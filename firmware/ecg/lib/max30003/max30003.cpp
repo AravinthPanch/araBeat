@@ -75,14 +75,13 @@ void max30003::max30003_init()
 
     // General config register setting
     max30003::GeneralConfiguration_u CNFG_GEN_r;
-    CNFG_GEN_r.bits.en_ecg = 1;    // Enable ECG channel
-    CNFG_GEN_r.bits.rbiasn = 1;    // Enable resistive bias on negative input
-    CNFG_GEN_r.bits.rbiasp = 1;    // Enable resistive bias on positive input
-    CNFG_GEN_r.bits.en_rbias = 1;  // Enable resistive bias
-    CNFG_GEN_r.bits.imag = 2;      // Current magnitude = 10nA
-    CNFG_GEN_r.bits.en_dcloff = 1; // Enable DC lead-off detection
-    // CNFG_GEN_r.bits.vth = 3;    // DC Lead-Off Voltage Threshold Selection
-    // VMID ± 500mV VMID ± 500mV
+    CNFG_GEN_r.bits.en_ecg = 1;       // Enable ECG channel
+    CNFG_GEN_r.bits.en_rbias = 1;     // Enable resistive bias
+    CNFG_GEN_r.bits.rbiasn = 1;       // Enable resistive bias on negative input
+    CNFG_GEN_r.bits.rbiasp = 1;       // Enable resistive bias on positive input
+    CNFG_GEN_r.bits.imag = 0b101;     // Current magnitude
+    CNFG_GEN_r.bits.en_dcloff = 0b01; // Enable DC lead-off detection
+    CNFG_GEN_r.bits.vth = 0b11;       // Lead-Off Voltage Threshold
     max30003_write_register(max30003::CNFG_GEN, CNFG_GEN_r.all);
     // max30003_write_register(max30003::CNFG_GEN, 0x081007);
     delay(100);
@@ -115,10 +114,10 @@ void max30003::max30003_init()
 
     // ECG Config register setting
     max30003::ECGConfiguration_u CNFG_ECG_r;
-    CNFG_ECG_r.bits.dlpf = 1; // Digital LPF cutoff = 40Hz
-    CNFG_ECG_r.bits.dhpf = 1; // Digital HPF cutoff = 0.5Hz
-    CNFG_ECG_r.bits.gain = 0; // ECG gain = 20V/V
-    CNFG_ECG_r.bits.rate = 2; // Sample rate = 128 sps for fMSTR = 32768Hz
+    CNFG_ECG_r.bits.dlpf = 1;    // Digital LPF cutoff = 40Hz
+    CNFG_ECG_r.bits.dhpf = 1;    // Digital HPF cutoff = 0.5Hz
+    CNFG_ECG_r.bits.gain = 0b01; // ECG gain
+    CNFG_ECG_r.bits.rate = 2;    // Sample rate = 128 sps for fMSTR = 32768Hz
     max30003_write_register(max30003::CNFG_ECG, CNFG_ECG_r.all);
     // max30003_write_register(max30003::CNFG_ECG, 0x805000);
     delay(100);
@@ -143,9 +142,10 @@ void max30003::max30003_init()
     // Enable interrupts register setting
     max30003::EnableInterrupts_u EN_INT_r;
     EN_INT_r.all = 0;
-    EN_INT_r.bits.en_eint = 1;   // Enable EINT interrupt
-    EN_INT_r.bits.en_rrint = 1;  // Disable R-to-R interrupt
-    EN_INT_r.bits.intb_type = 1; // Open-drain NMOS with internal pullup
+    EN_INT_r.bits.en_eint = 1;      // Enable EINT interrupt
+    EN_INT_r.bits.en_rrint = 1;     // Enable R-to-R interrupt
+    EN_INT_r.bits.intb_type = 1;    // CMOS Driver
+    EN_INT_r.bits.en_dcloffint = 1; // Enable DC Lead-Off Detection Interrupt
     max30003_write_register(max30003::EN_INT, EN_INT_r.all);
 
     // Manage interrupts register setting
