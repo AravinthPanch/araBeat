@@ -154,21 +154,45 @@ void update_dcloff_array()
     }
 }
 
-//
+// check if electrodes are touched
 int16_t voltage_threshold = 0;
 uint8_t above_voltage_threshold_count = 0;
-void is_dc_lead_off()
+int16_t dcloff_threshold_count_midpoint = 10;
+bool are_electrodes_touched()
 {
+    bool result = false;
+    // count voltages above threshold
     for (int i = 0; i < dcloff_array_size; i++)
     {
         if (dcloff_array[i] >= voltage_threshold)
             above_voltage_threshold_count++;
     }
 
-    // Serial.print("##");
-    // Serial.println(above_voltage_threshold_count);
+    Serial.println(above_voltage_threshold_count);
+
+    if (above_voltage_threshold_count < dcloff_threshold_count_midpoint)
+        result = true;
+
+    // reset counter
     dcloff_array_count = 0;
     above_voltage_threshold_count = 0;
+
+    return result;
+}
+
+// if electrodes are touched, fake heartbeat till RTOR interrupt
+const uint16_t default_rtor_time_ms = 800;
+void check_electrodes()
+{
+    // if dcloff_array is full, check if electrodes are touched
+    if (dcloff_array_count == dcloff_array_size)
+    {
+        if (are_electrodes_touched())
+        {
+            set_led_timer(default_rtor_time_ms);
+            Serial.println("Fake It Till You Make It");
+        }
+    }
 }
 
 /*******************************************************************************
@@ -180,10 +204,8 @@ void is_dc_lead_off()
 void loop()
 {
     current_time_ms = millis();
+    check_electrodes();
     check_rtor_led();
-
-    if (dcloff_array_count == dcloff_array_size)
-        is_dc_lead_off();
 
     if (ecg_int_flag)
     {
@@ -201,7 +223,7 @@ void loop()
         // R-to-R readout
         if ((status & RTOR_STATUS_MASK) == RTOR_STATUS_MASK)
         {
-            // Serial.println("R-to-R readout");
+            Serial.println("R-to-R readout");
 
             // Read RtoR register
             r_to_r = ecg.max30003_read_register(max30003::RTOR);
@@ -253,7 +275,7 @@ void loop()
             {
                 // r_to_r must be multiplied by 8 to get the time interval in
                 // millisecond 8ms resolution is for 32768Hz master clock
-                send_data_to_pde_plot(ecg_sample[i], (uint16_t)r_to_r * 8, (int16_t)bpm);
+                // send_data_to_pde_plot(ecg_sample[i], (uint16_t)r_to_r * 8, (int16_t)bpm);
 
                 // Serial.print(r_to_r * 8);
                 // Serial.print(",");
