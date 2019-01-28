@@ -14,9 +14,9 @@
  * Variable declarations
  ********************************************************************************/
 // D2 on Arduino Nano
-const byte int1_pin = 2;
-// D3 on Arduino Nano
-const byte int2_pin = 3;
+const uint8_t int1_pin = 2;
+// RTOR LED pin
+const uint8_t led_pin = 3;
 
 const uint32_t EINT_STATUS_MASK = 0x800000;   // D[23] bit
 const uint32_t DCLOFF_STATUS_MASK = 0x100000; // D[20] bit
@@ -44,7 +44,7 @@ void setup()
     Serial.begin(115200);
 
     // setup status LED
-    pinMode(LED_BUILTIN, OUTPUT);
+    pinMode(led_pin, OUTPUT);
 
     // setup interrupt
     pinMode(int1_pin, INPUT);
@@ -101,6 +101,40 @@ void send_data_to_pde_plot(int16_t ecg_sample, uint16_t r_to_r, uint16_t bpm)
     }
 }
 
+// switch led off after R-TO-R interval timeout
+bool led_status = LOW;
+uint32_t current_time_ms = 0;
+uint32_t last_time_ms = 0;
+uint16_t interval_time_ms = 800;
+void check_rtor_led()
+{
+    if ((current_time_ms - last_time_ms) >= interval_time_ms)
+    {
+        last_time_ms = current_time_ms;
+
+        if (led_status == HIGH)
+        {
+            // Serial.println("timer_out");
+            led_status = LOW;
+            digitalWrite(led_pin, LOW);
+        }
+    }
+}
+
+// switch led on and set R-TO-R interval timeout
+const uint16_t min_rtor_interval = 500;  // 120 bpm
+const uint16_t max_rtor_interval = 1000; // 60 bpm
+void set_led_timer(uint16_t time_ms)
+{
+    if (time_ms >= min_rtor_interval && time_ms <= max_rtor_interval)
+    {
+        // Serial.println("set_led_timer");
+        led_status = HIGH;
+        digitalWrite(led_pin, HIGH);
+        interval_time_ms = time_ms;
+    }
+}
+
 /*******************************************************************************
  * ECG voltage readout for serial plotting
  *
@@ -113,6 +147,9 @@ float bpm;
 
 void loop()
 {
+    current_time_ms = millis();
+    check_rtor_led();
+
     if (ecg_int_flag)
     {
         ecg_int_flag = 0;
@@ -137,6 +174,8 @@ void loop()
             // extract 14 bits data from r_to_r register
             r_to_r = ((r_to_r >> 10) & 0x3fff);
             // Serial.println(r_to_r * 8);
+
+            set_led_timer(r_to_r * 8);
 
             // calculate BPM
             bpm = 1.0f / (r_to_r * RTOR_LSB_RES / 60.0f);
@@ -179,8 +218,9 @@ void loop()
             {
                 // r_to_r must be multiplied by 8 to get the time interval in
                 // millisecond 8ms resolution is for 32768Hz master clock
-                // send_data_to_pde_plot(ecg_sample[i], (uint16_t)r_to_r * 8, (int16_t)bpm);
-                Serial.println(ecg_sample[i]);
+                send_data_to_pde_plot(ecg_sample[i], (uint16_t)r_to_r * 8, (int16_t)bpm);
+
+                // Serial.println(ecg_sample[i]);
             }
         }
     }
