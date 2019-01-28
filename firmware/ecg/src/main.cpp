@@ -13,15 +13,20 @@
 /*******************************************************************************
  * Variable declarations
  ********************************************************************************/
-max30003 ecg;
-
-const float RTOR_LSB_RES = 0.0078125f;
-
 // D2 on Arduino Nano
 const byte int1_pin = 2;
 // D3 on Arduino Nano
 const byte int2_pin = 3;
 
+const int EINT_STATUS_MASK = 1 << 23;
+const int FIFO_OVF_MASK = 0x7;
+const int FIFO_VALID_SAMPLE_MASK = 0x0;
+const int FIFO_FAST_SAMPLE_MASK = 0x1;
+const int ETAG_BITS_MASK = 0x7;
+const int RTOR_STATUS_MASK = 1 << 10;
+const float RTOR_LSB_RES = 0.0078125f;
+
+max30003 ecg;
 /*******************************************************************************
  * Functions
  ********************************************************************************/
@@ -101,50 +106,34 @@ void send_data_to_pde_plot(int16_t ecg_sample, uint16_t r_to_r, uint16_t bpm)
  * R-R is always above 0 at 20V/V ECG Gain in the serial plotter, when no ac
  * noise is present ac noise in the system comes from laptop charger, monitor HDMI
  ********************************************************************************/
-const int EINT_STATUS_MASK = 1 << 23;
-const int FIFO_OVF_MASK = 0x7;
-const int FIFO_VALID_SAMPLE_MASK = 0x0;
-const int FIFO_FAST_SAMPLE_MASK = 0x1;
-const int ETAG_BITS_MASK = 0x7;
+uint32_t ecg_fifo, sample_count, etag_bits[32], r_to_r;
+int16_t ecg_sample[32];
+float bpm;
 
 void loop()
 {
-    // // read ecg data from max30003 fifo
-    // uint32_t ecg_fifo = ecg.max30003_read_register(max30003::ECG_FIFO);
-    //
-    // // shift out ETG[5:3] & PTG[2:0] bits & extract 18 bits data as signed
-    // // integer for serial plotting
-    // int16_t ecg_sample = ecg_fifo >> 6;
-    //
-    // // print ecg voltage to display in serial plotter
-    // // Serial.println(ecg_sample);
-    //
-    // // read r-to-r data from max30003
-    // uint32_t r_to_r = ecg.max30003_read_register(max30003::RTOR);
-    //
-    // // extract 14 bits data from r_to_r register
-    // r_to_r = ((r_to_r >> 10) & 0x3fff);
-    // // Serial.print(r_to_r * 8);
-    // // Serial.print(",");
-    //
-    // // calculate BPM
-    // float bpm = 1.0f / (r_to_r * RTOR_LSB_RES / 60.0f);
-    // // Serial.println(bpm);
-    //
-    // // r_to_r must be multiplied by 8 to get the time interval in millisecond
-    // // 8ms resolution is for 32768Hz master clock
-    // send_data_to_pde_plot(ecg_sample, (uint16_t)r_to_r * 8, (int16_t)bpm);
-    //
-    // delay(8);
-
     if (ecg_int_flag)
     {
         ecg_int_flag = 0;
         uint32_t status = ecg.max30003_read_register(max30003::STATUS);
+        // Serial.println(status, BIN);
 
-        uint32_t ecg_fifo, sample_count, etag_bits[32];
-        int16_t ecg_sample[32];
+        // R-to-R readout
+        if ((status & RTOR_STATUS_MASK) == RTOR_STATUS_MASK)
+        {
+            // Read RtoR register
+            r_to_r = ecg.max30003_read_register(max30003::RTOR);
 
+            // extract 14 bits data from r_to_r register
+            r_to_r = ((r_to_r >> 10) & 0x3fff);
+            // Serial.println(r_to_r * 8);
+
+            // calculate BPM
+            bpm = 1.0f / (r_to_r * RTOR_LSB_RES / 60.0f);
+            // Serial.println(bpm);
+        }
+
+        // ECG readout
         if ((status & EINT_STATUS_MASK) == EINT_STATUS_MASK)
         {
             // reset sample counter
@@ -176,7 +165,9 @@ void loop()
             // Print results
             for (int i = 0; (sample_count > 1 && i < sample_count); i++)
             {
-                Serial.println(ecg_sample[i]);
+                // r_to_r must be multiplied by 8 to get the time interval in
+                // millisecond 8ms resolution is for 32768Hz master clock
+                send_data_to_pde_plot(ecg_sample[i], (uint16_t)r_to_r * 8, (int16_t)bpm);
             }
         }
     }

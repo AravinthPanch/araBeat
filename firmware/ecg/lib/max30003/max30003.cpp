@@ -144,7 +144,7 @@ void max30003::max30003_init()
     max30003::EnableInterrupts_u EN_INT_r;
     EN_INT_r.all = 0;
     EN_INT_r.bits.en_eint = 1;   // Enable EINT interrupt
-    EN_INT_r.bits.en_rrint = 0;  // Disable R-to-R interrupt
+    EN_INT_r.bits.en_rrint = 1;  // Disable R-to-R interrupt
     EN_INT_r.bits.intb_type = 1; // Open-drain NMOS with internal pullup
     max30003_write_register(max30003::EN_INT, EN_INT_r.all);
 
