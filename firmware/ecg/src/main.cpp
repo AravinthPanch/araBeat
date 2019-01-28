@@ -168,7 +168,7 @@ bool are_electrodes_touched()
             above_voltage_threshold_count++;
     }
 
-    Serial.println(above_voltage_threshold_count);
+    // Serial.println(above_voltage_threshold_count);
 
     if (above_voltage_threshold_count < dcloff_threshold_count_midpoint)
         result = true;
@@ -190,7 +190,7 @@ void check_electrodes()
         if (are_electrodes_touched())
         {
             set_led_timer(default_rtor_time_ms);
-            Serial.println("Fake It Till You Make It");
+            // Serial.println("Fake It Till You Make It");
         }
     }
 }
@@ -214,16 +214,16 @@ void loop()
         // Serial.print("#");
         // Serial.println(status, BIN);
 
-        // DC Lead-off detection
+        // DC Lead-off detection interrupt
         if ((status & DCLOFF_STATUS_MASK) == DCLOFF_STATUS_MASK)
         {
             // Serial.println("DC Lead-off detected");
         }
 
-        // R-to-R readout
+        // R-to-R readout interrupt
         if ((status & RTOR_STATUS_MASK) == RTOR_STATUS_MASK)
         {
-            Serial.println("R-to-R readout");
+            // Serial.println("R-to-R readout");
 
             // Read RtoR register
             r_to_r = ecg.max30003_read_register(max30003::RTOR);
@@ -239,7 +239,7 @@ void loop()
             // Serial.println(bpm);
         }
 
-        // ECG readout
+        // ECG readout interrupt
         if ((status & EINT_STATUS_MASK) == EINT_STATUS_MASK)
         {
             // Serial.println("ECG readout");
@@ -275,7 +275,7 @@ void loop()
             {
                 // r_to_r must be multiplied by 8 to get the time interval in
                 // millisecond 8ms resolution is for 32768Hz master clock
-                // send_data_to_pde_plot(ecg_sample[i], (uint16_t)r_to_r * 8, (int16_t)bpm);
+                send_data_to_pde_plot(ecg_sample[i], (uint16_t)r_to_r * 8, (int16_t)bpm);
 
                 // Serial.print(r_to_r * 8);
                 // Serial.print(",");
