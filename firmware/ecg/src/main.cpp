@@ -28,6 +28,10 @@ const uint8_t ETAG_BITS_MASK = 0x7;
 const float RTOR_LSB_RES = 0.0078125f;
 
 max30003 ecg;
+
+uint32_t ecg_fifo, sample_count, etag_bits[32], r_to_r;
+int16_t ecg_sample[32];
+float bpm;
 /*******************************************************************************
  * Functions
  ********************************************************************************/
@@ -135,20 +139,51 @@ void set_led_timer(uint16_t time_ms)
     }
 }
 
+// brute force dc lead-off delection
+const uint8_t dcloff_array_size = 96;
+int16_t dcloff_array[dcloff_array_size];
+uint8_t dcloff_array_count = 0;
+void update_dcloff_array()
+{
+    for (int i = 0;
+         (dcloff_array_count < dcloff_array_size && sample_count > 1 && i < sample_count);
+         i++)
+    {
+        dcloff_array[dcloff_array_count] = ecg_sample[i];
+        dcloff_array_count++;
+    }
+}
+
+//
+int16_t voltage_threshold = 0;
+uint8_t above_voltage_threshold_count = 0;
+void is_dc_lead_off()
+{
+    for (int i = 0; i < dcloff_array_size; i++)
+    {
+        if (dcloff_array[i] >= voltage_threshold)
+            above_voltage_threshold_count++;
+    }
+
+    // Serial.print("##");
+    // Serial.println(above_voltage_threshold_count);
+    dcloff_array_count = 0;
+    above_voltage_threshold_count = 0;
+}
+
 /*******************************************************************************
  * ECG voltage readout for serial plotting
  *
  * R-R is always above 0 at 20V/V ECG Gain in the serial plotter, when no ac
  * noise is present ac noise in the system comes from laptop charger, monitor HDMI
  ********************************************************************************/
-uint32_t ecg_fifo, sample_count, etag_bits[32], r_to_r;
-int16_t ecg_sample[32];
-float bpm;
-
 void loop()
 {
     current_time_ms = millis();
     check_rtor_led();
+
+    if (dcloff_array_count == dcloff_array_size)
+        is_dc_lead_off();
 
     if (ecg_int_flag)
     {
@@ -173,7 +208,7 @@ void loop()
 
             // extract 14 bits data from r_to_r register
             r_to_r = ((r_to_r >> 10) & 0x3fff);
-            // Serial.println(r_to_r * 8);
+            // Serial.print(r_to_r * 8);
 
             set_led_timer(r_to_r * 8);
 
@@ -220,8 +255,11 @@ void loop()
                 // millisecond 8ms resolution is for 32768Hz master clock
                 send_data_to_pde_plot(ecg_sample[i], (uint16_t)r_to_r * 8, (int16_t)bpm);
 
+                // Serial.print(r_to_r * 8);
+                // Serial.print(",");
                 // Serial.println(ecg_sample[i]);
             }
+            update_dcloff_array();
         }
     }
 }
