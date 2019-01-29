@@ -1,0 +1,26 @@
+{
+  "name": "arabea-gui",
+  "description": "Graphical User Interface for ECG optimisation",
+  "main": "main.js",
+  "authors": [
+    "GitHub"
+  ],
+  "license": "CC0-1.0",
+  "keywords": [
+    "arabeat",
+    "new-media-art",
+    "AravinthPanch"
+  ],
+  "homepage": "https://github.com/AravinthPanch/araBeat",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "smoothie": "^1.34.0"
+  }
+}

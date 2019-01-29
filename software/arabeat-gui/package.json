@@ -1,22 +1,23 @@
 {
-  "name": "electron-quick-start",
-  "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "name": "arabeat-gui",
+  "version": "0.9.0",
+  "description": "Graphical User Interface for ECG optimisation",
   "main": "main.js",
   "scripts": {
     "start": "electron ."
   },
-  "repository": "https://github.com/electron/electron-quick-start",
+  "repository": "https://github.com/AravinthPanch/araBeat",
   "keywords": [
-    "Electron",
-    "quick",
-    "start",
-    "tutorial",
-    "demo"
+    "arabeat",
+    "new-media-art",
+    "AravinthPanch"
   ],
   "author": "GitHub",
   "license": "CC0-1.0",
   "devDependencies": {
     "electron": "^4.0.2"
+  },
+  "dependencies": {
+    "smoothie": "^1.35.0"
   }
 }

@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Hello World!</title>
-  </head>
-  <body>
-    <h1>Hello World!</h1>
-    <!-- All of the Node.js APIs are available in this renderer process. -->
-    We are using Node.js <script>document.write(process.versions.node)</script>,
-    Chromium <script>document.write(process.versions.chrome)</script>,
-    and Electron <script>document.write(process.versions.electron)</script>.
 
-    <script>
-      // You can also require other files to run in this process
-      require('./renderer.js')
-    </script>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <title>araBeat - Graphical User Interface for ECG optimisation</title>
+  <link rel="stylesheet" href="src/arabeat.css">
+</head>
+
+<body onload="createTimeline()">
+  <img src="src/images/arabeat.png" width=30% />
+  <h1></h1>
+  <canvas id="chart" width=1000% height=200px></canvas>
+</body>
+
+<script src="bower_components/smoothie/smoothie.js"></script>
+<script>
+  require('./renderer.js')
+</script>
+<script src="src/arabeat.js"></script>
+
 </html>
