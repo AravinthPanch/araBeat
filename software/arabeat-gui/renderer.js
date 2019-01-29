@@ -1,36 +1,50 @@
-// This file is required by the index.html file and will
-// be executed in the renderer process for that window.
-// All of the Node.js APIs are available in this process.
-
+// required modules
 window.$ = window.jQuery = require('jquery');
-const Smoothie = require('smoothie');
+var SerialPort = require('serialport');
+var Readline = SerialPort.parsers.Readline
+var plot = require('./plot');
+var port = null;
+var count = 0;
 
-var random = new Smoothie.TimeSeries();
+// list available ports
+function list_serial_ports() {
+  SerialPort.list(function(err, ports) {
+    ports.forEach(function(port) {
+      console.log(port.comName)
+    })
+  });
+}
 
-setInterval(
-  function() {
-    random.append(new Date().getTime(), Math.random() * 10000);
-  },
-  500);
+// open a serial port
+function open_serial_port() {
+  port = new SerialPort('/dev/tty.usbserial-AJ02WUYE', {
+    baudRate: 115200,
+    parser: new Readline({
+      delimiter: '\r\n'
+    })
 
-function createTimeline() {
-
-  var chart = new Smoothie.SmoothieChart({
-    scrollBackwards: true,
-    tooltip: true
   });
 
-  chart.addTimeSeries(random, {
-    strokeStyle: 'rgba(0, 255, 0, 1)',
-    lineWidth: 2
-  });
+  // Read the port data
+  port.on("open", function() {
 
-  chart.streamTo(document.getElementById("chart"), 500);
+    console.log('port is open');
+
+    port.on('data', function(serial_data) {
+      for (var i = 0; i < serial_data.length; i++) {
+        plot.plot_data.append(new Date().getTime(), serial_data[i]);
+      }
+
+    });
+  });
 }
 
 
 
 // DOM Ready
 $(document).ready(function() {
-  createTimeline();
-})
+  plot.creat_chart();
+
+  // list_serial_ports();
+  open_serial_port();
+});

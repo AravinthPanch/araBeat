@@ -17,4 +17,8 @@ image2icon.app
 
 # Generate icns from iconset
 iconutil -c icns "icon.iconset"
+
+# serialport not found in electron issue
+./node_modules/.bin/electron-rebuild -$(electron -v)
+
 ```

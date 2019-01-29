@@ -15,10 +15,12 @@
   "author": "GitHub",
   "license": "CC0-1.0",
   "devDependencies": {
-    "electron": "^4.0.2"
+    "electron": "^4.0.2",
+    "electron-rebuild": "^1.8.2"
   },
   "dependencies": {
     "jquery": "^3.3.1",
+    "serialport": "^7.1.4",
     "smoothie": "^1.35.0"
   }
 }
