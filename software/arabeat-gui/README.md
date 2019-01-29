@@ -10,7 +10,7 @@ npm install
 npm start
 
 # Generate standalone package
-electron-packager . --icon=src/images/icon.icns
+electron-packager . --icon=assets/icon.icns
 
 # Generate iconset from png
 image2icon.app

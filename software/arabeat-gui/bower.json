@@ -21,6 +21,7 @@
     "tests"
   ],
   "dependencies": {
-    "smoothie": "^1.34.0"
+    "smoothie": "^1.34.0",
+    "jquery": "^3.3.1"
   }
 }

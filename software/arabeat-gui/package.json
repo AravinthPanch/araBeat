@@ -1,7 +1,7 @@
 {
-  "name": "arabeat-gui",
+  "name": "araBeat-GUI",
   "version": "0.9.0",
-  "description": "Graphical User Interface for ECG optimization",
+  "description": "Graphical User Interface for Interaction Optimization",
   "main": "main.js",
   "scripts": {
     "start": "electron ."
@@ -18,6 +18,7 @@
     "electron": "^4.0.2"
   },
   "dependencies": {
+    "jquery": "^3.3.1",
     "smoothie": "^1.35.0"
   }
 }
