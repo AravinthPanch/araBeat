@@ -1,4 +1,5 @@
 EESchema Schematic File Version 4
+LIBS:ecg-cassette-cache
 EELAYER 26 0
 EELAYER END
 $Descr A4 11693 8268
@@ -104,33 +105,59 @@ F 3 "~" H 9100 2700 50  0001 C CNN
 	1    9100 2700
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	9100 2700 9100 2950
 Connection ~ 9100 3200
 Wire Wire Line
 	9100 3200 8600 3200
 Wire Wire Line
+	9100 2700 9100 3200
+Wire Wire Line
+	8550 3300 9200 3300
+$Comp
+L power:PWR_FLAG #FLG?
+U 1 1 5C55EC07
+P 9300 2900
+F 0 "#FLG?" H 9300 2975 50  0001 C CNN
+F 1 "PWR_FLAG" H 9300 3074 50  0000 C CNN
+F 2 "" H 9300 2900 50  0001 C CNN
+F 3 "~" H 9300 2900 50  0001 C CNN
+	1    9300 2900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
 	8650 3100 9300 3100
 Wire Wire Line
-	8550 3300 9250 3300
-Wire Wire Line
-	9100 2950 9300 2950
-Wire Wire Line
-	9300 2950 9300 3100
-Connection ~ 9100 2950
-Wire Wire Line
-	9100 2950 9100 3050
+	9300 2900 9300 3000
 Connection ~ 9300 3100
 Wire Wire Line
 	9300 3100 9450 3100
 Wire Wire Line
-	9100 3050 9250 3050
+	9300 3000 9200 3000
 Wire Wire Line
-	9250 3050 9250 3300
-Connection ~ 9100 3050
+	9200 3000 9200 3300
+Connection ~ 9300 3000
 Wire Wire Line
-	9100 3050 9100 3200
-Connection ~ 9250 3300
+	9300 3000 9300 3100
+Connection ~ 9200 3300
 Wire Wire Line
-	9250 3300 9450 3300
+	9200 3300 9450 3300
+Text Label 8900 3400 0    50   ~ 0
+INT2
+Text Label 8900 3500 0    50   ~ 0
+INT1
+Text Label 8900 3600 0    50   ~ 0
+FCLK
+Text Label 8900 3700 0    50   ~ 0
+CSB
+Text Label 9300 4200 0    50   ~ 0
+SCK
+Text Label 9250 4300 0    50   ~ 0
+MOSI
+Text Label 9200 4400 0    50   ~ 0
+MISO
+Text Label 8900 3100 0    50   ~ 0
+GND
+Text Label 8900 3200 0    50   ~ 0
+VCC
+Text Label 8900 3300 0    50   ~ 0
+GND
 $EndSCHEMATC
