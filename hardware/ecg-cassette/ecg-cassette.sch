@@ -5,9 +5,9 @@ EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
 Sheet 1 1
-Title "araBeat : ECG Cassette"
+Title "araBeat : ECG Module"
 Date "2019-01-31"
-Rev "v0.1"
+Rev "v0.2"
 Comp "www.aravinth.info"
 Comment1 ""
 Comment2 ""
