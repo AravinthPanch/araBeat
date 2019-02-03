@@ -99,8 +99,8 @@ This is a 12-feet-tall-permanent-public-installation, therefore it is built to w
 - #### Baseboard Prototype
 
 <p align="center">
-<img src="./images/ecg-baseboard/ecg-baseboard-3.jpg" width=40%/>
-<img src="./images/ecg-baseboard/ecg-baseboard-4.jpg" width=45%/>
+<img src="./images/pcbs/ecg-baseboard-3.jpg" width=40%/>
+<img src="./images/pcbs/ecg-baseboard-4.jpg" width=45%/>
 </p>
 
 - #### Baseboard Prototype Testing with Stainless Steel Electrodes
@@ -129,8 +129,8 @@ This is a 12-feet-tall-permanent-public-installation, therefore it is built to w
 - #### ECG Module Prototype
 
 <p align="center">
-<img src="./images/ecg-module/ecg-module-1.jpg" width=42%/>
-<img src="./images/ecg-module/ecg-module-2.jpg" width=48%/>
+<img src="./images/pcbs/ecg-module-1.jpg" width=42%/>
+<img src="./images/pcbs/ecg-module-2.jpg" width=48%/>
 </p>
 
 - #### Testing the Production-Sensor-Frontend
@@ -141,9 +141,23 @@ This is a 12-feet-tall-permanent-public-installation, therefore it is built to w
 <img src="./images/sensor-frontend/sensor-frontend-4.jpg" width=50%/>
 </p>
 
-- #### Audio Setup
+- #### Marine Standard Tweeter, Sub-Woofer, Amplifier, PSU
 
 <p align="center">
-<img src="./images/audio/audio-1.jpg" width=40%/>
-<img src="./images/audio/audio-2.jpg" width=40%/>
+<img src="./images/audio/audio-1.jpg" width=30%/>
+<img src="./images/audio/audio-2.jpg" width=30%/>
+</p>
+
+- #### ECG Module v0.2
+
+<p align="center">
+<img src="./images/pcbs/ecg-module-4.png" width=40%/>
+<img src="./images/pcbs/ecg-module-3.png" width=40%/>
+</p>
+
+- #### MCU Module v0.1
+
+<p align="center">
+<img src="./images/pcbs/mcu-module-2.png" width=40%/>
+<img src="./images/pcbs/mcu-module-1.png" width=40%/>
 </p>
