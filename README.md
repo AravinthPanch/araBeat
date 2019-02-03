@@ -158,6 +158,6 @@ This is a 12-feet-tall-permanent-public-installation, therefore it is built to w
 - #### MCU Module v0.1
 
 <p align="center">
-<img src="./images/pcbs/mcu-module-2.png" width=40%/>
 <img src="./images/pcbs/mcu-module-1.png" width=40%/>
+<img src="./images/pcbs/mcu-module-2.png" width=40%/>
 </p>
