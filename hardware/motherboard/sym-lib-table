@@ -1,0 +1,4 @@
+(sym_lib_table
+  (lib (name ARABEAT)(type Legacy)(uri ${KIPRJMOD}/libraries/ARABEAT.symbol/ARABEAT.lib)(options "")(descr ""))
+  (lib (name motherboard-rescue)(type Legacy)(uri ${KIPRJMOD}/motherboard-rescue.lib)(options "")(descr ""))
+)
