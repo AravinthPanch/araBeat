@@ -8,17 +8,22 @@ An interactive New Media Art system to translate the heartbeat of the visitor to
 This is a 12-feet-tall-permanent-public-installation, therefore it is built to withstand a harsh environment where the temperature goes to -20°C.
 
 ## ARTISTS
-
 - Aravinth Panch < http://aravinth.info > New Media Art
 - Stacia Goodman < http://www.staciagoodmanmosaics.com > Mosaic Art
 
 ## COLLABORATORS
 - Marc Basara - Project Management
+- Stuart Ackerberg - Art Producer
 - David Riding - Electrical Engineering
 - Felix Christmann - Industrial Design
 - Alessandro Aresta - Sound Engineering
 - Len Goodman - Graphic Design
-- Hart John, Randi Johnson, John Bean, Pavel - Structural Design & Construction
+- Hart John & Randi Johnson - Production Management
+- John Bean & Pavel - Stainless Steel Structural Design & Construction
+- Shresth Agrawal - Software Engineering
+- Niranjan Harakel Rao - Firmware Engineering
+- Chris Kooper - Metalworking
+
 
 ## STUDIOS AND MANUFACTURERS
 - nLab Berlin - Interaction Technology Design & Development
@@ -27,6 +32,7 @@ This is a 12-feet-tall-permanent-public-installation, therefore it is built to w
 - Seeed Studio Shenzhen - PCB Manufacturing
 - Troublemaker Shenzhen - Prototyping
 - HLH Prototypes Shenzhen - Stainless Steel CNC Machining
+- S-Hamacher Art Production Berlin - Stainless Steel WaterJet Cutting & Metalwork
 
 ## DESIGN
 
