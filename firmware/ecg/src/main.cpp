@@ -275,11 +275,11 @@ void loop()
             {
                 // r_to_r must be multiplied by 8 to get the time interval in
                 // millisecond 8ms resolution is for 32768Hz master clock
-                send_data_to_pde_plot(ecg_sample[i], (uint16_t)r_to_r * 8, (int16_t)bpm);
+                // send_data_to_pde_plot(ecg_sample[i], (uint16_t)r_to_r * 8, (int16_t)bpm);
 
                 // Serial.print(r_to_r * 8);
                 // Serial.print(",");
-                // Serial.println(ecg_sample[i]);
+                Serial.println(ecg_sample[i]);
             }
             update_dcloff_array();
         }
