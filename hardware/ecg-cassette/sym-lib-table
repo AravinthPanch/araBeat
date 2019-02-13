@@ -1,3 +1,4 @@
 (sym_lib_table
   (lib (name PROTOCENTRAL)(type Legacy)(uri "/Users/aravinth/Google Drive/Workspace/projects/-mozaic-beat/araBeat/hardware/-libraries/PROTOCENTRAL.symbol/PROTOCENTRAL.lib")(options "")(descr ""))
+  (lib (name ARABEAT)(type Legacy)(uri "/Users/aravinth/Google Drive/Workspace/projects/-mozaic-beat/araBeat/hardware/-libraries/ARABEAT.symbol/ARABEAT.lib")(options "")(descr ""))
 )

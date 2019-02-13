@@ -1,4 +1,4 @@
-(module MAX30003 (layer F.Cu) (tedit 5C641F80)
+(module MAX30003 (layer F.Cu) (tedit 5C6490D6)
   (descr "Through hole straight pin header, 1x10, 2.54mm pitch, single row")
   (tags "Through hole pin header THT 1x10 2.54mm single row")
   (fp_text reference U1 (at 0.0442 -4.0312) (layer F.SilkS)
@@ -80,6 +80,7 @@
   (pad 8 thru_hole oval (at 0 17.78) (size 1.7 1.7) (drill 1) (layers *.Cu *.Mask))
   (pad 9 thru_hole oval (at 0 20.32) (size 1.7 1.7) (drill 1) (layers *.Cu *.Mask))
   (pad 10 thru_hole oval (at 0 22.86) (size 1.7 1.7) (drill 1) (layers *.Cu *.Mask))
+  (pad "" np_thru_hole circle (at 27.2034 21.9202) (size 3.3 3.3) (drill 3.3) (layers *.Cu *.Mask))
   (model /Users/aravinth/araBeat/hardware/ecg-cassette/libraries/PROTOCENTRAL.pretty/PROTOCENTRAL_MAX30003.step
     (at (xyz 0 0 0))
     (scale (xyz 1 1 1))

@@ -6,158 +6,198 @@ $Descr A4 11693 8268
 encoding utf-8
 Sheet 1 1
 Title "araBeat : ECG Module"
-Date "2019-01-31"
+Date "2019-02-13"
 Rev "v0.2"
 Comp "www.aravinth.info"
-Comment1 ""
+Comment1 "www.arabeat.aravinth.info"
 Comment2 ""
 Comment3 ""
 Comment4 ""
 $EndDescr
+Text GLabel 8850 4550 0    50   Input ~ 0
+D2
+Text GLabel 8850 4650 0    50   Input ~ 0
+D3
+Text GLabel 8850 5050 0    50   Input ~ 0
+D7
+Text GLabel 8850 5450 0    50   Input ~ 0
+D11
+Text GLabel 8850 5550 0    50   Input ~ 0
+D12
+Text GLabel 10200 4250 2    50   Input ~ 0
+GND
+Text GLabel 8850 4250 0    50   Input ~ 0
+5V
+Text GLabel 8850 5650 0    50   Input ~ 0
+D13
 $Comp
-L PROTOCENTRAL:MAX30003 U1
-U 1 1 5C532DDD
-P 9800 3600
-F 0 "U1" H 9700 4250 50  0000 L CNN
-F 1 "MAX30003" H 9550 3000 50  0000 L CNN
-F 2 "PROTOCENTRAL:MAX30003" H 9800 3600 50  0001 C CNN
-F 3 "https://github.com/Protocentral/protocentral_max30003" H 11100 4150 50  0001 C CNN
-	1    9800 3600
+L ARABEAT:02x15_PIN_HEADER_SOCKET U1
+U 1 1 5C649CA8
+P 9550 5050
+F 0 "U1" H 9525 6115 50  0000 C CNN
+F 1 "02x15_PIN_HEADER_SOCKET" H 9525 6024 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_2x15_P2.54mm_Horizontal" H 9400 5250 50  0001 C CNN
+F 3 "" H 9400 5250 50  0001 C CNN
+	1    9550 5050
 	1    0    0    -1  
 $EndComp
+NoConn ~ 10200 4550
+NoConn ~ 10200 4650
 $Comp
-L Connector_Generic:Conn_02x07_Counter_Clockwise J2
-U 1 1 5C533530
-P 8850 4900
-F 0 "J2" H 8900 5417 50  0000 C CNN
-F 1 "02x07_Horizontal_Pin_Header" H 8950 4450 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_2x07_P2.54mm_Horizontal" H 8850 4900 50  0001 C CNN
-F 3 "~" H 8850 4900 50  0001 C CNN
-	1    8850 4900
-	1    0    0    -1  
+L power:PWR_FLAG #FLG0102
+U 1 1 5C6473B3
+P 10750 3850
+F 0 "#FLG0102" H 10750 3925 50  0001 C CNN
+F 1 "PWR_FLAG" H 10750 4024 50  0000 C CNN
+F 2 "" H 10750 3850 50  0001 C CNN
+F 3 "~" H 10750 3850 50  0001 C CNN
+	1    10750 3850
+	-1   0    0    1   
 $EndComp
-Wire Wire Line
-	9450 3200 9100 3200
-Wire Wire Line
-	9450 3400 8500 3400
-Wire Wire Line
-	9450 3600 8400 3600
-Wire Wire Line
-	9450 3800 9300 3800
-Wire Wire Line
-	9450 4000 9200 4000
-Wire Wire Line
-	8650 4600 8650 3100
-Wire Wire Line
-	8650 4700 8600 4700
-Wire Wire Line
-	8600 4700 8600 3200
-Wire Wire Line
-	8650 4800 8550 4800
-Wire Wire Line
-	8550 4800 8550 3300
-Wire Wire Line
-	8650 4900 8500 4900
-Wire Wire Line
-	8500 4900 8500 3400
-Wire Wire Line
-	8650 5000 8450 5000
-Wire Wire Line
-	8450 5000 8450 3500
-Wire Wire Line
-	8450 3500 9450 3500
-Wire Wire Line
-	8650 5100 8400 5100
-Wire Wire Line
-	8400 5100 8400 3600
-Wire Wire Line
-	9450 3700 8350 3700
-Wire Wire Line
-	8650 5200 8350 5200
-Wire Wire Line
-	8350 5200 8350 3700
-Wire Wire Line
-	9150 5000 9200 5000
-Wire Wire Line
-	9200 5000 9200 4000
-Wire Wire Line
-	9150 5100 9250 5100
-Wire Wire Line
-	9250 5100 9250 3900
-Wire Wire Line
-	9250 3900 9450 3900
-Wire Wire Line
-	9150 5200 9300 5200
-Wire Wire Line
-	9300 5200 9300 3800
-NoConn ~ 9150 4600
-NoConn ~ 9150 4700
-NoConn ~ 9150 4800
-NoConn ~ 9150 4900
 $Comp
 L power:PWR_FLAG #FLG0101
-U 1 1 5C53E774
-P 9100 2700
-F 0 "#FLG0101" H 9100 2775 50  0001 C CNN
-F 1 "PWR_FLAG" H 9100 2874 50  0000 C CNN
-F 2 "" H 9100 2700 50  0001 C CNN
-F 3 "~" H 9100 2700 50  0001 C CNN
-	1    9100 2700
-	1    0    0    -1  
+U 1 1 5C647C99
+P 8350 3850
+F 0 "#FLG0101" H 8350 3925 50  0001 C CNN
+F 1 "PWR_FLAG" H 8350 4024 50  0000 C CNN
+F 2 "" H 8350 3850 50  0001 C CNN
+F 3 "~" H 8350 3850 50  0001 C CNN
+	1    8350 3850
+	-1   0    0    1   
 $EndComp
-Connection ~ 9100 3200
 Wire Wire Line
-	9100 3200 8600 3200
+	8350 3850 8850 3850
 Wire Wire Line
-	9100 2700 9100 3200
+	8850 3850 8850 4250
 Wire Wire Line
-	8550 3300 9200 3300
+	10750 3850 10200 3850
+Wire Wire Line
+	10200 3850 10200 4250
 $Comp
-L power:PWR_FLAG #FLG?
-U 1 1 5C55EC07
-P 9300 2900
-F 0 "#FLG?" H 9300 2975 50  0001 C CNN
-F 1 "PWR_FLAG" H 9300 3074 50  0000 C CNN
-F 2 "" H 9300 2900 50  0001 C CNN
-F 3 "~" H 9300 2900 50  0001 C CNN
-	1    9300 2900
-	1    0    0    -1  
+L Device:LED D1
+U 1 1 5C648856
+P 4650 4650
+F 0 "D1" V 4688 4533 50  0000 R CNN
+F 1 "RED_STATUS_LED" V 4597 4533 50  0000 R CNN
+F 2 "LED_SMD:LED_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 4650 4650 50  0001 C CNN
+F 3 "~" H 4650 4650 50  0001 C CNN
+	1    4650 4650
+	0    -1   -1   0   
 $EndComp
 Wire Wire Line
-	8650 3100 9300 3100
-Wire Wire Line
-	9300 2900 9300 3000
-Connection ~ 9300 3100
-Wire Wire Line
-	9300 3100 9450 3100
-Wire Wire Line
-	9300 3000 9200 3000
-Wire Wire Line
-	9200 3000 9200 3300
-Connection ~ 9300 3000
-Wire Wire Line
-	9300 3000 9300 3100
-Connection ~ 9200 3300
-Wire Wire Line
-	9200 3300 9450 3300
-Text Label 8900 3400 0    50   ~ 0
-INT2
-Text Label 8900 3500 0    50   ~ 0
-INT1
-Text Label 8900 3600 0    50   ~ 0
-FCLK
-Text Label 8900 3700 0    50   ~ 0
-CSB
-Text Label 9300 4200 0    50   ~ 0
-SCK
-Text Label 9250 4300 0    50   ~ 0
-MOSI
-Text Label 9200 4400 0    50   ~ 0
-MISO
-Text Label 8900 3100 0    50   ~ 0
+	4650 4350 4650 4500
+Text GLabel 4650 5150 3    50   Input ~ 0
 GND
-Text Label 8900 3200 0    50   ~ 0
-VCC
-Text Label 8900 3300 0    50   ~ 0
+Wire Wire Line
+	4650 4950 4650 4800
+$Comp
+L Device:LED D2
+U 1 1 5C64B3B3
+P 5550 4650
+F 0 "D2" V 5588 4533 50  0000 R CNN
+F 1 "GREEN_PWR_LED" V 5497 4533 50  0000 R CNN
+F 2 "LED_SMD:LED_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 5550 4650 50  0001 C CNN
+F 3 "~" H 5550 4650 50  0001 C CNN
+	1    5550 4650
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	5550 4350 5550 4500
+Text GLabel 5550 5150 3    50   Input ~ 0
 GND
+Wire Wire Line
+	5550 4950 5550 4800
+Text GLabel 5550 4350 1    50   Input ~ 0
+5V
+$Comp
+L Device:R_Small R1
+U 1 1 5C64D1DB
+P 4650 5050
+F 0 "R1" H 4709 5096 50  0000 L CNN
+F 1 "1K" H 4709 5005 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 4650 5050 50  0001 C CNN
+F 3 "~" H 4650 5050 50  0001 C CNN
+	1    4650 5050
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R_Small R2
+U 1 1 5C64D476
+P 5550 5050
+F 0 "R2" H 5609 5096 50  0000 L CNN
+F 1 "1K" H 5609 5005 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 5550 5050 50  0001 C CNN
+F 3 "~" H 5550 5050 50  0001 C CNN
+	1    5550 5050
+	1    0    0    -1  
+$EndComp
+$Comp
+L PROTOCENTRAL:MAX30003 U2
+U 1 1 5C648D73
+P 7300 4850
+F 0 "U2" H 7477 4946 50  0000 L CNN
+F 1 "MAX30003" H 7477 4855 50  0000 L CNN
+F 2 "PROTOCENTRAL:MAX30003" H 7300 4850 50  0001 C CNN
+F 3 "https://github.com/Protocentral/protocentral_max30003" H 8600 5400 50  0001 C CNN
+	1    7300 4850
+	1    0    0    -1  
+$EndComp
+Text GLabel 6950 4350 0    50   Input ~ 0
+GND
+Text GLabel 6950 4450 0    50   Input ~ 0
+5V
+Text GLabel 6950 4550 0    50   Input ~ 0
+GND
+Text GLabel 6950 4750 0    50   Input ~ 0
+D2
+Text GLabel 6950 4650 0    50   Input ~ 0
+D3
+Text GLabel 6950 4950 0    50   Input ~ 0
+D7
+Text GLabel 6950 5050 0    50   Input ~ 0
+D13
+Text GLabel 6950 5150 0    50   Input ~ 0
+D11
+Text GLabel 6950 5250 0    50   Input ~ 0
+D12
+NoConn ~ 6950 4850
+Text GLabel 4650 4350 1    50   Input ~ 0
+D7
+NoConn ~ 10200 4750
+NoConn ~ 10200 4850
+NoConn ~ 10200 4950
+NoConn ~ 10200 5050
+NoConn ~ 10200 5150
+NoConn ~ 10200 5250
+NoConn ~ 10200 5350
+NoConn ~ 10200 5450
+NoConn ~ 10200 5550
+NoConn ~ 10200 5650
+NoConn ~ 8850 5150
+NoConn ~ 8850 5250
+NoConn ~ 8850 5350
+NoConn ~ 8850 4350
+NoConn ~ 8850 4450
+NoConn ~ 8850 4750
+NoConn ~ 8850 4850
+NoConn ~ 8850 4950
+$Comp
+L ARABEAT:ECG-WIRE-TO-BOARD U?
+U 1 1 5C64898B
+P 7200 5850
+F 0 "U?" H 7378 5996 50  0000 L CNN
+F 1 "ECG-WIRE-TO-BOARD" H 7378 5905 50  0000 L CNN
+F 2 "" H 7150 5850 50  0001 C CNN
+F 3 "" H 7150 5850 50  0001 C CNN
+	1    7200 5850
+	1    0    0    -1  
+$EndComp
+Text GLabel 6950 5700 0    50   Input ~ 0
+ECGN
+Text GLabel 6950 5800 0    50   Input ~ 0
+ECGP
+Text GLabel 10200 4350 2    50   Input ~ 0
+ECGN
+Text GLabel 10200 4450 2    50   Input ~ 0
+ECGP
 $EndSCHEMATC
