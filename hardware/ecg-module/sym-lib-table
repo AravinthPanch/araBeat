@@ -1,6 +1,6 @@
 (sym_lib_table
-  (lib (name MAX30003CTI)(type Legacy)(uri ${KIPRJMOD}/libraries/MAXIM.symbol/MAX30003CTI.lib)(options "")(descr ""))
-  (lib (name AP2112K-1.8TRG1)(type Legacy)(uri ${KIPRJMOD}/libraries/DIODES-INC.symbol/AP2112K-1.8TRG1.lib)(options "")(descr ""))
-  (lib (name TXB0108PWR)(type Legacy)(uri ${KIPRJMOD}/libraries/TI.symbol/TXB0108PWR.lib)(options "")(descr ""))
-  (lib (name 35RASMT2BHNTRX)(type Legacy)(uri ${KIPRJMOD}/libraries/SWITCHCRAFT.symbol/35RASMT2BHNTRX.lib)(options "")(descr ""))
+  (lib (name MAX30003CTI)(type Legacy)(uri "/Users/aravinth/Google Drive/Workspace/projects/-mozaic-beat/araBeat/hardware/-libraries/MAXIM.symbol/MAX30003CTI.lib")(options "")(descr ""))
+  (lib (name 35RASMT2BHNTRX)(type Legacy)(uri "/Users/aravinth/Google Drive/Workspace/projects/-mozaic-beat/araBeat/hardware/-libraries/SWITCHCRAFT.symbol/35RASMT2BHNTRX.lib")(options "")(descr ""))
+  (lib (name TXB0108PWR)(type Legacy)(uri "/Users/aravinth/Google Drive/Workspace/projects/-mozaic-beat/araBeat/hardware/-libraries/TI.symbol/TXB0108PWR.lib")(options "")(descr ""))
+  (lib (name AP2112K-1.8TRG1)(type Legacy)(uri "/Users/aravinth/Google Drive/Workspace/projects/-mozaic-beat/araBeat/hardware/-libraries/DIODES-INC.symbol/AP2112K-1.8TRG1.lib")(options "")(descr ""))
 )
