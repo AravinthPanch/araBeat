@@ -1,4 +1,5 @@
 EESchema Schematic File Version 4
+LIBS:motherboard-cache
 EELAYER 26 0
 EELAYER END
 $Descr A4 11693 8268
@@ -14,29 +15,7 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 $Comp
-L MOTHERBOARD:ECG-MODULE U1
-U 1 1 5C576FB0
-P 1800 2900
-F 0 "U1" H 1950 3415 50  0000 C CNN
-F 1 "ECG-MODULE" H 1950 3324 50  0000 C CNN
-F 2 "" H 1600 3050 50  0001 C CNN
-F 3 "" H 1600 3050 50  0001 C CNN
-	1    1800 2900
-	-1   0    0    -1  
-$EndComp
-$Comp
-L MOTHERBOARD:MCU-MODULE U2
-U 1 1 5C577071
-P 3800 3050
-F 0 "U2" H 3850 1914 50  0000 C CNN
-F 1 "MCU-MODULE" H 3850 1823 50  0000 C CNN
-F 2 "" H 3800 3050 50  0001 C CNN
-F 3 "" H 3800 3050 50  0001 C CNN
-	1    3800 3050
-	1    0    0    -1  
-$EndComp
-$Comp
-L MOTHERBOARD:DSP-MODULE U3
+L ARABEAT:DSP-MODULE U3
 U 1 1 5C5AE633
 P 7200 3150
 F 0 "U3" H 7225 4465 50  0000 C CNN
@@ -84,69 +63,6 @@ NoConn ~ 7850 3450
 NoConn ~ 7850 3650
 NoConn ~ 7850 3850
 NoConn ~ 7850 4050
-Wire Wire Line
-	2100 2650 3000 2650
-Wire Wire Line
-	3000 2650 3000 2850
-Wire Wire Line
-	3000 4100 3400 4100
-Wire Wire Line
-	2100 2750 2600 2750
-Wire Wire Line
-	2600 3700 3350 3700
-Wire Wire Line
-	3350 3600 2700 3600
-Wire Wire Line
-	2700 3600 2700 3450
-Wire Wire Line
-	2700 3450 2100 3450
-Wire Wire Line
-	2100 3350 3250 3350
-Wire Wire Line
-	3250 3350 3250 3800
-Wire Wire Line
-	3250 3800 3350 3800
-Wire Wire Line
-	2100 3250 3200 3250
-Wire Wire Line
-	3200 3250 3200 3200
-Wire Wire Line
-	3200 3200 3350 3200
-Wire Wire Line
-	2100 2950 3150 2950
-Wire Wire Line
-	2100 3050 3200 3050
-Wire Wire Line
-	3200 3050 3200 2700
-Text Label 2750 2650 0    50   ~ 0
-GND
-Text Label 2600 2350 0    50   ~ 0
-5V
-Wire Wire Line
-	2600 2750 2600 2000
-Wire Wire Line
-	2100 2850 3000 2850
-Connection ~ 3000 2850
-Wire Wire Line
-	3000 2850 3000 4100
-Text Label 2750 2950 0    50   ~ 0
-INT2
-Text Label 2750 3050 0    50   ~ 0
-INT1
-Wire Wire Line
-	3200 2700 3350 2700
-Wire Wire Line
-	3350 2800 3150 2800
-Wire Wire Line
-	3150 2800 3150 2950
-Text Label 2750 3250 0    50   ~ 0
-CSB
-Text Label 2750 3350 0    50   ~ 0
-SCK
-Text Label 2750 3600 0    50   ~ 0
-MOSI
-Text Label 2750 3700 0    50   ~ 0
-MISO
 $Comp
 L Connector:Screw_Terminal_01x02 J3
 U 1 1 5C5CCB23
@@ -159,14 +75,7 @@ F 3 "~" H 3500 6700 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 Wire Wire Line
-	3750 2100 3750 1850
-Wire Wire Line
-	3750 1850 4600 1850
-Wire Wire Line
-	4600 1850 4600 5300
-Wire Wire Line
 	3400 6500 3400 6400
-Connection ~ 3400 4100
 $Comp
 L power:PWR_FLAG #FLG0101
 U 1 1 5C5CE15B
@@ -195,12 +104,9 @@ Wire Wire Line
 Text Label 3500 6200 1    50   ~ 0
 VIN
 Wire Wire Line
-	4600 5300 9250 5300
-Wire Wire Line
 	9250 5300 9250 2750
 Wire Wire Line
 	9250 2750 8900 2750
-Connection ~ 4600 5300
 NoConn ~ 8900 2850
 NoConn ~ 8900 2950
 NoConn ~ 8900 3050
@@ -227,37 +133,8 @@ NoConn ~ 5500 3250
 NoConn ~ 5500 3150
 NoConn ~ 5500 2950
 NoConn ~ 5500 2750
-NoConn ~ 4350 3800
-NoConn ~ 4350 3700
-NoConn ~ 4350 3600
-NoConn ~ 4350 3500
-NoConn ~ 4350 3400
-NoConn ~ 4350 3300
-NoConn ~ 4350 3200
-NoConn ~ 4350 3100
-NoConn ~ 4350 2900
-NoConn ~ 4350 2600
-NoConn ~ 4350 2500
-NoConn ~ 3350 2500
-NoConn ~ 3350 2600
-NoConn ~ 3350 2900
-NoConn ~ 3350 3000
-NoConn ~ 3350 3100
-NoConn ~ 3350 3300
-NoConn ~ 3350 3400
-NoConn ~ 3350 3500
-NoConn ~ 2100 3150
 Text Label 3400 6050 3    50   ~ 0
 GND
-Wire Wire Line
-	2100 3550 2600 3550
-Wire Wire Line
-	2600 3550 2600 3700
-Wire Wire Line
-	2600 2000 4050 2000
-Wire Wire Line
-	4050 2000 4050 2100
-NoConn ~ 3950 2100
 $Comp
 L Connector:Conn_Coaxial J4
 U 1 1 5C648EFA
@@ -500,8 +377,6 @@ Text Notes 5150 7250 0    50   ~ 0
 AUDIO UI
 Wire Wire Line
 	3500 6400 3500 5300
-Wire Wire Line
-	3500 5300 4600 5300
 Connection ~ 3500 6400
 Wire Notes Line
 	4200 5500 4200 7300
@@ -572,22 +447,8 @@ Wire Notes Line
 	1300 5500 2500 5500
 Text Notes 1800 7250 0    50   ~ 0
 ECG UI
-Text Notes 1600 3600 1    50   ~ 0
-3.5mm \nJack ECG
-Wire Notes Line
-	1550 3650 1550 4850
 Wire Notes Line
 	1550 4850 1750 4850
-Wire Notes Line
-	1400 3200 1650 3200
-Wire Notes Line
-	1650 3650 1400 3650
-Wire Notes Line
-	1400 3200 1400 3650
-Wire Notes Line
-	1650 3200 1650 3650
-Text Notes 1500 4600 1    50   ~ 0
-3.5mm Male to Male \nAudio Cable
 Text Notes 7150 4150 1    50   ~ 0
 RCA OUT_L
 Text Notes 7350 4150 1    50   ~ 0
@@ -624,4 +485,17 @@ Text Label 9050 2750 0    50   ~ 0
 VIN
 Wire Wire Line
 	3400 4100 3950 4100
+$Comp
+L ARABEAT:ECG-MODULE U?
+U 1 1 5C66A653
+P 1700 2700
+F 0 "U?" H 1725 3665 50  0000 C CNN
+F 1 "ECG-MODULE" H 1725 3574 50  0000 C CNN
+F 2 "" H 1350 3300 50  0001 C CNN
+F 3 "" H 1350 3300 50  0001 C CNN
+	1    1700 2700
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3500 5300 9250 5300
 $EndSCHEMATC

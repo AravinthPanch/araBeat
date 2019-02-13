@@ -1,3 +1,3 @@
 (sym_lib_table
-  (lib (name MOTHERBOARD)(type Legacy)(uri "/Users/aravinth/Google Drive/Workspace/projects/-mozaic-beat/araBeat/hardware/-libraries/MOTHERBOARD.symbol/MOTHERBOARD.lib")(options "")(descr ""))
+  (lib (name ARABEAT)(type Legacy)(uri "/Users/aravinth/Google Drive/Workspace/projects/-mozaic-beat/araBeat/hardware/-libraries/ARABEAT.symbol/ARABEAT.lib")(options "")(descr ""))
 )
