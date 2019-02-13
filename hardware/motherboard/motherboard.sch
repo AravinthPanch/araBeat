@@ -1,5 +1,4 @@
 EESchema Schematic File Version 4
-LIBS:motherboard-cache
 EELAYER 26 0
 EELAYER END
 $Descr A4 11693 8268
@@ -15,7 +14,7 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 $Comp
-L ARABEAT:ECG-MODULE U1
+L MOTHERBOARD:ECG-MODULE U1
 U 1 1 5C576FB0
 P 1800 2900
 F 0 "U1" H 1950 3415 50  0000 C CNN
@@ -26,7 +25,7 @@ F 3 "" H 1600 3050 50  0001 C CNN
 	-1   0    0    -1  
 $EndComp
 $Comp
-L ARABEAT:MCU-MODULE U2
+L MOTHERBOARD:MCU-MODULE U2
 U 1 1 5C577071
 P 3800 3050
 F 0 "U2" H 3850 1914 50  0000 C CNN
@@ -37,7 +36,7 @@ F 3 "" H 3800 3050 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L ARABEAT:DSP-MODULE U3
+L MOTHERBOARD:DSP-MODULE U3
 U 1 1 5C5AE633
 P 7200 3150
 F 0 "U3" H 7225 4465 50  0000 C CNN
@@ -148,9 +147,6 @@ Text Label 2750 3600 0    50   ~ 0
 MOSI
 Text Label 2750 3700 0    50   ~ 0
 MISO
-Wire Wire Line
-	3850 4100 3950 4100
-Connection ~ 3850 4100
 $Comp
 L Connector:Screw_Terminal_01x02 J3
 U 1 1 5C5CCB23
@@ -171,8 +167,6 @@ Wire Wire Line
 Wire Wire Line
 	3400 6500 3400 6400
 Connection ~ 3400 4100
-Wire Wire Line
-	3400 4100 3850 4100
 $Comp
 L power:PWR_FLAG #FLG0101
 U 1 1 5C5CE15B
@@ -628,4 +622,6 @@ Text Notes 8000 2000 0    50   ~ 0
 2x10 MOLEX Female to \nFemale Cable
 Text Label 9050 2750 0    50   ~ 0
 VIN
+Wire Wire Line
+	3400 4100 3950 4100
 $EndSCHEMATC
