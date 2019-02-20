@@ -9,6 +9,7 @@
  ********************************************************************************/
 #include <Arduino.h>
 #include <max30003.h>
+#include <plot.h>
 
 /*******************************************************************************
  * Variable declarations
@@ -28,6 +29,7 @@ const uint8_t ETAG_BITS_MASK = 0x7;
 const float RTOR_LSB_RES = 0.0078125f;
 
 max30003 ecg;
+plot plotter;
 
 uint32_t ecg_fifo, sample_count, etag_bits[32], r_to_r;
 int16_t ecg_sample[32];
@@ -67,42 +69,6 @@ void setup()
 
     // initialize max30003 chip
     ecg.max30003_init();
-}
-
-// send data to Protocental GUI
-// it works only with ECG Gain 20V/V, otherwise too noisy
-void send_data_to_pde_plot(int16_t ecg_sample, uint16_t r_to_r, uint16_t bpm)
-{
-    uint8_t data_bytes[20];
-
-    data_bytes[0] = 0x0A;
-    data_bytes[1] = 0xFA;
-    data_bytes[2] = 0x0C;
-    data_bytes[3] = 0;
-    data_bytes[4] = 0x02;
-
-    data_bytes[5] = ecg_sample >> 24;
-    data_bytes[6] = ecg_sample >> 16;
-    data_bytes[7] = ecg_sample >> 8;
-    data_bytes[8] = ecg_sample;
-
-    data_bytes[9] = r_to_r;
-    data_bytes[10] = r_to_r >> 8;
-    data_bytes[11] = 0x00;
-    data_bytes[12] = 0x00;
-
-    data_bytes[13] = bpm;
-    data_bytes[14] = bpm >> 8;
-    data_bytes[15] = 0x00;
-    data_bytes[16] = 0x00;
-
-    data_bytes[17] = 0x00;
-    data_bytes[18] = 0x0b;
-
-    for (int i = 0; i < 19; i++)
-    {
-        Serial.write(data_bytes[i]);
-    }
 }
 
 // switch led off after R-TO-R interval timeout
@@ -275,11 +241,13 @@ void loop()
             {
                 // r_to_r must be multiplied by 8 to get the time interval in
                 // millisecond 8ms resolution is for 32768Hz master clock
-                // send_data_to_pde_plot(ecg_sample[i], (uint16_t)r_to_r * 8, (int16_t)bpm);
 
-                // Serial.print(r_to_r * 8);
-                // Serial.print(",");
-                Serial.println(ecg_sample[i]);
+                // plotter.send_data_to_protocentral_gui(
+                //     ecg_sample[i], (uint16_t)r_to_r * 8, (int16_t)bpm);
+
+                // plotter.send_data_to_arduino_plotter(ecg_sample[i]);
+
+                plotter.send_data_to_arabeat_gui(plot::ANALOG_VAL0, ecg_sample[i]);
             }
             update_dcloff_array();
         }
