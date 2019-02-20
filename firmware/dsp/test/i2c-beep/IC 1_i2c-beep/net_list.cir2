@@ -1,2 +1,4 @@
-0 sin_lookupAlg19401 O_C2_A0_P1_out Link0
-1 ICSigma100Out1 I_C4_A0_P1_in Link0
+0 sin_lookupAlg19401 O_C24_A0_P1_out Link0
+1 MuteNoSlewAlg1 I_C15_A0_P1_in Link0 O_C15_A0_P2_out Link2
+2 Gain1940AlgNS1 I_C28_A0_P1_in Link2 O_C28_A0_P2_out Link1
+3 ICSigma100Out1 I_C4_A0_P1_in Link1
