@@ -1,0 +1,19 @@
+0 DCInpAlg1 O_C371_A0_P1_out Link8
+1 DCInpAlg2 O_C373_A0_P1_out Link9
+2 GPIAlg1 O_C0_A0_P1_out Link15
+3 ZeroCompareAlg1 I_C5_A0_P1_in Link15 O_C5_A0_P2_out Link7
+4 OneShotRiseResetFixedAlg1 I_C144_A0_P1_in Link7 I_C144_A0_P2_in Link1 O_C144_A0_P3_out Link10
+5 Optimized2ChimeAlgWGainGUI1 I_C213_A0_P1_in Link7 O_C213_A0_P2_out Link6
+6 BassBAlg1 I_C201_A0_P1_in Link6 O_C201_A0_P2_out Link16
+7 MultCtrlDelGrowAlg1 I_C29_A0_P1_in Link10 O_C29_A0_P2_out Link3
+8 TwoChannelSingleDetectExpGainAlg_Hi_Res1 I_C123_A0_P1_in Link16 I_C123_A0_P2_in Link16 O_C123_A0_P4_out Link4 O_C123_A0_P5_out Link5
+9 ReadBackAlg1 I_C250_A0_P1_in Link16
+10 StopWatchAlg1 I_C12_A0_P1_in Link9 I_C12_A0_P2_in Link2 I_C12_A0_P3_in Link3 O_C12_A0_P4_out Link11
+11 ICSigma100Out1 I_C195_A0_P1_in Link4
+12 ICSigma100Out2 I_C197_A0_P1_in Link5
+13 CondAlg22 I_C111_A0_P1_in Link11 I_C111_A0_P2_in Link9 I_C111_A0_P3_in Link9 I_C111_A0_P4_in Link8 O_C111_A0_P5_out Link0
+14 ValueHAlgGrowable1 I_C43_A0_P1_in Link10 I_C43_A0_P2_in Link11 O_C43_A0_P3_out Link12
+15 Gain1940AlgNS1 I_C178_A0_P1_in Link12 O_C178_A0_P2_out Link14
+16 VCOAlg1 I_C184_A0_P1_in Link12 O_C184_A0_P2_out Link13
+17 FeedbackAlg2 I_C155_A0_P1_in Link10 O_C155_A0_P2_out_fback Link1
+18 FeedbackAlg1 I_C136_A0_P1_in Link0 O_C136_A0_P2_out_fback Link2
