@@ -11,7 +11,7 @@
     (via_costs 50)
     (plane_via_costs 5)
     (start_ripup_costs 100)
-    (start_pass_no 916)
+    (start_pass_no 1338)
     (layer_rule F.Cu
       (active on)
       (preferred_direction horizontal)
@@ -115,7 +115,7 @@
     )
   )
   (class PWR
-    3V3 AREF GND 5V VIN
+    AREF GND 5V 3V3
     (clearance_class PWR)
     (via_rule PWR)
     (rule
@@ -128,7 +128,8 @@
   (class SIGNAL
     D1 D0 RST A0 A1 D2 A2 D3
     A3 D4 A4 D5 A5 D6 A6 D7
-    A7 D8 D9 D10 D11 D12 D13
+    A7 D8 D9 D10 D11 D12 D13 "Net-(D1-Pad1)"
+    "Net-(D2-Pad1)"
     (clearance_class SIGNAL)
     (via_rule SIGNAL)
     (rule
