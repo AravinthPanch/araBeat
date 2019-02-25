@@ -143,9 +143,9 @@ Wire Wire Line
 	7450 4100 7550 4100
 Wire Wire Line
 	7550 4500 7400 4500
-Text GLabel 8850 4350 0    50   Input ~ 0
-D1
 Text GLabel 8850 4450 0    50   Input ~ 0
+D1
+Text GLabel 8850 4350 0    50   Input ~ 0
 D0
 Text GLabel 8850 4550 0    50   Input ~ 0
 D2
