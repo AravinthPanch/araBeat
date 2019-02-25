@@ -23,6 +23,7 @@ This is a 12-feet-tall-permanent-public-installation, therefore it is built to w
 - Shresth Agrawal - Software Engineering
 - Niranjan Harakel Rao - Firmware Engineering
 - Chris Kooper - Metalworking
+- Robert Blowsky - Digital Signal Processing
 
 
 ## STUDIOS AND MANUFACTURERS
