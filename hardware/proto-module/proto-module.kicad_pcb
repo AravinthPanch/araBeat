@@ -866,7 +866,7 @@
   )
 
   (module ARABEAT:CASSETTE-LOGO (layer B.Cu) (tedit 0) (tstamp 5CB93C6F)
-    (at 164.8714 143.4846 180)
+    (at 165.1 143.6878 180)
     (fp_text reference G*** (at 0 0 180) (layer B.SilkS) hide
       (effects (font (size 1.524 1.524) (thickness 0.3)) (justify mirror))
     )
@@ -1126,7 +1126,7 @@
       (xy -6.934787 4.864965) (xy -6.14133 4.98258) (xy -5.408771 4.954712)) (layer B.SilkS) (width 0.01))
   )
 
-  (gr_text "Proto Module v0.1 : Designed by Aravinth\nwww.arabeat.aravinth.info\n" (at 124.9172 145.3134) (layer B.SilkS)
+  (gr_text "PROTO Module v0.1 : Designed by Aravinth\nwww.arabeat.aravinth.info\n" (at 125.3998 145.2626) (layer B.SilkS)
     (effects (font (size 1.5 1.5) (thickness 0.3)) (justify mirror))
   )
   (gr_text 5V (at 104.394 132.748806 90) (layer B.SilkS) (tstamp 5CAD2B17)
