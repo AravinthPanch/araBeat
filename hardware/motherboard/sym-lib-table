@@ -1,3 +1,4 @@
 (sym_lib_table
   (lib (name ARABEAT)(type Legacy)(uri "/Users/aravinth/Google Drive/Workspace/projects/-mozaic-beat/araBeat/hardware/-libraries/ARABEAT.symbol/ARABEAT.lib")(options "")(descr ""))
+  (lib (name PJRAN1X1U01X)(type Legacy)(uri "/Users/aravinth/Google Drive/Workspace/projects/-mozaic-beat/araBeat/hardware/-libraries/SWITCHCRAFT.symbol/PJRAN1X1U01X.lib")(options "")(descr ""))
 )

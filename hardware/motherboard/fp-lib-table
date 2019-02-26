@@ -1,4 +1,6 @@
 (fp_lib_table
   (lib (name ARABEAT)(type KiCad)(uri "/Users/aravinth/Google Drive/Workspace/projects/-mozaic-beat/araBeat/hardware/-libraries/ARABEAT.pretty")(options "")(descr ""))
   (lib (name TE-CONNECTIVITY)(type KiCad)(uri "/Users/aravinth/Google Drive/Workspace/projects/-mozaic-beat/araBeat/hardware/-libraries/TE-CONNECTIVITY.pretty")(options "")(descr ""))
+  (lib (name JST)(type KiCad)(uri "/Users/aravinth/Google Drive/Workspace/projects/-mozaic-beat/araBeat/hardware/-libraries/JST.pretty")(options "")(descr ""))
+  (lib (name SWITCHCRAFT)(type KiCad)(uri "/Users/aravinth/Google Drive/Workspace/projects/-mozaic-beat/araBeat/hardware/-libraries/SWITCHCRAFT.pretty")(options "")(descr ""))
 )

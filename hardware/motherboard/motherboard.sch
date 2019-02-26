@@ -70,7 +70,7 @@ U 1 1 5C66A653
 P 8350 3100
 F 0 "U3" H 8375 4065 50  0000 C CNN
 F 1 "ECG-MODULE" H 8375 3974 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_2x15_P2.54mm_Vertical" H 8000 3700 50  0001 C CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_2x15_P2.54mm_Vertical" H 8000 3700 50  0001 C CNN
 F 3 "" H 8000 3700 50  0001 C CNN
 	1    8350 3100
 	1    0    0    -1  
@@ -81,7 +81,7 @@ U 1 1 5C64D1AB
 P 6800 3100
 F 0 "U2" H 6825 4065 50  0000 C CNN
 F 1 "MCU-MODULE" H 6825 3974 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_2x15_P2.54mm_Vertical" H 6450 3700 50  0001 C CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_2x15_P2.54mm_Vertical" H 6450 3700 50  0001 C CNN
 F 3 "" H 6450 3700 50  0001 C CNN
 	1    6800 3100
 	1    0    0    -1  
@@ -164,7 +164,7 @@ U 1 1 5C64C99C
 P 9900 3100
 F 0 "U5" H 9925 4065 50  0000 C CNN
 F 1 "PROTO-MODULE" H 9925 3974 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_2x15_P2.54mm_Vertical" H 9550 3700 50  0001 C CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_2x15_P2.54mm_Vertical" H 9550 3700 50  0001 C CNN
 F 3 "" H 9550 3700 50  0001 C CNN
 	1    9900 3100
 	1    0    0    -1  
@@ -241,28 +241,6 @@ Wire Wire Line
 	3350 6600 3350 6700
 Connection ~ 3350 6700
 $Comp
-L Connector:Conn_Coaxial J3
-U 1 1 5C7558FB
-P 4850 7000
-F 0 "J3" H 4950 6884 50  0000 L CNN
-F 1 "RCA_L_Female_Tweeter" H 4850 7150 50  0000 C CNN
-F 2 "" H 4850 7000 50  0001 C CNN
-F 3 " ~" H 4850 7000 50  0001 C CNN
-	1    4850 7000
-	-1   0    0    1   
-$EndComp
-$Comp
-L Connector:Conn_Coaxial J4
-U 1 1 5C755B5F
-P 5800 7000
-F 0 "J4" H 5900 6884 50  0000 L CNN
-F 1 "RCA_R_Female_Sub" H 5750 7150 50  0000 C CNN
-F 2 "" H 5800 7000 50  0001 C CNN
-F 3 " ~" H 5800 7000 50  0001 C CNN
-	1    5800 7000
-	-1   0    0    1   
-$EndComp
-$Comp
 L ARABEAT:DSP-MODULE_IDC_J3 U1
 U 1 1 5C7588B4
 P 6500 5700
@@ -290,7 +268,7 @@ U 1 1 5C75A43C
 P 10450 5050
 F 0 "U6" H 10450 5500 50  0000 L CNN
 F 1 "DSP-MODULE_RCA_J3" H 10100 5400 50  0000 L CNN
-F 2 "" H 7950 6400 50  0001 C CNN
+F 2 "Connector_JST:JST_PH_B4B-PH-K_1x04_P2.00mm_Vertical" H 7950 6400 50  0001 C CNN
 F 3 "" H 7950 6400 50  0001 C CNN
 	1    10450 5050
 	1    0    0    -1  
@@ -303,13 +281,13 @@ Text GLabel 10050 5000 0    50   Input ~ 0
 ROUT-
 Text GLabel 10050 5100 0    50   Input ~ 0
 LOUT-
-Text GLabel 5050 7000 2    50   Input ~ 0
+Text GLabel 5100 6650 2    50   Input ~ 0
 ROUT+
-Text GLabel 4850 6800 1    50   Input ~ 0
+Text GLabel 4950 6850 2    50   Input ~ 0
 ROUT-
-Text GLabel 6000 7000 2    50   Input ~ 0
+Text GLabel 6100 6650 2    50   Input ~ 0
 LOUT+
-Text GLabel 5800 6800 1    50   Input ~ 0
+Text GLabel 5950 6850 2    50   Input ~ 0
 LOUT-
 Wire Notes Line
 	4300 6300 4300 7450
@@ -490,4 +468,54 @@ Wire Wire Line
 	7750 4950 7750 4850
 Wire Wire Line
 	7750 4850 7900 4850
+$Comp
+L PJRAN1X1U01X:PJRAN1X1U01X J3
+U 1 1 5C749EF2
+P 4750 6750
+F 0 "J3" H 4741 7028 50  0000 C CNN
+F 1 "RCA_L_Female_Tweeter" H 4900 6500 50  0000 C CNN
+F 2 "SWITCHCRAFT:PJRAN1X1U01X" H 4750 6750 50  0001 L BNN
+F 3 "Conn Phono Jack F 3 POS Solder RA Thru-Hole 3 Terminal 1 Port" H 4750 6750 50  0001 L BNN
+F 4 "None" H 4750 6750 50  0001 L BNN "Field4"
+F 5 "Unavailable" H 4750 6750 50  0001 L BNN "Field5"
+F 6 "PJRAN1X1U01X" H 4750 6750 50  0001 L BNN "Field6"
+F 7 "None" H 4750 6750 50  0001 L BNN "Field7"
+F 8 "Switchcraft" H 4750 6750 50  0001 L BNN "Field8"
+	1    4750 6750
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4950 6650 5050 6650
+Wire Wire Line
+	4950 6750 5050 6750
+Wire Wire Line
+	5050 6750 5050 6650
+Connection ~ 5050 6650
+Wire Wire Line
+	5050 6650 5100 6650
+$Comp
+L PJRAN1X1U01X:PJRAN1X1U01X J4
+U 1 1 5C74C73A
+P 5750 6750
+F 0 "J4" H 5741 7028 50  0000 C CNN
+F 1 "RCA_R_Female_Sub" H 5900 6500 50  0000 C CNN
+F 2 "SWITCHCRAFT:PJRAN1X1U01X" H 5750 6750 50  0001 L BNN
+F 3 "Conn Phono Jack F 3 POS Solder RA Thru-Hole 3 Terminal 1 Port" H 5750 6750 50  0001 L BNN
+F 4 "None" H 5750 6750 50  0001 L BNN "Field4"
+F 5 "Unavailable" H 5750 6750 50  0001 L BNN "Field5"
+F 6 "PJRAN1X1U01X" H 5750 6750 50  0001 L BNN "Field6"
+F 7 "None" H 5750 6750 50  0001 L BNN "Field7"
+F 8 "Switchcraft" H 5750 6750 50  0001 L BNN "Field8"
+	1    5750 6750
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5950 6650 6000 6650
+Wire Wire Line
+	5950 6750 6000 6750
+Wire Wire Line
+	6000 6750 6000 6650
+Connection ~ 6000 6650
+Wire Wire Line
+	6000 6650 6100 6650
 $EndSCHEMATC
