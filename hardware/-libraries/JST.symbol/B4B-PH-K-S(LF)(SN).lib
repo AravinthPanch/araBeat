@@ -1,0 +1,30 @@
+EESchema-LIBRARY Version 2.3
+#encoding utf-8
+#(c) SnapEDA 2016 (snapeda.com)
+#This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License (CC BY-SA) with Design Exception 1.0
+#
+# B4B-PH-K-S(LF)(SN)
+#
+DEF B4B-PH-K-S(LF)(SN) J 0 40 Y Y 1 L N
+F0 "J" -100 240 50 H V L BNN
+F1 "B4B-PH-K-S(LF)(SN)" -100 -400 50 H V L BNN
+F2 "JST_B4B-PH-K-S(LF)(SN)" 0 0 50 H I L BNN
+F3 "PH Series 4 Position 2 mm Pitch Through Hole Crimp Top Entry Shrouded Header" 0 0 50 H I L BNN
+F4 "JST Sales" 0 0 50 H I L BNN
+F5 "Unavailable" 0 0 50 H I L BNN
+F6 "None" 0 0 50 H I L BNN
+F7 "None" 0 0 50 H I L BNN
+F8 "B4B-PH-K-S_LF__SN_" 0 0 50 H I L BNN
+DRAW
+P 2 0 0 10 -100 -300 -100 200 N
+P 2 0 0 10 -100 200 100 200 N
+P 2 0 0 10 100 200 100 -300 N
+P 2 0 0 10 100 -300 -100 -300 N
+X 1 1 -300 100 200 R 40 40 0 0 P 
+X 2 2 -300 0 200 R 40 40 0 0 P 
+X 3 3 -300 -100 200 R 40 40 0 0 P 
+X 4 4 -300 -200 200 R 40 40 0 0 P 
+ENDDRAW
+ENDDEF
+#
+# End Library

@@ -1,0 +1,35 @@
+EESchema-LIBRARY Version 2.3
+#encoding utf-8
+#(c) SnapEDA 2016 (snapeda.com)
+#This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License (CC BY-SA) with Design Exception 1.0
+#
+# PJRAN1X1U01X
+#
+DEF PJRAN1X1U01X J 0 40 N Y 1 L N
+F0 "J" -250 200 50 H V L BNN
+F1 "PJRAN1X1U01X" -250 -250 50 H V L BNN
+F2 "SWITCHCRAFT_PJRAN1X1U01X" 0 0 50 H I L BNN
+F3 "Conn Phono Jack F 3 POS Solder RA Thru-Hole 3 Terminal 1 Port" 0 0 50 H I L BNN
+F4 "None" 0 0 50 H I L BNN
+F5 "https://www.digikey.com/product-detail/en/switchcraft-inc/PJRAN1X1U01X/PJRAN1X1U01X-ND/1288632?utm_source=snapeda&utm_medium=aggregator&utm_campaign=symbol" 0 0 50 H I L BNN
+F6 "PJRAN1X1U01X" 0 0 50 H I L BNN
+F7 "Switchcraft" 0 0 50 H I L BNN
+F8 "PJRAN1X1U01X-ND" 0 0 50 H I L BNN
+DRAW
+P 2 0 0 6 100 -100 -200 -100 N
+P 2 0 0 6 -200 -100 -200 -50 N
+P 2 0 0 6 100 0 0 0 N
+P 2 0 0 6 0 0 0 100 N
+P 2 0 0 6 100 100 0 100 N
+P 2 0 0 6 0 100 -70 100 N
+P 2 0 0 6 -70 100 -100 40 N
+P 2 0 0 6 -100 40 -130 100 N
+S -230 -50 -170 100 0 0 0 F
+P 3 0 0 6 0 100 -20 50 20 50 F
+X SLEEVE 1 200 -100 100 L 40 40 0 0 P 
+X TIP 2 200 100 100 L 40 40 0 0 P 
+X SHUNT 3 200 0 100 L 40 40 0 0 P 
+ENDDRAW
+ENDDEF
+#
+# End Library
