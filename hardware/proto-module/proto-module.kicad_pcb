@@ -176,9 +176,9 @@
     (add_net RST)
   )
 
-  (module ARABEAT:PERF-BOARD (layer F.Cu) (tedit 5C747370) (tstamp 5CA796BA)
+  (module ARABEAT:PERF-BOARD (layer F.Cu) (tedit 5C76FB12) (tstamp 5CA796BA)
     (at 103.632 102.362)
-    (fp_text reference PERF (at -3.81 14.732 90) (layer F.SilkS)
+    (fp_text reference PERF (at -3.81 14.732 90) (layer F.Fab)
       (effects (font (size 1 1) (thickness 0.15)))
     )
     (fp_text value PERF-BOARD (at -3.81 6.604 90) (layer F.Fab)
