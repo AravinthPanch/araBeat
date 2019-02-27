@@ -627,4 +627,118 @@ Wire Wire Line
 	3500 5600 3500 6050
 Wire Wire Line
 	2800 5600 2800 6050
+$Comp
+L Connector:TestPoint TP1
+U 1 1 5C767325
+P 1300 3000
+F 0 "TP1" H 1242 3027 50  0000 R CNN
+F 1 "SCL" H 1242 3118 50  0000 R CNN
+F 2 "TestPoint:TestPoint_Keystone_5000-5004_Miniature" H 1500 3000 50  0001 C CNN
+F 3 "~" H 1500 3000 50  0001 C CNN
+	1    1300 3000
+	-1   0    0    1   
+$EndComp
+$Comp
+L Connector:TestPoint TP2
+U 1 1 5C76793B
+P 1600 3000
+F 0 "TP2" H 1542 3027 50  0000 R CNN
+F 1 "SDA" H 1542 3118 50  0000 R CNN
+F 2 "TestPoint:TestPoint_Keystone_5000-5004_Miniature" H 1800 3000 50  0001 C CNN
+F 3 "~" H 1800 3000 50  0001 C CNN
+	1    1600 3000
+	-1   0    0    1   
+$EndComp
+$Comp
+L Connector:TestPoint TP3
+U 1 1 5C768E63
+P 1900 3000
+F 0 "TP3" H 1842 3027 50  0000 R CNN
+F 1 "MISO" H 1842 3118 50  0000 R CNN
+F 2 "TestPoint:TestPoint_Keystone_5000-5004_Miniature" H 2100 3000 50  0001 C CNN
+F 3 "~" H 2100 3000 50  0001 C CNN
+	1    1900 3000
+	-1   0    0    1   
+$EndComp
+$Comp
+L Connector:TestPoint TP4
+U 1 1 5C769523
+P 2200 3000
+F 0 "TP4" H 2142 3027 50  0000 R CNN
+F 1 "MOSI" H 2142 3118 50  0000 R CNN
+F 2 "TestPoint:TestPoint_Keystone_5000-5004_Miniature" H 2400 3000 50  0001 C CNN
+F 3 "~" H 2400 3000 50  0001 C CNN
+	1    2200 3000
+	-1   0    0    1   
+$EndComp
+$Comp
+L Connector:TestPoint TP5
+U 1 1 5C76A83B
+P 2500 3000
+F 0 "TP5" H 2442 3027 50  0000 R CNN
+F 1 "SCK" H 2442 3118 50  0000 R CNN
+F 2 "TestPoint:TestPoint_Keystone_5000-5004_Miniature" H 2700 3000 50  0001 C CNN
+F 3 "~" H 2700 3000 50  0001 C CNN
+	1    2500 3000
+	-1   0    0    1   
+$EndComp
+Text GLabel 1900 3000 1    50   Input ~ 0
+D12
+Text GLabel 2200 3000 1    50   Input ~ 0
+D11
+Text GLabel 2500 3000 1    50   Input ~ 0
+D13
+Text GLabel 1300 3000 1    50   Input ~ 0
+A5
+Text GLabel 1600 3000 1    50   Input ~ 0
+A4
+$Comp
+L Connector:TestPoint TP6
+U 1 1 5C76D96D
+P 2800 3000
+F 0 "TP6" H 2742 3027 50  0000 R CNN
+F 1 "5V" H 2742 3118 50  0000 R CNN
+F 2 "TestPoint:TestPoint_Keystone_5000-5004_Miniature" H 3000 3000 50  0001 C CNN
+F 3 "~" H 3000 3000 50  0001 C CNN
+	1    2800 3000
+	-1   0    0    1   
+$EndComp
+$Comp
+L Connector:TestPoint TP7
+U 1 1 5C76DD3D
+P 3050 3000
+F 0 "TP7" H 2992 3027 50  0000 R CNN
+F 1 "3V3" H 2992 3118 50  0000 R CNN
+F 2 "TestPoint:TestPoint_Keystone_5000-5004_Miniature" H 3250 3000 50  0001 C CNN
+F 3 "~" H 3250 3000 50  0001 C CNN
+	1    3050 3000
+	-1   0    0    1   
+$EndComp
+$Comp
+L Connector:TestPoint TP8
+U 1 1 5C76E2EC
+P 3350 3000
+F 0 "TP8" H 3292 3027 50  0000 R CNN
+F 1 "GND" H 3292 3118 50  0000 R CNN
+F 2 "TestPoint:TestPoint_Keystone_5000-5004_Miniature" H 3550 3000 50  0001 C CNN
+F 3 "~" H 3550 3000 50  0001 C CNN
+	1    3350 3000
+	-1   0    0    1   
+$EndComp
+Text GLabel 2800 3000 1    50   Input ~ 0
+5V
+Text GLabel 3350 3000 1    50   Input ~ 0
+GND
+Text GLabel 3050 3000 1    50   Input ~ 0
+3V3
+Wire Notes Line
+	1100 3400 3800 3400
+Wire Notes Line
+	3800 2700 1100 2700
+Wire Notes Line
+	1100 2700 1100 3400
+Wire Notes Line
+	3800 2700 3800 3400
+Text Notes 2150 3350 0    50   ~ 0
+TEST POINTS\n
 $EndSCHEMATC
