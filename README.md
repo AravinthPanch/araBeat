@@ -11,7 +11,7 @@ This is a 12-feet-tall-permanent-public-installation, therefore it is built to w
 - Aravinth Panch < http://aravinth.info > New Media Art
 - Stacia Goodman < http://www.staciagoodmanmosaics.com > Mosaic Art
 
-## COLLABORATORS
+## COLLABORATORS & SUPPORTERS
 - Marc Basara - Project Management
 - Stuart Ackerberg - Art Producer
 - David Riding - Electrical Engineering
@@ -24,6 +24,7 @@ This is a 12-feet-tall-permanent-public-installation, therefore it is built to w
 - Niranjan Harakel Rao - Firmware Engineering
 - Chris Kooper - Metalworking
 - Robert Blowsky - Digital Signal Processing
+- Ivy Li - PCB Manufacturing
 
 
 ## STUDIOS AND MANUFACTURERS
