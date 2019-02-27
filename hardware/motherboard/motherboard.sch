@@ -231,13 +231,14 @@ F 3 "" H 6100 7050 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L ARABEAT:DSP-MODULE_RCA_J3 U6
+L ARABEAT:DSP-MODULE_JST_J3 U6
 U 1 1 5C75A43C
 P 10450 5050
 F 0 "U6" H 10450 5500 50  0000 L CNN
-F 1 "DSP-MODULE_RCA_J3" H 10100 5400 50  0000 L CNN
-F 2 "Connector_JST:JST_PH_B4B-PH-K_1x04_P2.00mm_Vertical" H 7950 6400 50  0001 C CNN
+F 1 "DSP-MODULE_JST_J3" H 10100 5400 50  0000 L CNN
+F 2 "JST:B4B-PH-K-S(LF)(SN)" H 7950 6400 50  0001 C CNN
 F 3 "" H 7950 6400 50  0001 C CNN
+F 4 "KiCad / Mfg footprint pins are reversed when compared to RCA interface pinout of Wondom" H 0   0   50  0001 C CNN "Notes"
 	1    10450 5050
 	1    0    0    -1  
 $EndComp
