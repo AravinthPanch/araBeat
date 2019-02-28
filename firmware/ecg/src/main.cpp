@@ -87,6 +87,7 @@ void check_rtor_led()
             // Serial.println("timer_out");
             led_status = LOW;
             digitalWrite(led_pin, LOW);
+            plotter.send_data_to_arabeat_gui(plot::DIGITAL_VAL0, 0);
         }
     }
 }
@@ -102,6 +103,7 @@ void set_led_timer(uint16_t time_ms)
         led_status = HIGH;
         digitalWrite(led_pin, HIGH);
         interval_time_ms = time_ms;
+        plotter.send_data_to_arabeat_gui(plot::DIGITAL_VAL0, 1);
     }
 }
 
