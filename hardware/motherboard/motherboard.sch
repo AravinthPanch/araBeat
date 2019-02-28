@@ -5,9 +5,9 @@ EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
 Sheet 1 1
-Title "araBeat : Motherboard v0.2"
+Title "araBeat : Motherboard v1.0"
 Date "2019-02-25"
-Rev "v0.2"
+Rev "v1.0"
 Comp "www.aravinth.info"
 Comment1 "www.arabeat.aravinth.info"
 Comment2 ""
