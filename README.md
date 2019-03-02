@@ -152,8 +152,10 @@ This is a 12-feet-tall-permanent-public-installation, therefore it is built to w
 -   #### ECG Module v0.2
 
 <p align="center">
-<img src="./images/pcbs/ecg-module-4.png" width=30%/>
-<img src="./images/pcbs/ecg-module-3.png" width=30%/>
+<img src="./images/pcbs/ecg-module-v0.2-1.png" width=30%/>
+<img src="./images/pcbs/ecg-module-v0.2-2.png" width=30%/>
+<img src="./images/pcbs/ecg-module-v0.2-3.png" width=30%/>
+
 </p>
 
 -   #### MCU Module v0.1
