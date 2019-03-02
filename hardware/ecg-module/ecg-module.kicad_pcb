@@ -326,6 +326,11 @@
       (net 5 +1V8))
     (pad 1 smd rect (at -2.921 -2.921) (size 1.4732 0.3556) (layers F.Cu F.Paste F.Mask)
       (net 27 MISO_1.8V))
+    (model ${KISYS3DMOD}/Package_SO.3dshapes/TSSOP-20_4.4x6.5mm_P0.65mm.step
+      (at (xyz 0 0 0))
+      (scale (xyz 1 1 1))
+      (rotate (xyz 0 0 0))
+    )
   )
 
   (module Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder (layer F.Cu) (tedit 5B301BBD) (tstamp 5BFCA83E)
@@ -1383,7 +1388,7 @@
     )
   )
 
-  (module TestPoint:TestPoint_Keystone_5000-5004_Miniature (layer F.Cu) (tedit 5A0F774F) (tstamp 5BFCA87E)
+  (module TestPoint:TestPoint_Keystone_5000-5004_Miniature (layer F.Cu) (tedit 5C7B015E) (tstamp 5BFCA87E)
     (at 128.6027 120.0988)
     (descr "Keystone Miniature THM Test Point 5000-5004, http://www.keyelco.com/product-pdf.cfm?p=1309")
     (tags "Through Hole Mount Test Points")
@@ -1411,9 +1416,14 @@
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
     )
+    (model "/Users/aravinth/Google Drive/Workspace/projects/mozaic-beat/araBeat/hardware/-resources/3d-models/keystone-5000.step"
+      (offset (xyz 0 0 -1.5))
+      (scale (xyz 1 1 1))
+      (rotate (xyz 0 0 0))
+    )
   )
 
-  (module TestPoint:TestPoint_Keystone_5000-5004_Miniature (layer F.Cu) (tedit 5A0F774F) (tstamp 5BFCA88B)
+  (module TestPoint:TestPoint_Keystone_5000-5004_Miniature (layer F.Cu) (tedit 5C7B015E) (tstamp 5BFCA88B)
     (at 158.6027 125.0988)
     (descr "Keystone Miniature THM Test Point 5000-5004, http://www.keyelco.com/product-pdf.cfm?p=1309")
     (tags "Through Hole Mount Test Points")
@@ -1441,9 +1451,14 @@
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
     )
+    (model "/Users/aravinth/Google Drive/Workspace/projects/mozaic-beat/araBeat/hardware/-resources/3d-models/keystone-5000.step"
+      (offset (xyz 0 0 -1.5))
+      (scale (xyz 1 1 1))
+      (rotate (xyz 0 0 0))
+    )
   )
 
-  (module TestPoint:TestPoint_Keystone_5000-5004_Miniature (layer F.Cu) (tedit 5A0F774F) (tstamp 5BFCA898)
+  (module TestPoint:TestPoint_Keystone_5000-5004_Miniature (layer F.Cu) (tedit 5C7B015E) (tstamp 5BFCA898)
     (at 153.6027 125.0988)
     (descr "Keystone Miniature THM Test Point 5000-5004, http://www.keyelco.com/product-pdf.cfm?p=1309")
     (tags "Through Hole Mount Test Points")
@@ -1471,9 +1486,14 @@
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
     )
+    (model "/Users/aravinth/Google Drive/Workspace/projects/mozaic-beat/araBeat/hardware/-resources/3d-models/keystone-5000.step"
+      (offset (xyz 0 0 -1.5))
+      (scale (xyz 1 1 1))
+      (rotate (xyz 0 0 0))
+    )
   )
 
-  (module TestPoint:TestPoint_Keystone_5000-5004_Miniature (layer F.Cu) (tedit 5A0F774F) (tstamp 5BFCA8A5)
+  (module TestPoint:TestPoint_Keystone_5000-5004_Miniature (layer F.Cu) (tedit 5C7B015E) (tstamp 5BFCA8A5)
     (at 138.6027 125.0988)
     (descr "Keystone Miniature THM Test Point 5000-5004, http://www.keyelco.com/product-pdf.cfm?p=1309")
     (tags "Through Hole Mount Test Points")
@@ -1501,9 +1521,14 @@
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
     )
+    (model "/Users/aravinth/Google Drive/Workspace/projects/mozaic-beat/araBeat/hardware/-resources/3d-models/keystone-5000.step"
+      (offset (xyz 0 0 -1.5))
+      (scale (xyz 1 1 1))
+      (rotate (xyz 0 0 0))
+    )
   )
 
-  (module TestPoint:TestPoint_Keystone_5000-5004_Miniature (layer F.Cu) (tedit 5A0F774F) (tstamp 5BFCA8B2)
+  (module TestPoint:TestPoint_Keystone_5000-5004_Miniature (layer F.Cu) (tedit 5C7B015E) (tstamp 5BFCA8B2)
     (at 143.6027 125.0988)
     (descr "Keystone Miniature THM Test Point 5000-5004, http://www.keyelco.com/product-pdf.cfm?p=1309")
     (tags "Through Hole Mount Test Points")
@@ -1531,9 +1556,14 @@
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
     )
+    (model "/Users/aravinth/Google Drive/Workspace/projects/mozaic-beat/araBeat/hardware/-resources/3d-models/keystone-5000.step"
+      (offset (xyz 0 0 -1.5))
+      (scale (xyz 1 1 1))
+      (rotate (xyz 0 0 0))
+    )
   )
 
-  (module TestPoint:TestPoint_Keystone_5000-5004_Miniature (layer F.Cu) (tedit 5A0F774F) (tstamp 5BFCA8BF)
+  (module TestPoint:TestPoint_Keystone_5000-5004_Miniature (layer F.Cu) (tedit 5C7B015E) (tstamp 5BFCA8BF)
     (at 128.6027 125.0988)
     (descr "Keystone Miniature THM Test Point 5000-5004, http://www.keyelco.com/product-pdf.cfm?p=1309")
     (tags "Through Hole Mount Test Points")
@@ -1561,9 +1591,14 @@
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
     )
+    (model "/Users/aravinth/Google Drive/Workspace/projects/mozaic-beat/araBeat/hardware/-resources/3d-models/keystone-5000.step"
+      (offset (xyz 0 0 -1.5))
+      (scale (xyz 1 1 1))
+      (rotate (xyz 0 0 0))
+    )
   )
 
-  (module TestPoint:TestPoint_Keystone_5000-5004_Miniature (layer F.Cu) (tedit 5A0F774F) (tstamp 5BFCA8CC)
+  (module TestPoint:TestPoint_Keystone_5000-5004_Miniature (layer F.Cu) (tedit 5C7B015E) (tstamp 5BFCA8CC)
     (at 133.6027 125.0988)
     (descr "Keystone Miniature THM Test Point 5000-5004, http://www.keyelco.com/product-pdf.cfm?p=1309")
     (tags "Through Hole Mount Test Points")
@@ -1591,9 +1626,14 @@
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
     )
+    (model "/Users/aravinth/Google Drive/Workspace/projects/mozaic-beat/araBeat/hardware/-resources/3d-models/keystone-5000.step"
+      (offset (xyz 0 0 -1.5))
+      (scale (xyz 1 1 1))
+      (rotate (xyz 0 0 0))
+    )
   )
 
-  (module TestPoint:TestPoint_Keystone_5000-5004_Miniature (layer F.Cu) (tedit 5A0F774F) (tstamp 5BFCA8D9)
+  (module TestPoint:TestPoint_Keystone_5000-5004_Miniature (layer F.Cu) (tedit 5C7B015E) (tstamp 5BFCA8D9)
     (at 148.6027 125.0988)
     (descr "Keystone Miniature THM Test Point 5000-5004, http://www.keyelco.com/product-pdf.cfm?p=1309")
     (tags "Through Hole Mount Test Points")
@@ -1621,9 +1661,14 @@
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
     )
+    (model "/Users/aravinth/Google Drive/Workspace/projects/mozaic-beat/araBeat/hardware/-resources/3d-models/keystone-5000.step"
+      (offset (xyz 0 0 -1.5))
+      (scale (xyz 1 1 1))
+      (rotate (xyz 0 0 0))
+    )
   )
 
-  (module TestPoint:TestPoint_Keystone_5000-5004_Miniature (layer F.Cu) (tedit 5A0F774F) (tstamp 5BFCA8E6)
+  (module TestPoint:TestPoint_Keystone_5000-5004_Miniature (layer F.Cu) (tedit 5C7B015E) (tstamp 5BFCA8E6)
     (at 168.6027 125.0988)
     (descr "Keystone Miniature THM Test Point 5000-5004, http://www.keyelco.com/product-pdf.cfm?p=1309")
     (tags "Through Hole Mount Test Points")
@@ -1651,9 +1696,14 @@
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
     )
+    (model "/Users/aravinth/Google Drive/Workspace/projects/mozaic-beat/araBeat/hardware/-resources/3d-models/keystone-5000.step"
+      (offset (xyz 0 0 -1.5))
+      (scale (xyz 1 1 1))
+      (rotate (xyz 0 0 0))
+    )
   )
 
-  (module TestPoint:TestPoint_Keystone_5000-5004_Miniature (layer F.Cu) (tedit 5A0F774F) (tstamp 5BFCA8F3)
+  (module TestPoint:TestPoint_Keystone_5000-5004_Miniature (layer F.Cu) (tedit 5C7B015E) (tstamp 5BFCA8F3)
     (at 163.6027 125.0988)
     (descr "Keystone Miniature THM Test Point 5000-5004, http://www.keyelco.com/product-pdf.cfm?p=1309")
     (tags "Through Hole Mount Test Points")
@@ -1681,9 +1731,14 @@
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
     )
+    (model "/Users/aravinth/Google Drive/Workspace/projects/mozaic-beat/araBeat/hardware/-resources/3d-models/keystone-5000.step"
+      (offset (xyz 0 0 -1.5))
+      (scale (xyz 1 1 1))
+      (rotate (xyz 0 0 0))
+    )
   )
 
-  (module TestPoint:TestPoint_Keystone_5000-5004_Miniature (layer F.Cu) (tedit 5A0F774F) (tstamp 5BFCA900)
+  (module TestPoint:TestPoint_Keystone_5000-5004_Miniature (layer F.Cu) (tedit 5C7B015E) (tstamp 5BFCA900)
     (at 168.6027 120.0988)
     (descr "Keystone Miniature THM Test Point 5000-5004, http://www.keyelco.com/product-pdf.cfm?p=1309")
     (tags "Through Hole Mount Test Points")
@@ -1708,6 +1763,11 @@
       (net 20 INT2B_5V))
     (model ${KISYS3DMOD}/TestPoint.3dshapes/TestPoint_Keystone_5000-5004_Miniature.wrl
       (at (xyz 0 0 0))
+      (scale (xyz 1 1 1))
+      (rotate (xyz 0 0 0))
+    )
+    (model "/Users/aravinth/Google Drive/Workspace/projects/mozaic-beat/araBeat/hardware/-resources/3d-models/keystone-5000.step"
+      (offset (xyz 0 0 -1.5))
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
     )
@@ -1826,6 +1886,11 @@
       (net 10 GNDA))
     (pad 1 smd rect (at -2.3749 -1.524 270) (size 0.3048 0.9652) (layers F.Cu F.Paste F.Mask)
       (net 10 GNDA))
+    (model ${KISYS3DMOD}/Package_DFN_QFN.3dshapes/QFN-24_4x4mm_P0.5mm.step
+      (at (xyz 0 0 0))
+      (scale (xyz 1 1 1))
+      (rotate (xyz 0 0 0))
+    )
   )
 
   (module DIODES-INC:OSCSC508P500X700X155-4N (layer F.Cu) (tedit 0) (tstamp 5BFCA9CE)
@@ -1923,8 +1988,8 @@
       (net 30 "Net-(J1-Pad2)"))
     (pad 1 thru_hole rect (at 0 0) (size 2.1 2.1) (drill 1.1) (layers *.Cu *.Mask)
       (net 14 "Net-(J1-Pad1)"))
-    (model ${KISYS3DMOD}/TerminalBlock_RND.3dshapes/TerminalBlock_RND_205-00045_1x02_P5.00mm_Horizontal.wrl
-      (at (xyz 0 0 0))
+    (model "/Users/aravinth/Google Drive/Workspace/projects/mozaic-beat/araBeat/hardware/-libraries/TE-CONNECTIVITY.pretty/282837-2.step"
+      (offset (xyz 2.5 0 0))
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
     )

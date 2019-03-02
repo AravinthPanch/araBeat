@@ -1,7 +1,7 @@
 (fp_lib_table
-  (lib (name MAXIM)(type KiCad)(uri "/Users/aravinth/Google Drive/Workspace/projects/-mozaic-beat/araBeat/hardware/-libraries/MAXIM.pretty")(options "")(descr ""))
-  (lib (name TI)(type KiCad)(uri "/Users/aravinth/Google Drive/Workspace/projects/-mozaic-beat/araBeat/hardware/-libraries/TI.pretty")(options "")(descr ""))
-  (lib (name SWITCHCRAFT)(type KiCad)(uri "/Users/aravinth/Google Drive/Workspace/projects/-mozaic-beat/araBeat/hardware/-libraries/SWITCHCRAFT.pretty")(options "")(descr ""))
-  (lib (name DIODES-INC)(type KiCad)(uri "/Users/aravinth/Google Drive/Workspace/projects/-mozaic-beat/araBeat/hardware/-libraries/DIODES-INC.pretty")(options "")(descr ""))
-  (lib (name ECG-MODULE)(type KiCad)(uri "/Users/aravinth/Google Drive/Workspace/projects/-mozaic-beat/araBeat/hardware/-libraries/ECG-MODULE.pretty")(options "")(descr ""))
+  (lib (name MAXIM)(type KiCad)(uri "/Users/aravinth/Google Drive/Workspace/projects/mozaic-beat/araBeat/hardware/-libraries/MAXIM.pretty")(options "")(descr ""))
+  (lib (name TI)(type KiCad)(uri "/Users/aravinth/Google Drive/Workspace/projects/mozaic-beat/araBeat/hardware/-libraries/TI.pretty")(options "")(descr ""))
+  (lib (name SWITCHCRAFT)(type KiCad)(uri "/Users/aravinth/Google Drive/Workspace/projects/mozaic-beat/araBeat/hardware/-libraries/SWITCHCRAFT.pretty")(options "")(descr ""))
+  (lib (name DIODES-INC)(type KiCad)(uri "/Users/aravinth/Google Drive/Workspace/projects/mozaic-beat/araBeat/hardware/-libraries/DIODES-INC.pretty")(options "")(descr ""))
+  (lib (name ECG-MODULE)(type KiCad)(uri "/Users/aravinth/Google Drive/Workspace/projects/mozaic-beat/araBeat/hardware/-libraries/ECG-MODULE.pretty")(options "")(descr ""))
 )
