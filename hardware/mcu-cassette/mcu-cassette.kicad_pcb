@@ -283,12 +283,7 @@
     (pad "" np_thru_hole circle (at 15.24 -2.54 90) (size 1.78 1.78) (drill 1.78) (layers *.Cu *.Mask))
     (pad "" np_thru_hole circle (at 15.24 38.1 90) (size 1.78 1.78) (drill 1.78) (layers *.Cu *.Mask))
     (pad "" np_thru_hole circle (at 0 38.1 90) (size 1.78 1.78) (drill 1.78) (layers *.Cu *.Mask))
-    (model ${KISYS3DMOD}/Module.3dshapes/Arduino_Nano_WithMountingHoles.wrl
-      (at (xyz 0 0 0))
-      (scale (xyz 1 1 1))
-      (rotate (xyz 0 0 0))
-    )
-    (model /Users/aravinth/araBeat/hardware/-resources/3d-models/nano.step
+    (model "/Users/aravinth/Google Drive/Workspace/projects/mozaic-beat/araBeat/hardware/-resources/3d-models/arduino-nano.step"
       (at (xyz 0 0 0))
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
@@ -4421,10 +4416,10 @@
       (net 2 D0))
     (pad 1 thru_hole rect (at 0 0 270) (size 1.7 1.7) (drill 1) (layers *.Cu *.Mask)
       (net 21 5V))
-    (model /Users/aravinth/araBeat/hardware/-libraries/TE-CONNECTIVITY.pretty/1-86479-9.stp
+    (model "/Users/aravinth/Google Drive/Workspace/projects/mozaic-beat/araBeat/hardware/-libraries/TE-CONNECTIVITY.pretty/1-86479-9.step"
       (offset (xyz 0 0 -2.5))
       (scale (xyz 1 1 1))
-      (rotate (xyz 0 180 90))
+      (rotate (xyz 0 0 0))
     )
   )
 
@@ -4717,6 +4712,11 @@
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
     )
+    (model "/Users/aravinth/Google Drive/Workspace/projects/mozaic-beat/araBeat/hardware/-resources/3d-models/keystone-5000.step"
+      (offset (xyz 0 0 -1.5))
+      (scale (xyz 1 1 1))
+      (rotate (xyz 0 0 0))
+    )
   )
 
   (module TestPoint:TestPoint_Keystone_5000-5004_Miniature (layer F.Cu) (tedit 5C72EF34) (tstamp 5C7F50F5)
@@ -4744,6 +4744,11 @@
       (net 21 5V))
     (model ${KISYS3DMOD}/TestPoint.3dshapes/TestPoint_Keystone_5000-5004_Miniature.wrl
       (at (xyz 0 0 0))
+      (scale (xyz 1 1 1))
+      (rotate (xyz 0 0 0))
+    )
+    (model "/Users/aravinth/Google Drive/Workspace/projects/mozaic-beat/araBeat/hardware/-resources/3d-models/keystone-5000.step"
+      (offset (xyz 0 0 -1.5))
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
     )
