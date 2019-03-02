@@ -138,8 +138,9 @@ This is a 12-feet-tall-permanent-public-installation, therefore it is built to w
 -   #### Motherboard v0.1
 
 <p align="center">
-<img src="./images/pcbs/ecg-baseboard-3.jpg" width=30%/>
-<img src="./images/pcbs/ecg-baseboard-4.jpg" width=30%/>
+<img src="./images/pcbs/motherboard-v0.1-1.png" width=15%/>
+<img src="./images/pcbs/motherboard-v0.1-2.png" width=15%/>
+<img src="./images/pcbs/motherboard-v0.1-3.png" width=19%/>
 </p>
 
 -   #### ECG Module v0.1

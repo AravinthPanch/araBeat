@@ -374,7 +374,7 @@
       (net 10 "Net-(A1-Pad15)"))
     (pad 16 thru_hole oval (at 15.24 35.56) (size 1.6 1.6) (drill 0.8) (layers *.Cu *.Mask)
       (net 11 "Net-(A1-Pad16)"))
-    (model ${KISYS3DMOD}/Module.3dshapes/Arduino_Nano_WithMountingHoles.wrl
+    (model "/Users/aravinth/Google Drive/Workspace/projects/mozaic-beat/araBeat/hardware/-resources/3d-models/arduino-nano.step"
       (at (xyz 0 0 0))
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
@@ -488,10 +488,15 @@
       (net 6 "Net-(A1-Pad5)"))
     (pad 4 thru_hole circle (at 15 0 270) (size 2.1 2.1) (drill 1.1) (layers *.Cu *.Mask)
       (net 3 "Net-(A1-Pad19)"))
-    (model ${KISYS3DMOD}/TerminalBlock_RND.3dshapes/TerminalBlock_RND_205-00047_1x04_P5.00mm_Horizontal.wrl
-      (at (xyz 0 0 0))
+    (model "/Users/aravinth/Google Drive/Workspace/projects/mozaic-beat/araBeat/hardware/-libraries/TE-CONNECTIVITY.pretty/282837-2.step"
+      (offset (xyz 2.5 0 0))
       (scale (xyz 1 1 1))
-      (rotate (xyz 0 0 0))
+      (rotate (xyz 0 0 180))
+    )
+    (model "/Users/aravinth/Google Drive/Workspace/projects/mozaic-beat/araBeat/hardware/-libraries/TE-CONNECTIVITY.pretty/282837-2.step"
+      (offset (xyz 12.5 0 0))
+      (scale (xyz 1 1 1))
+      (rotate (xyz 0 0 180))
     )
   )
 
@@ -541,7 +546,7 @@
       (net 9 "Net-(A1-Pad14)"))
     (pad 10 thru_hole oval (at 0 22.86 270) (size 1.7 1.7) (drill 1) (layers *.Cu *.Mask)
       (net 10 "Net-(A1-Pad15)"))
-    (model ${KISYS3DMOD}/Connector_PinSocket_2.54mm.3dshapes/PinSocket_1x10_P2.54mm_Vertical.wrl
+    (model "/Users/aravinth/Google Drive/Workspace/projects/mozaic-beat/araBeat/hardware/-libraries/PROTOCENTRAL.pretty/PROTOCENTRAL_MAX30003.step"
       (at (xyz 0 0 0))
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
