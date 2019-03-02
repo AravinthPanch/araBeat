@@ -503,7 +503,7 @@
       (net 5 ROUT+))
     (pad 1 thru_hole rect (at 0 0) (size 2.8 1.6) (drill oval 2.5 1.3) (layers *.Cu *.Mask)
       (net 6 ROUT-))
-    (model "/Users/aravinth/Google Drive/Workspace/projects/-mozaic-beat/araBeat/hardware/-libraries/SWITCHCRAFT.pretty/PJRAN1X1U01X.step"
+    (model "/Users/aravinth/Google Drive/Workspace/projects/mozaic-beat/araBeat/hardware/-libraries/SWITCHCRAFT.pretty/PJRAN1X1U01X.step"
       (at (xyz 0 0 0))
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
@@ -2327,7 +2327,7 @@
     (pad "" np_thru_hole circle (at -23.3426 23.3426) (size 3 3) (drill 3) (layers *.Cu *.Mask))
     (pad "" np_thru_hole circle (at -23.3426 -23.3426) (size 3 3) (drill 3) (layers *.Cu *.Mask))
     (pad "" np_thru_hole circle (at 23.368 -23.368) (size 3 3) (drill 3) (layers *.Cu *.Mask))
-    (model "/Users/aravinth/Google Drive/Workspace/projects/-mozaic-beat/araBeat/hardware/-libraries/ARABEAT.pretty/wondom-dsp.step"
+    (model "/Users/aravinth/Google Drive/Workspace/projects/mozaic-beat/araBeat/hardware/-libraries/ARABEAT.pretty/wondom-dsp.step"
       (at (xyz 0 0 0))
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
@@ -2401,7 +2401,7 @@
       (net 3 ECGN))
     (pad 1 thru_hole rect (at -2.54 0) (size 1.65 1.65) (drill 1.1) (layers *.Cu *.Mask)
       (net 4 ECGP))
-    (model /Users/aravinth/araBeat/hardware/-libraries/TE-CONNECTIVITY.pretty/282837-2.step
+    (model "/Users/aravinth/Google Drive/Workspace/projects/mozaic-beat/araBeat/hardware/-libraries/TE-CONNECTIVITY.pretty/282837-2.step"
       (at (xyz 0 0 0))
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
@@ -2437,7 +2437,7 @@
       (net 36 "Net-(J2-Pad1)"))
     (pad 2 thru_hole circle (at 2.54 0) (size 1.65 1.65) (drill 1.1) (layers *.Cu *.Mask)
       (net 37 "Net-(J2-Pad2)"))
-    (model /Users/aravinth/araBeat/hardware/-libraries/TE-CONNECTIVITY.pretty/282837-2.step
+    (model "/Users/aravinth/Google Drive/Workspace/projects/mozaic-beat/araBeat/hardware/-libraries/TE-CONNECTIVITY.pretty/282837-2.step"
       (at (xyz 0 0 0))
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
@@ -2756,7 +2756,7 @@
       (net 34 D0))
     (pad 1 thru_hole rect (at 0 0 225) (size 1.7 1.7) (drill 1) (layers *.Cu *.Mask)
       (net 2 5V))
-    (model "/Users/aravinth/Google Drive/Workspace/projects/-mozaic-beat/araBeat/hardware/-resources/3d-models/mcu-cassette.step"
+    (model "/Users/aravinth/Google Drive/Workspace/projects/mozaic-beat/araBeat/hardware/-resources/3d-models/mcu-cassette.step"
       (offset (xyz 0 0 -2.5))
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
@@ -2834,7 +2834,7 @@
       (net 3 ECGN))
     (pad 30 thru_hole oval (at -2.54 35.56 315) (size 1.7 1.7) (drill 1) (layers *.Cu *.Mask)
       (net 1 GND))
-    (model "/Users/aravinth/Google Drive/Workspace/projects/-mozaic-beat/araBeat/hardware/-resources/3d-models/ecg-cassette.step"
+    (model "/Users/aravinth/Google Drive/Workspace/projects/mozaic-beat/araBeat/hardware/-resources/3d-models/ecg-cassette.step"
       (offset (xyz 0 0 -2.5))
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
@@ -2929,7 +2929,7 @@
     (pad 29 thru_hole oval (at 0 35.56 315) (size 1.7 1.7) (drill 1) (layers *.Cu *.Mask))
     (pad 30 thru_hole oval (at -2.54 35.56 315) (size 1.7 1.7) (drill 1) (layers *.Cu *.Mask)
       (net 1 GND))
-    (model "/Users/aravinth/Google Drive/Workspace/projects/-mozaic-beat/araBeat/hardware/-resources/3d-models/proto-module.step"
+    (model "/Users/aravinth/Google Drive/Workspace/projects/mozaic-beat/araBeat/hardware/-resources/3d-models/proto-module.step"
       (offset (xyz 0 0 -2.5))
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
@@ -3024,7 +3024,7 @@
     (pad 29 thru_hole oval (at 0 35.56 225) (size 1.7 1.7) (drill 1) (layers *.Cu *.Mask))
     (pad 30 thru_hole oval (at -2.54 35.56 225) (size 1.7 1.7) (drill 1) (layers *.Cu *.Mask)
       (net 1 GND))
-    (model "/Users/aravinth/Google Drive/Workspace/projects/-mozaic-beat/araBeat/hardware/-resources/3d-models/proto-module.step"
+    (model "/Users/aravinth/Google Drive/Workspace/projects/mozaic-beat/araBeat/hardware/-resources/3d-models/proto-module.step"
       (offset (xyz 0 0 -2.5))
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
@@ -3332,7 +3332,7 @@
       (net 37 "Net-(J2-Pad2)"))
     (pad 1 thru_hole rect (at 0 0) (size 1.7 1.7) (drill 1) (layers *.Cu *.Mask)
       (net 1 GND))
-    (model "/Users/aravinth/Google Drive/Workspace/projects/-mozaic-beat/araBeat/hardware/-libraries/TE-CONNECTIVITY.pretty/382811-8.step"
+    (model "/Users/aravinth/Google Drive/Workspace/projects/mozaic-beat/araBeat/hardware/-libraries/TE-CONNECTIVITY.pretty/382811-8.step"
       (offset (xyz 0 0 -2.5))
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
@@ -3372,7 +3372,7 @@
       (net 2 5V))
     (pad 2 thru_hole oval (at 0 2.54) (size 1.7 1.7) (drill 1) (layers *.Cu *.Mask)
       (net 36 "Net-(J2-Pad1)"))
-    (model "/Users/aravinth/Google Drive/Workspace/projects/-mozaic-beat/araBeat/hardware/-libraries/TE-CONNECTIVITY.pretty/382811-8.step"
+    (model "/Users/aravinth/Google Drive/Workspace/projects/mozaic-beat/araBeat/hardware/-libraries/TE-CONNECTIVITY.pretty/382811-8.step"
       (offset (xyz 0 0 -2.5))
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
@@ -3445,7 +3445,7 @@
       (net 7 LOUT+))
     (pad 3 thru_hole rect (at 3.75 -3.7) (size 1.3 2.8) (drill oval 1 2.5) (layers *.Cu *.Mask)
       (net 7 LOUT+))
-    (model "/Users/aravinth/Google Drive/Workspace/projects/-mozaic-beat/araBeat/hardware/-libraries/SWITCHCRAFT.pretty/PJRAN1X1U01X.step"
+    (model "/Users/aravinth/Google Drive/Workspace/projects/mozaic-beat/araBeat/hardware/-libraries/SWITCHCRAFT.pretty/PJRAN1X1U01X.step"
       (at (xyz 0 0 0))
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
@@ -3480,6 +3480,11 @@
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
     )
+    (model "/Users/aravinth/Google Drive/Workspace/projects/mozaic-beat/araBeat/hardware/-resources/3d-models/keystone-5000.step"
+      (offset (xyz 0 0 -1.5))
+      (scale (xyz 1 1 1))
+      (rotate (xyz 0 0 0))
+    )
   )
 
   (module TestPoint:TestPoint_Keystone_5000-5004_Miniature (layer F.Cu) (tedit 5C7661EE) (tstamp 5C82D32E)
@@ -3507,6 +3512,11 @@
       (net 10 A4))
     (model ${KISYS3DMOD}/TestPoint.3dshapes/TestPoint_Keystone_5000-5004_Miniature.wrl
       (at (xyz 0 0 0))
+      (scale (xyz 1 1 1))
+      (rotate (xyz 0 0 0))
+    )
+    (model "/Users/aravinth/Google Drive/Workspace/projects/mozaic-beat/araBeat/hardware/-resources/3d-models/keystone-5000.step"
+      (offset (xyz 0 0 -1.5))
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
     )
@@ -3540,6 +3550,11 @@
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
     )
+    (model "/Users/aravinth/Google Drive/Workspace/projects/mozaic-beat/araBeat/hardware/-resources/3d-models/keystone-5000.step"
+      (offset (xyz 0 0 -1.5))
+      (scale (xyz 1 1 1))
+      (rotate (xyz 0 0 0))
+    )
   )
 
   (module TestPoint:TestPoint_Keystone_5000-5004_Miniature (layer F.Cu) (tedit 5C76604F) (tstamp 5C82D348)
@@ -3567,6 +3582,11 @@
       (net 26 D11))
     (model ${KISYS3DMOD}/TestPoint.3dshapes/TestPoint_Keystone_5000-5004_Miniature.wrl
       (at (xyz 0 0 0))
+      (scale (xyz 1 1 1))
+      (rotate (xyz 0 0 0))
+    )
+    (model "/Users/aravinth/Google Drive/Workspace/projects/mozaic-beat/araBeat/hardware/-resources/3d-models/keystone-5000.step"
+      (offset (xyz 0 0 -1.5))
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
     )
@@ -3600,6 +3620,11 @@
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
     )
+    (model "/Users/aravinth/Google Drive/Workspace/projects/mozaic-beat/araBeat/hardware/-resources/3d-models/keystone-5000.step"
+      (offset (xyz 0 0 -1.5))
+      (scale (xyz 1 1 1))
+      (rotate (xyz 0 0 0))
+    )
   )
 
   (module TestPoint:TestPoint_Keystone_5000-5004_Miniature (layer F.Cu) (tedit 5C7660B1) (tstamp 5C82D362)
@@ -3627,6 +3652,11 @@
       (net 2 5V))
     (model ${KISYS3DMOD}/TestPoint.3dshapes/TestPoint_Keystone_5000-5004_Miniature.wrl
       (at (xyz 0 0 0))
+      (scale (xyz 1 1 1))
+      (rotate (xyz 0 0 0))
+    )
+    (model "/Users/aravinth/Google Drive/Workspace/projects/mozaic-beat/araBeat/hardware/-resources/3d-models/keystone-5000.step"
+      (offset (xyz 0 0 -1.5))
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
     )
@@ -3660,6 +3690,11 @@
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
     )
+    (model "/Users/aravinth/Google Drive/Workspace/projects/mozaic-beat/araBeat/hardware/-resources/3d-models/keystone-5000.step"
+      (offset (xyz 0 0 -1.5))
+      (scale (xyz 1 1 1))
+      (rotate (xyz 0 0 0))
+    )
   )
 
   (module TestPoint:TestPoint_Keystone_5000-5004_Miniature (layer F.Cu) (tedit 5C7660B4) (tstamp 5C82D37C)
@@ -3687,6 +3722,11 @@
       (net 1 GND))
     (model ${KISYS3DMOD}/TestPoint.3dshapes/TestPoint_Keystone_5000-5004_Miniature.wrl
       (at (xyz 0 0 0))
+      (scale (xyz 1 1 1))
+      (rotate (xyz 0 0 0))
+    )
+    (model "/Users/aravinth/Google Drive/Workspace/projects/mozaic-beat/araBeat/hardware/-resources/3d-models/keystone-5000.step"
+      (offset (xyz 0 0 -1.5))
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
     )
