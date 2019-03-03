@@ -25,7 +25,6 @@ void max30003::max30003_write_register(uint8_t reg_address, uint32_t data)
 {
     // chip select
     digitalWrite(MAX30003_CS_PIN, LOW);
-    delay(2);
 
     // select the register to write
     SPI.transfer((reg_address << 1) | WREG);
@@ -36,7 +35,6 @@ void max30003::max30003_write_register(uint8_t reg_address, uint32_t data)
     SPI.transfer(data);
 
     // chip deselect
-    delay(2);
     digitalWrite(MAX30003_CS_PIN, HIGH);
 }
 
