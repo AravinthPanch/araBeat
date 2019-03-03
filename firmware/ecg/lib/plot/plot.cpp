@@ -24,6 +24,7 @@ plot::plot(){};
 // the message is intentionally made unsigned to perform bit operations
 void plot::send_data_to_arabeat_gui(midi_commands_e command, unsigned int message)
 {
+    // return 0;
     // Send Command Byte
     Serial.write(command);
 
@@ -46,7 +47,7 @@ void plot::send_data_to_arabeat_gui(midi_commands_e command, unsigned int messag
 
 // send data to Protocental GUI
 // it works only with ECG Gain 20V/V, otherwise too noisy
-void plot::send_data_to_protocentral_gui(int16_t ecg_sample, uint16_t r_to_r, uint16_t bpm)
+void plot::send_data_to_protocentral_gui(int16_t ecg_sample, uint16_t rtor, uint16_t bpm)
 {
     uint8_t data_bytes[20];
 
@@ -61,8 +62,8 @@ void plot::send_data_to_protocentral_gui(int16_t ecg_sample, uint16_t r_to_r, ui
     data_bytes[7] = ecg_sample >> 8;
     data_bytes[8] = ecg_sample;
 
-    data_bytes[9] = r_to_r;
-    data_bytes[10] = r_to_r >> 8;
+    data_bytes[9] = rtor;
+    data_bytes[10] = rtor >> 8;
     data_bytes[11] = 0x00;
     data_bytes[12] = 0x00;
 
@@ -83,5 +84,6 @@ void plot::send_data_to_protocentral_gui(int16_t ecg_sample, uint16_t r_to_r, ui
 // send data to Arduino Plotter
 void plot::send_data_to_arduino_plotter(int16_t ecg_sample)
 {
+    return 0;
     Serial.println(ecg_sample);
 }

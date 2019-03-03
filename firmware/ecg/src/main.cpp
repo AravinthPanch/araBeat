@@ -27,15 +27,43 @@ const uint8_t FIFO_VALID_SAMPLE_MASK = 0x0;
 const uint8_t FIFO_FAST_SAMPLE_MASK = 0x1;
 const uint8_t ETAG_BITS_MASK = 0x7;
 const float RTOR_LSB_RES = 0.0078125f;
-// 8ms RTOR resolution is for 32768Hz master clock
-const uint8_t RTOR_PRESCALE = 8;
+const uint8_t RTOR_PRESCALE = 8; // 8ms RTOR resolution is for 32768Hz master clock
+const uint16_t MIN_RTOR_INTERVAL = 500;  // 120 bpm
+const uint16_t MAX_RTOR_INTERVAL = 1000; // 60 bpm
 
 max30003 ecg;
 plot plotter;
 
-uint32_t ecg_fifo, sample_count, etag_bits[32], r_to_r;
+uint32_t ecg_fifo, sample_count, etag_bits[32], rtor;
 int16_t ecg_sample[32];
 float bpm;
+
+bool pulse_status = LOW;
+uint32_t current_time_ms = 0;
+uint32_t last_time_ms = 0;
+uint16_t interval_time_ms = 800;
+uint32_t last_rtor_interrupt_time_ms = 0;
+
+const uint8_t dcloff_array_size = 96;
+int16_t dcloff_array[dcloff_array_size];
+uint8_t dcloff_array_count = 0;
+
+// avg voltage of samples when electrodes touched
+const int16_t voltage_threshold = 0; // 0V in the graph
+// count of avg voltage of samples above threshold when electrodes touched
+uint8_t above_voltage_threshold_count = 0;
+// counts to check since electrodes touched, before confirming real touch, to avoid noises
+const int16_t debounce_above_voltage_threshold_count = 2;
+
+const uint16_t fake_rtor_time_ms = 833; // 72 bpm
+// time to wait since electrodes touched, before sending the fake rtor, to avoid noises
+const uint16_t debounce_fake_rtor_time_ms = 3 * 1000;
+uint16_t electrodes_last_touched_time_ms = 0;
+bool are_electrodes_touched_for_the_first_time = false;
+const uint16_t user_inactive_time_ms = 20 * 1000;
+// It takes approximately 20 seconds to get stablized RTOR from MAX30003/ Thompkins Algorithm
+const uint16_t rtor_stabilizing_time_ms = 10 * 1000;
+
 /*******************************************************************************
  * Functions
  ********************************************************************************/
@@ -74,45 +102,36 @@ void setup()
 }
 
 // switch led off after R-TO-R interval timeout
-bool led_status = LOW;
-uint32_t current_time_ms = 0;
-uint32_t last_time_ms = 0;
-uint16_t interval_time_ms = 800;
 void check_rtor_led()
 {
     if ((current_time_ms - last_time_ms) >= interval_time_ms)
     {
         last_time_ms = current_time_ms;
 
-        if (led_status == HIGH)
+        if (pulse_status == HIGH)
         {
             // Serial.println("timer_out");
-            led_status = LOW;
-            digitalWrite(led_pin, led_status);
-            plotter.send_data_to_arabeat_gui(plot::HEART_PULSE, led_status);
+            pulse_status = LOW;
+            digitalWrite(led_pin, pulse_status);
+            plotter.send_data_to_arabeat_gui(plot::HEART_PULSE, pulse_status);
         }
     }
 }
 
 // switch led on and set R-TO-R interval timeout
-const uint16_t min_rtor_interval = 500;  // 120 bpm
-const uint16_t max_rtor_interval = 1000; // 60 bpm
-void set_led_timer(uint16_t time_ms)
+void send_heart_pulse(uint16_t time_ms)
 {
-    if (time_ms >= min_rtor_interval && time_ms <= max_rtor_interval)
+    if (time_ms >= MIN_RTOR_INTERVAL && time_ms <= MAX_RTOR_INTERVAL)
     {
-        // Serial.println("set_led_timer");
-        led_status = HIGH;
+        pulse_status = HIGH;
         interval_time_ms = time_ms;
-        digitalWrite(led_pin, led_status);
-        plotter.send_data_to_arabeat_gui(plot::HEART_PULSE, led_status);
+        digitalWrite(led_pin, pulse_status);
+        plotter.send_data_to_arabeat_gui(plot::HEART_PULSE, pulse_status);
+        plotter.send_data_to_arabeat_gui(plot::RTOR_IN_MS, rtor);
     }
 }
 
 // brute force dc lead-off delection
-const uint8_t dcloff_array_size = 96;
-int16_t dcloff_array[dcloff_array_size];
-uint8_t dcloff_array_count = 0;
 void update_dcloff_array()
 {
     for (int i = 0;
@@ -125,9 +144,6 @@ void update_dcloff_array()
 }
 
 // check if electrodes are touched
-int16_t voltage_threshold = 0;
-uint8_t above_voltage_threshold_count = 0;
-int16_t dcloff_threshold_count_midpoint = 10;
 bool are_electrodes_touched()
 {
     bool result = false;
@@ -137,11 +153,20 @@ bool are_electrodes_touched()
         if (dcloff_array[i] >= voltage_threshold)
             above_voltage_threshold_count++;
     }
-
     // Serial.println(above_voltage_threshold_count);
 
-    if (above_voltage_threshold_count < dcloff_threshold_count_midpoint)
+    if (above_voltage_threshold_count >= debounce_above_voltage_threshold_count)
+    {
         result = true;
+
+        // check if the electrodes are touch for the first time after inactive time
+        if ((current_time_ms - electrodes_last_touched_time_ms) >= user_inactive_time_ms)
+            are_electrodes_touched_for_the_first_time = true;
+        else
+            are_electrodes_touched_for_the_first_time = false;
+
+        electrodes_last_touched_time_ms = millis();
+    }
 
     // reset counter
     dcloff_array_count = 0;
@@ -151,18 +176,21 @@ bool are_electrodes_touched()
 }
 
 // if electrodes are touched, fake heartbeat till RTOR interrupt
-const uint16_t default_rtor_time_ms = 800;
 void check_electrodes()
 {
     // if dcloff_array is full, check if electrodes are touched
     if (dcloff_array_count == dcloff_array_size)
     {
-        if (are_electrodes_touched())
+        if (are_electrodes_touched() &&
+            ((current_time_ms - are_electrodes_touched_for_the_first_time) >= debounce_fake_rtor_time_ms))
         {
-            set_led_timer(default_rtor_time_ms);
-            plotter.send_data_to_arabeat_gui(plot::R2R_IN_MS, default_rtor_time_ms);
-            // Serial.println("Fake It Till You Make It");
+            plotter.send_data_to_arabeat_gui(plot::ELECTRODES_TOUCHED, 1);
+
+            if ((current_time_ms - are_electrodes_touched_for_the_first_time) <= rtor_stabilizing_time_ms)
+                send_heart_pulse(fake_rtor_time_ms);
         }
+        else
+            plotter.send_data_to_arabeat_gui(plot::ELECTRODES_TOUCHED, 0);
     }
 }
 
@@ -197,20 +225,21 @@ void loop()
             // Serial.println("R-to-R readout");
 
             // Read RtoR register
-            r_to_r = ecg.max30003_read_register(max30003::RTOR);
+            rtor = ecg.max30003_read_register(max30003::RTOR);
 
-            // extract 14 bits data from r_to_r register
-            r_to_r = ((r_to_r >> 10) & 0x3fff);
+            last_rtor_interrupt_time_ms = millis();
 
-            // r_to_r must be multiplied by 8 to get the time interval in millisecond 8ms resolution is for 32768Hz master clock
-            r_to_r = r_to_r * 8;
+            // extract 14 bits data from rtor register
+            rtor = ((rtor >> 10) & 0x3fff);
 
-            // Serial.print(r_to_r );
-            set_led_timer(r_to_r);
-            plotter.send_data_to_arabeat_gui(plot::R2R_IN_MS, r_to_r);
+            // rtor must be multiplied by 8 to get the time interval in millisecond 8ms resolution is for 32768Hz master clock
+            rtor = rtor * 8;
+
+            // Serial.print(rtor );
+            send_heart_pulse(rtor);
 
             // calculate BPM
-            bpm = 1.0f / (r_to_r * RTOR_LSB_RES / 60.0f);
+            bpm = 1.0f / (rtor * RTOR_LSB_RES / 60.0f);
             // Serial.println(bpm);
         }
 
@@ -248,12 +277,11 @@ void loop()
             // Print results
             for (int i = 0; (sample_count > 1 && i < sample_count); i++)
             {
-                // plotter.send_data_to_protocentral_gui(ecg_sample[i], (uint16_t)r_to_r, (int16_t)bpm);
-                // plotter.send_data_to_arduino_plotter(ecg_sample[i]);
+                // plotter.send_data_to_protocentral_gui(ecg_sample[i], (uint16_t)rtor, (int16_t)bpm);
+                plotter.send_data_to_arduino_plotter(ecg_sample[i]);
 
                 plotter.send_data_to_arabeat_gui(plot::ECG_ANALOG_VOLTAGE, ecg_sample[i]);
-                digitalWrite(led_pin, led_status);
-                plotter.send_data_to_arabeat_gui(plot::HEART_PULSE, led_status);
+                plotter.send_data_to_arabeat_gui(plot::HEART_PULSE, pulse_status);
             }
             update_dcloff_array();
         }
