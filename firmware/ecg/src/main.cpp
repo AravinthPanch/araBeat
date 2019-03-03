@@ -27,6 +27,8 @@ const uint8_t FIFO_VALID_SAMPLE_MASK = 0x0;
 const uint8_t FIFO_FAST_SAMPLE_MASK = 0x1;
 const uint8_t ETAG_BITS_MASK = 0x7;
 const float RTOR_LSB_RES = 0.0078125f;
+// 8ms RTOR resolution is for 32768Hz master clock
+const uint8_t RTOR_PRESCALE = 8;
 
 max30003 ecg;
 plot plotter;
@@ -199,9 +201,12 @@ void loop()
 
             // extract 14 bits data from r_to_r register
             r_to_r = ((r_to_r >> 10) & 0x3fff);
-            // Serial.print(r_to_r * 8);
 
-            set_led_timer(r_to_r * 8);
+            // r_to_r must be multiplied by 8 to get the time interval in millisecond 8ms resolution is for 32768Hz master clock
+            r_to_r = r_to_r * 8;
+
+            // Serial.print(r_to_r );
+            set_led_timer(r_to_r);
             plotter.send_data_to_arabeat_gui(plot::R2R_IN_MS, r_to_r);
 
             // calculate BPM
@@ -243,12 +248,7 @@ void loop()
             // Print results
             for (int i = 0; (sample_count > 1 && i < sample_count); i++)
             {
-                // r_to_r must be multiplied by 8 to get the time interval in
-                // millisecond 8ms resolution is for 32768Hz master clock
-
-                // plotter.send_data_to_protocentral_gui(
-                //     ecg_sample[i], (uint16_t)r_to_r * 8, (int16_t)bpm);
-
+                // plotter.send_data_to_protocentral_gui(ecg_sample[i], (uint16_t)r_to_r, (int16_t)bpm);
                 // plotter.send_data_to_arduino_plotter(ecg_sample[i]);
 
                 plotter.send_data_to_arabeat_gui(plot::ECG_ANALOG_VOLTAGE, ecg_sample[i]);
