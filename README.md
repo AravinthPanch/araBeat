@@ -32,7 +32,7 @@ This is a 12-feet-tall-permanent-public-installation, therefore it is built to w
 -   Christoph Iwasjuta - Advisor, MotionLab Berlin
 -   Niranjan Harakel Rao - Firmware Optimisation, Next Big Thing
 -   Karissa Xie, Rolin Pei - Stainless Steel CNC Machining, HLH Prototypes
--   Ivy Li, Monica Shen - PCB Manufacturing, Seeed Studio
+-   Monica Shen, Ivy Li, Carmen Zheng - PCB Manufacturing, Seeed Studio
 -   Goran, S-Hamacher - Stainless Steel WaterJet Cutting, S-Hamacher Art Production
 -   Robert Blowsky - Digital Signal Processing, Analog Devices
 
