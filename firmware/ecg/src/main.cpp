@@ -86,8 +86,8 @@ void check_rtor_led()
         {
             // Serial.println("timer_out");
             led_status = LOW;
-            digitalWrite(led_pin, LOW);
-            plotter.send_data_to_arabeat_gui(plot::DIGITAL_VAL0, 0);
+            digitalWrite(led_pin, led_status);
+            plotter.send_data_to_arabeat_gui(plot::HEART_PULSE, led_status);
         }
     }
 }
@@ -101,9 +101,9 @@ void set_led_timer(uint16_t time_ms)
     {
         // Serial.println("set_led_timer");
         led_status = HIGH;
-        digitalWrite(led_pin, HIGH);
         interval_time_ms = time_ms;
-        plotter.send_data_to_arabeat_gui(plot::DIGITAL_VAL0, 1);
+        digitalWrite(led_pin, led_status);
+        plotter.send_data_to_arabeat_gui(plot::HEART_PULSE, led_status);
     }
 }
 
@@ -158,6 +158,7 @@ void check_electrodes()
         if (are_electrodes_touched())
         {
             set_led_timer(default_rtor_time_ms);
+            plotter.send_data_to_arabeat_gui(plot::R2R_IN_MS, default_rtor_time_ms);
             // Serial.println("Fake It Till You Make It");
         }
     }
@@ -201,6 +202,7 @@ void loop()
             // Serial.print(r_to_r * 8);
 
             set_led_timer(r_to_r * 8);
+            plotter.send_data_to_arabeat_gui(plot::R2R_IN_MS, r_to_r);
 
             // calculate BPM
             bpm = 1.0f / (r_to_r * RTOR_LSB_RES / 60.0f);
@@ -249,7 +251,9 @@ void loop()
 
                 // plotter.send_data_to_arduino_plotter(ecg_sample[i]);
 
-                plotter.send_data_to_arabeat_gui(plot::ANALOG_VAL0, ecg_sample[i]);
+                plotter.send_data_to_arabeat_gui(plot::ECG_ANALOG_VOLTAGE, ecg_sample[i]);
+                digitalWrite(led_pin, led_status);
+                plotter.send_data_to_arabeat_gui(plot::HEART_PULSE, led_status);
             }
             update_dcloff_array();
         }

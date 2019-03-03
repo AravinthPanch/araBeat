@@ -19,7 +19,7 @@ class plot
 public:
     enum midi_commands_e
     {
-        ANALOG_VAL0 = 0xE0,
+        ECG_ANALOG_VOLTAGE = 0xE0,
         DIGITAL_VAL0 = 0x90,
         DIGITAL_ON = 0x00,
         DIGITAL_OFF = 0x00,
