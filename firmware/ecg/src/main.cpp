@@ -12,12 +12,19 @@
 #include <plot.h>
 
 /*******************************************************************************
+ * Pin Configuration
+ ********************************************************************************/
+
+// MAX30003 Interrupt 1 to receive ECG readings
+const uint8_t ECG_INT1_PIN = 2;
+// Heart Pulse LED on MCU Module
+const uint8_t MCU_HEART_PULSE_PIN = 5;
+// Heart Pulse to DSP GPIO MP2
+const uint8_t DSP_HEART_PULSE_PIN = 6;
+
+/*******************************************************************************
  * Variable declarations
  ********************************************************************************/
-// D2 on Arduino Nano
-const uint8_t int1_pin = 2;
-// RTOR LED pin
-const uint8_t led_pin = 3;
 
 const uint32_t EINT_STATUS_MASK = 0x800000;   // D[23] bit
 const uint32_t DCLOFF_STATUS_MASK = 0x100000; // D[20] bit
@@ -40,10 +47,10 @@ float bpm;
 const uint16_t MIN_RTOR_INTERVAL = 500;
 // 60 bpm
 const uint16_t MAX_RTOR_INTERVAL = 1000;
-bool pulse_status = LOW;
-uint32_t current_time_ms = 0;
-uint32_t last_time_ms = 0;
-uint16_t interval_time_ms = 800;
+bool heart_pulse_status = LOW;
+uint32_t current_system_time_ms = 0;
+uint32_t last_heart_pulse_time_ms = 0;
+uint16_t current_heart_pulse_rtor_time_ms = 0;
 uint32_t last_rtor_interrupt_time_ms = 0;
 
 const uint8_t DCLOFF_ARRAY_SIZE = 96;
@@ -86,12 +93,13 @@ void setup()
     // setup serial port for plotting
     Serial.begin(115200);
 
-    // setup status LED
-    pinMode(led_pin, OUTPUT);
+    // setup outputs
+    pinMode(MCU_HEART_PULSE_PIN, OUTPUT);
+    pinMode(DSP_HEART_PULSE_PIN, OUTPUT);
 
     // setup interrupt
-    pinMode(int1_pin, INPUT);
-    attachInterrupt(digitalPinToInterrupt(int1_pin), ecg_callback, CHANGE);
+    pinMode(ECG_INT1_PIN, INPUT);
+    attachInterrupt(digitalPinToInterrupt(ECG_INT1_PIN), ecg_callback, CHANGE);
 
     // setup chipselect pin
     pinMode(MAX30003_CS_PIN, OUTPUT);
@@ -108,19 +116,19 @@ void setup()
     ecg.max30003_init();
 }
 
-// switch led off after R-TO-R interval timeout
-void set_heart_pulse_off()
+// switch outputs off after RTOR interval timeout
+void check_heart_pulse_off_timer()
 {
-    if ((current_time_ms - last_time_ms) >= interval_time_ms)
+    if ((current_system_time_ms - last_heart_pulse_time_ms) >= current_heart_pulse_rtor_time_ms)
     {
-        last_time_ms = current_time_ms;
+        last_heart_pulse_time_ms = current_system_time_ms;
 
-        if (pulse_status == HIGH)
+        if (heart_pulse_status == HIGH)
         {
-            // Serial.println("timer_out");
-            pulse_status = LOW;
-            digitalWrite(led_pin, pulse_status);
-            plotter.send_data_to_arabeat_gui(plot::HEART_PULSE, pulse_status);
+            heart_pulse_status = LOW;
+            digitalWrite(MCU_HEART_PULSE_PIN, heart_pulse_status);
+            digitalWrite(DSP_HEART_PULSE_PIN, heart_pulse_status);
+            plotter.send_data_to_arabeat_gui(plot::HEART_PULSE, heart_pulse_status);
         }
     }
 }
@@ -128,14 +136,15 @@ void set_heart_pulse_off()
 // switch led on and set R-TO-R interval timeout
 void set_heart_pulse_on(uint16_t time_ms)
 {
-    // if (time_ms >= MIN_RTOR_INTERVAL && time_ms <= MAX_RTOR_INTERVAL)
-    // {
-    pulse_status = HIGH;
-    interval_time_ms = HEART_PULSE_QRS_TIME;
-    digitalWrite(led_pin, pulse_status);
-    plotter.send_data_to_arabeat_gui(plot::HEART_PULSE, pulse_status);
-    plotter.send_data_to_arabeat_gui(plot::RTOR_IN_MS, rtor);
-    // }
+    if (time_ms >= MIN_RTOR_INTERVAL && time_ms <= MAX_RTOR_INTERVAL)
+    {
+        heart_pulse_status = HIGH;
+        current_heart_pulse_rtor_time_ms = HEART_PULSE_QRS_TIME;
+        digitalWrite(MCU_HEART_PULSE_PIN, heart_pulse_status);
+        digitalWrite(DSP_HEART_PULSE_PIN, heart_pulse_status);
+        plotter.send_data_to_arabeat_gui(plot::HEART_PULSE, heart_pulse_status);
+        plotter.send_data_to_arabeat_gui(plot::RTOR_IN_MS, rtor);
+    }
 }
 
 // brute force dc lead-off delection
@@ -166,7 +175,7 @@ bool are_electrodes_touched()
         result = true;
 
         // check if the electrodes are touch for the first time after inactive time
-        if ((current_time_ms - electrodes_last_touched_time_ms) >= USER_INACTIVE_TIME_MS)
+        if ((current_system_time_ms - electrodes_last_touched_time_ms) >= USER_INACTIVE_TIME_MS)
             are_electrodes_touched_for_the_first_time = true;
         else
             are_electrodes_touched_for_the_first_time = false;
@@ -188,11 +197,11 @@ void check_electrodes()
     if (dcloff_array_count == DCLOFF_ARRAY_SIZE)
     {
         if (are_electrodes_touched() &&
-            ((current_time_ms - are_electrodes_touched_for_the_first_time) >= DEBOUNCE_FAKE_RTOR_TIME_MS))
+            ((current_system_time_ms - are_electrodes_touched_for_the_first_time) >= DEBOUNCE_FAKE_RTOR_TIME_MS))
         {
             plotter.send_data_to_arabeat_gui(plot::ELECTRODES_TOUCHED, 1);
 
-            if ((current_time_ms - are_electrodes_touched_for_the_first_time) <= RTOR_STABILIZING_TIME_MS)
+            if ((current_system_time_ms - are_electrodes_touched_for_the_first_time) <= RTOR_STABILIZING_TIME_MS)
                 set_heart_pulse_on(FAKE_RTOR_TIME_MS);
         }
         else
@@ -208,9 +217,9 @@ void check_electrodes()
  ********************************************************************************/
 void loop()
 {
-    current_time_ms = millis();
+    current_system_time_ms = millis();
     // check_electrodes();
-    set_heart_pulse_off();
+    // check_heart_pulse_off_timer();
 
     if (ecg_int_flag)
     {
@@ -242,7 +251,8 @@ void loop()
             rtor = rtor * 8;
 
             // Serial.print(rtor );
-            set_heart_pulse_on(rtor);
+            // set_heart_pulse_on(rtor);
+            heart_pulse_status = HIGH;
 
             // calculate BPM
             bpm = 1.0f / (rtor * RTOR_LSB_RES / 60.0f);
@@ -287,13 +297,14 @@ void loop()
                 // plotter.send_data_to_arduino_plotter(ecg_sample[i]);
 
                 // plotter.send_data_to_arabeat_gui(plot::ECG_ANALOG_VOLTAGE, ecg_sample[i]);
-                // plotter.send_data_to_arabeat_gui(plot::HEART_PULSE, pulse_status);
+                // plotter.send_data_to_arabeat_gui(plot::HEART_PULSE, heart_pulse_status);
 
                 Serial.print(ecg_sample[i]);
                 Serial.print(",");
-                Serial.println(pulse_status);
+                Serial.println(heart_pulse_status);
+                heart_pulse_status = LOW;
             }
-            // pulse_status = LOW;
+
             // update_dcloff_array();
         }
     }
