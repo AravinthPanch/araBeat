@@ -28,9 +28,6 @@ const uint8_t FIFO_FAST_SAMPLE_MASK = 0x1;
 const uint8_t ETAG_BITS_MASK = 0x7;
 const float RTOR_LSB_RES = 0.0078125f;
 const uint8_t RTOR_PRESCALE = 8; // 8ms RTOR resolution is for 32768Hz master clock
-const uint16_t MIN_RTOR_INTERVAL = 500;    // 120 bpm
-const uint16_t MAX_RTOR_INTERVAL = 1000;   // 60 bpm
-const uint16_t HEART_PULSE_QRS_TIME = 200; // portion of RTOR when QRS happens
 
 max30003 ecg;
 plot plotter;
@@ -39,31 +36,40 @@ uint32_t ecg_fifo, sample_count, etag_bits[32], rtor;
 int16_t ecg_sample[32];
 float bpm;
 
+// 120 bpm
+const uint16_t MIN_RTOR_INTERVAL = 500;
+// 60 bpm
+const uint16_t MAX_RTOR_INTERVAL = 1000;
 bool pulse_status = LOW;
 uint32_t current_time_ms = 0;
 uint32_t last_time_ms = 0;
 uint16_t interval_time_ms = 800;
 uint32_t last_rtor_interrupt_time_ms = 0;
 
-const uint8_t dcloff_array_size = 96;
-int16_t dcloff_array[dcloff_array_size];
+const uint8_t DCLOFF_ARRAY_SIZE = 96;
+int16_t dcloff_array[DCLOFF_ARRAY_SIZE];
 uint8_t dcloff_array_count = 0;
-
-// avg voltage of samples when electrodes touched
-const int16_t voltage_threshold = 0; // 0V in the graph
+// avg voltage of samples when electrodes touched. It should be just above the avg peak of when electrodes not-touched
+const int16_t VOLTAGE_THRESHOLD = 0;
 // count of avg voltage of samples above threshold when electrodes touched
-uint8_t above_voltage_threshold_count = 0;
+uint8_t ABOVE_VOLTAGE_THRESHOLD_COUNT = 0;
 // counts to check since electrodes touched, before confirming real touch, to avoid noises
-const int16_t debounce_above_voltage_threshold_count = 2;
+const int16_t DEBOUNCE_ABOVE_VOLTAGE_THRESHOLD_COUNT = 2;
 
-const uint16_t fake_rtor_time_ms = 833; // 72 bpm
+// portion of RTOR when QRS happens
+const uint16_t HEART_PULSE_QRS_TIME = 200;
+// 72 bpm before RTOR stablized
+const uint16_t FAKE_RTOR_TIME_MS = 833;
 // time to wait since electrodes touched, before sending the fake rtor, to avoid noises
-const uint16_t debounce_fake_rtor_time_ms = 3 * 1000;
-uint16_t electrodes_last_touched_time_ms = 0;
-bool are_electrodes_touched_for_the_first_time = false;
-const uint16_t user_inactive_time_ms = 20 * 1000;
+const uint16_t DEBOUNCE_FAKE_RTOR_TIME_MS = 3 * 1000;
+// time after hands off the electrodes
+const uint16_t USER_INACTIVE_TIME_MS = 20 * 1000;
 // It takes approximately 20 seconds to get stablized RTOR from MAX30003/ Thompkins Algorithm
-const uint16_t rtor_stabilizing_time_ms = 10 * 1000;
+const uint16_t RTOR_STABILIZING_TIME_MS = 10 * 1000;
+// timestamp when electrodes were touched last
+uint16_t electrodes_last_touched_time_ms = 0;
+// are electrodes touched for the first time after being inactive
+bool are_electrodes_touched_for_the_first_time = false;
 
 /*******************************************************************************
  * Functions
@@ -124,11 +130,11 @@ void set_heart_pulse_on(uint16_t time_ms)
 {
     // if (time_ms >= MIN_RTOR_INTERVAL && time_ms <= MAX_RTOR_INTERVAL)
     // {
-        pulse_status = HIGH;
-        interval_time_ms = HEART_PULSE_QRS_TIME;
-        digitalWrite(led_pin, pulse_status);
-        plotter.send_data_to_arabeat_gui(plot::HEART_PULSE, pulse_status);
-        plotter.send_data_to_arabeat_gui(plot::RTOR_IN_MS, rtor);
+    pulse_status = HIGH;
+    interval_time_ms = HEART_PULSE_QRS_TIME;
+    digitalWrite(led_pin, pulse_status);
+    plotter.send_data_to_arabeat_gui(plot::HEART_PULSE, pulse_status);
+    plotter.send_data_to_arabeat_gui(plot::RTOR_IN_MS, rtor);
     // }
 }
 
@@ -136,7 +142,7 @@ void set_heart_pulse_on(uint16_t time_ms)
 void update_dcloff_array()
 {
     for (int i = 0;
-         (dcloff_array_count < dcloff_array_size && sample_count > 1 && i < sample_count);
+         (dcloff_array_count < DCLOFF_ARRAY_SIZE && sample_count > 1 && i < sample_count);
          i++)
     {
         dcloff_array[dcloff_array_count] = ecg_sample[i];
@@ -149,19 +155,18 @@ bool are_electrodes_touched()
 {
     bool result = false;
     // count voltages above threshold
-    for (int i = 0; i < dcloff_array_size; i++)
+    for (int i = 0; i < DCLOFF_ARRAY_SIZE; i++)
     {
-        if (dcloff_array[i] >= voltage_threshold)
-            above_voltage_threshold_count++;
+        if (dcloff_array[i] >= VOLTAGE_THRESHOLD)
+            ABOVE_VOLTAGE_THRESHOLD_COUNT++;
     }
-    // Serial.println(above_voltage_threshold_count);
 
-    if (above_voltage_threshold_count >= debounce_above_voltage_threshold_count)
+    if (ABOVE_VOLTAGE_THRESHOLD_COUNT >= DEBOUNCE_ABOVE_VOLTAGE_THRESHOLD_COUNT)
     {
         result = true;
 
         // check if the electrodes are touch for the first time after inactive time
-        if ((current_time_ms - electrodes_last_touched_time_ms) >= user_inactive_time_ms)
+        if ((current_time_ms - electrodes_last_touched_time_ms) >= USER_INACTIVE_TIME_MS)
             are_electrodes_touched_for_the_first_time = true;
         else
             are_electrodes_touched_for_the_first_time = false;
@@ -171,7 +176,7 @@ bool are_electrodes_touched()
 
     // reset counter
     dcloff_array_count = 0;
-    above_voltage_threshold_count = 0;
+    ABOVE_VOLTAGE_THRESHOLD_COUNT = 0;
 
     return result;
 }
@@ -180,15 +185,15 @@ bool are_electrodes_touched()
 void check_electrodes()
 {
     // if dcloff_array is full, check if electrodes are touched
-    if (dcloff_array_count == dcloff_array_size)
+    if (dcloff_array_count == DCLOFF_ARRAY_SIZE)
     {
         if (are_electrodes_touched() &&
-            ((current_time_ms - are_electrodes_touched_for_the_first_time) >= debounce_fake_rtor_time_ms))
+            ((current_time_ms - are_electrodes_touched_for_the_first_time) >= DEBOUNCE_FAKE_RTOR_TIME_MS))
         {
             plotter.send_data_to_arabeat_gui(plot::ELECTRODES_TOUCHED, 1);
 
-            if ((current_time_ms - are_electrodes_touched_for_the_first_time) <= rtor_stabilizing_time_ms)
-                set_heart_pulse_on(fake_rtor_time_ms);
+            if ((current_time_ms - are_electrodes_touched_for_the_first_time) <= RTOR_STABILIZING_TIME_MS)
+                set_heart_pulse_on(FAKE_RTOR_TIME_MS);
         }
         else
             plotter.send_data_to_arabeat_gui(plot::ELECTRODES_TOUCHED, 0);
