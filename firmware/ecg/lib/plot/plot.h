@@ -21,6 +21,7 @@ public:
     {
         ECG_ANALOG_VOLTAGE = 0xE0,
         RTOR_IN_MS = 0xE1,
+        RTOR_INTERRUPT_PULSE = 0xE2,
         HEART_PULSE = 0x90,
         ELECTRODES_TOUCHED = 0x91,
     };

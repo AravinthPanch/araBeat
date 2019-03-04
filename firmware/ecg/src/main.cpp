@@ -26,6 +26,8 @@ const uint8_t DSP_HEART_PULSE_PIN = 6;
  * Definitions
  ********************************************************************************/
 #define CURRENT_SYSTEM_TIME_MS millis()
+#define RTOR_INTERRUPT_PULSE_ON 10
+#define RTOR_INTERRUPT_PULSE_OFF 2
 
 /*******************************************************************************
  * Variable declarations
@@ -54,7 +56,7 @@ const uint16_t MIN_RTOR_INTERVAL = 500;
 // 60 bpm
 const uint16_t MAX_RTOR_INTERVAL = 1000;
 bool heart_pulse_status = LOW;
-int16_t heart_pulse_status_test = 1;
+int16_t rtor_interrupt_pulse = 1;
 uint32_t last_heart_pulse_time_ms = 0;
 uint16_t current_rtor_interval_ms = 0;
 uint32_t last_rtor_interrupt_time_ms = 0;
@@ -249,7 +251,7 @@ void loop()
 
             // switch on outputs
             set_heart_pulse_on(rtor);
-            heart_pulse_status_test = 2;
+            rtor_interrupt_pulse = RTOR_INTERRUPT_PULSE_ON;
 
             // calculate BPM
             bpm = 1.0f / (rtor * RTOR_LSB_RES / 60.0f);
@@ -290,16 +292,10 @@ void loop()
                 // plotter.send_data_to_protocentral_gui(ecg_sample[i], (uint16_t)rtor, (int16_t)bpm);
                 // plotter.send_data_to_arduino_plotter(ecg_sample[i]);
 
-                // plotter.send_data_to_arabeat_gui(plot::ECG_ANALOG_VOLTAGE, ecg_sample[i]);
-                // plotter.send_data_to_arabeat_gui(plot::HEART_PULSE, heart_pulse_status);
-
-                Serial.print(ecg_sample[i]);
-                Serial.print(",");
-                Serial.print(heart_pulse_status);
-                Serial.print(",");
-                Serial.println(heart_pulse_status_test);
-
-                heart_pulse_status_test = 1;
+                plotter.send_data_to_arabeat_gui(plot::ECG_ANALOG_VOLTAGE, ecg_sample[i]);
+                plotter.send_data_to_arabeat_gui(plot::HEART_PULSE, heart_pulse_status);
+                plotter.send_data_to_arabeat_gui(plot::RTOR_INTERRUPT_PULSE, rtor_interrupt_pulse);
+                rtor_interrupt_pulse = RTOR_INTERRUPT_PULSE_OFF;
             }
 
             check_heart_pulse_off_timer();
