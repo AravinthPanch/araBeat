@@ -23,9 +23,13 @@ const uint8_t MCU_HEART_PULSE_PIN = 5;
 const uint8_t DSP_HEART_PULSE_PIN = 6;
 
 /*******************************************************************************
+ * Definitions
+ ********************************************************************************/
+#define CURRENT_SYSTEM_TIME_MS millis()
+
+/*******************************************************************************
  * Variable declarations
  ********************************************************************************/
-
 const uint32_t EINT_STATUS_MASK = 0x800000;   // D[23] bit
 const uint32_t DCLOFF_STATUS_MASK = 0x100000; // D[20] bit
 const uint32_t RTOR_STATUS_MASK = 0x400;      // D[11] bit
@@ -43,14 +47,16 @@ uint32_t ecg_fifo, sample_count, etag_bits[32], rtor;
 int16_t ecg_sample[32];
 float bpm;
 
+volatile bool ecg_int_flag = 0;
+
 // 120 bpm
 const uint16_t MIN_RTOR_INTERVAL = 500;
 // 60 bpm
 const uint16_t MAX_RTOR_INTERVAL = 1000;
 bool heart_pulse_status = LOW;
-uint32_t current_system_time_ms = 0;
+int16_t heart_pulse_status_test = 1;
 uint32_t last_heart_pulse_time_ms = 0;
-uint16_t current_heart_pulse_rtor_time_ms = 0;
+uint16_t current_rtor_interval_ms = 0;
 uint32_t last_rtor_interrupt_time_ms = 0;
 
 const uint8_t DCLOFF_ARRAY_SIZE = 96;
@@ -66,9 +72,9 @@ const int16_t DEBOUNCE_ABOVE_VOLTAGE_THRESHOLD_COUNT = 2;
 // portion of RTOR when QRS happens
 const uint16_t HEART_PULSE_QRS_TIME = 200;
 // 72 bpm before RTOR stablized
-const uint16_t FAKE_RTOR_TIME_MS = 833;
+const uint16_t FAKE_RTOR_INTERVAL_MS = 833;
 // time to wait since electrodes touched, before sending the fake rtor, to avoid noises
-const uint16_t DEBOUNCE_FAKE_RTOR_TIME_MS = 3 * 1000;
+const uint16_t DEBOUNCE_FAKE_RTOR_INTERVAL_MS = 3 * 1000;
 // time after hands off the electrodes
 const uint16_t USER_INACTIVE_TIME_MS = 20 * 1000;
 // It takes approximately 20 seconds to get stablized RTOR from MAX30003/ Thompkins Algorithm
@@ -81,8 +87,8 @@ bool are_electrodes_touched_for_the_first_time = false;
 /*******************************************************************************
  * Functions
  ********************************************************************************/
+
 // interrupt service routine
-volatile bool ecg_int_flag = 0;
 void ecg_callback()
 {
     ecg_int_flag = 1;
@@ -116,30 +122,26 @@ void setup()
     ecg.max30003_init();
 }
 
-// switch outputs off after RTOR interval timeout
+// switch off outputs after RTOR interval timeout
 void check_heart_pulse_off_timer()
 {
-    if ((current_system_time_ms - last_heart_pulse_time_ms) >= current_heart_pulse_rtor_time_ms)
+    if ((CURRENT_SYSTEM_TIME_MS - last_heart_pulse_time_ms) >= HEART_PULSE_QRS_TIME)
     {
-        last_heart_pulse_time_ms = current_system_time_ms;
-
-        if (heart_pulse_status == HIGH)
-        {
-            heart_pulse_status = LOW;
-            digitalWrite(MCU_HEART_PULSE_PIN, heart_pulse_status);
-            digitalWrite(DSP_HEART_PULSE_PIN, heart_pulse_status);
-            plotter.send_data_to_arabeat_gui(plot::HEART_PULSE, heart_pulse_status);
-        }
+        heart_pulse_status = LOW;
+        last_heart_pulse_time_ms = CURRENT_SYSTEM_TIME_MS;
+        digitalWrite(MCU_HEART_PULSE_PIN, heart_pulse_status);
+        digitalWrite(DSP_HEART_PULSE_PIN, heart_pulse_status);
+        plotter.send_data_to_arabeat_gui(plot::HEART_PULSE, heart_pulse_status);
     }
 }
 
-// switch led on and set R-TO-R interval timeout
-void set_heart_pulse_on(uint16_t time_ms)
+// switch on outputs after RTOR detection
+void set_heart_pulse_on(uint16_t rtor_interval_ms)
 {
-    if (time_ms >= MIN_RTOR_INTERVAL && time_ms <= MAX_RTOR_INTERVAL)
+    if (rtor_interval_ms >= MIN_RTOR_INTERVAL && rtor_interval_ms <= MAX_RTOR_INTERVAL)
     {
         heart_pulse_status = HIGH;
-        current_heart_pulse_rtor_time_ms = HEART_PULSE_QRS_TIME;
+        current_rtor_interval_ms = HEART_PULSE_QRS_TIME;
         digitalWrite(MCU_HEART_PULSE_PIN, heart_pulse_status);
         digitalWrite(DSP_HEART_PULSE_PIN, heart_pulse_status);
         plotter.send_data_to_arabeat_gui(plot::HEART_PULSE, heart_pulse_status);
@@ -175,7 +177,7 @@ bool are_electrodes_touched()
         result = true;
 
         // check if the electrodes are touch for the first time after inactive time
-        if ((current_system_time_ms - electrodes_last_touched_time_ms) >= USER_INACTIVE_TIME_MS)
+        if ((CURRENT_SYSTEM_TIME_MS - electrodes_last_touched_time_ms) >= USER_INACTIVE_TIME_MS)
             are_electrodes_touched_for_the_first_time = true;
         else
             are_electrodes_touched_for_the_first_time = false;
@@ -197,12 +199,13 @@ void check_electrodes()
     if (dcloff_array_count == DCLOFF_ARRAY_SIZE)
     {
         if (are_electrodes_touched() &&
-            ((current_system_time_ms - are_electrodes_touched_for_the_first_time) >= DEBOUNCE_FAKE_RTOR_TIME_MS))
+            ((CURRENT_SYSTEM_TIME_MS - are_electrodes_touched_for_the_first_time) >=
+             DEBOUNCE_FAKE_RTOR_INTERVAL_MS))
         {
             plotter.send_data_to_arabeat_gui(plot::ELECTRODES_TOUCHED, 1);
 
-            if ((current_system_time_ms - are_electrodes_touched_for_the_first_time) <= RTOR_STABILIZING_TIME_MS)
-                set_heart_pulse_on(FAKE_RTOR_TIME_MS);
+            if ((CURRENT_SYSTEM_TIME_MS - are_electrodes_touched_for_the_first_time) <= RTOR_STABILIZING_TIME_MS)
+                set_heart_pulse_on(FAKE_RTOR_INTERVAL_MS);
         }
         else
             plotter.send_data_to_arabeat_gui(plot::ELECTRODES_TOUCHED, 0);
@@ -217,16 +220,12 @@ void check_electrodes()
  ********************************************************************************/
 void loop()
 {
-    current_system_time_ms = millis();
     // check_electrodes();
-    // check_heart_pulse_off_timer();
 
     if (ecg_int_flag)
     {
         ecg_int_flag = 0;
         uint32_t status = ecg.max30003_read_register(max30003::STATUS);
-        // Serial.print("#");
-        // Serial.println(status, BIN);
 
         // DC Lead-off detection interrupt
         if ((status & DCLOFF_STATUS_MASK) == DCLOFF_STATUS_MASK)
@@ -237,8 +236,6 @@ void loop()
         // R-to-R readout interrupt
         if ((status & RTOR_STATUS_MASK) == RTOR_STATUS_MASK)
         {
-            // Serial.println("R-to-R readout");
-
             // Read RtoR register
             rtor = ecg.max30003_read_register(max30003::RTOR);
 
@@ -250,20 +247,17 @@ void loop()
             // rtor must be multiplied by 8 to get the time interval in millisecond 8ms resolution is for 32768Hz master clock
             rtor = rtor * 8;
 
-            // Serial.print(rtor );
-            // set_heart_pulse_on(rtor);
-            heart_pulse_status = HIGH;
+            // switch on outputs
+            set_heart_pulse_on(rtor);
+            heart_pulse_status_test = 2;
 
             // calculate BPM
             bpm = 1.0f / (rtor * RTOR_LSB_RES / 60.0f);
-            // Serial.println(bpm);
         }
 
         // ECG readout interrupt
         if ((status & EINT_STATUS_MASK) == EINT_STATUS_MASK)
         {
-            // Serial.println("ECG readout");
-
             // reset sample counter
             sample_count = 0;
 
@@ -301,10 +295,14 @@ void loop()
 
                 Serial.print(ecg_sample[i]);
                 Serial.print(",");
-                Serial.println(heart_pulse_status);
-                heart_pulse_status = LOW;
+                Serial.print(heart_pulse_status);
+                Serial.print(",");
+                Serial.println(heart_pulse_status_test);
+
+                heart_pulse_status_test = 1;
             }
 
+            check_heart_pulse_off_timer();
             // update_dcloff_array();
         }
     }
