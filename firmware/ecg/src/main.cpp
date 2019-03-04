@@ -28,8 +28,9 @@ const uint8_t FIFO_FAST_SAMPLE_MASK = 0x1;
 const uint8_t ETAG_BITS_MASK = 0x7;
 const float RTOR_LSB_RES = 0.0078125f;
 const uint8_t RTOR_PRESCALE = 8; // 8ms RTOR resolution is for 32768Hz master clock
-const uint16_t MIN_RTOR_INTERVAL = 500;  // 120 bpm
-const uint16_t MAX_RTOR_INTERVAL = 1000; // 60 bpm
+const uint16_t MIN_RTOR_INTERVAL = 500;    // 120 bpm
+const uint16_t MAX_RTOR_INTERVAL = 1000;   // 60 bpm
+const uint16_t HEART_PULSE_QRS_TIME = 200; // portion of RTOR when QRS happens
 
 max30003 ecg;
 plot plotter;
@@ -102,7 +103,7 @@ void setup()
 }
 
 // switch led off after R-TO-R interval timeout
-void check_rtor_led()
+void set_heart_pulse_off()
 {
     if ((current_time_ms - last_time_ms) >= interval_time_ms)
     {
@@ -119,16 +120,16 @@ void check_rtor_led()
 }
 
 // switch led on and set R-TO-R interval timeout
-void send_heart_pulse(uint16_t time_ms)
+void set_heart_pulse_on(uint16_t time_ms)
 {
-    if (time_ms >= MIN_RTOR_INTERVAL && time_ms <= MAX_RTOR_INTERVAL)
-    {
+    // if (time_ms >= MIN_RTOR_INTERVAL && time_ms <= MAX_RTOR_INTERVAL)
+    // {
         pulse_status = HIGH;
-        interval_time_ms = time_ms;
+        interval_time_ms = HEART_PULSE_QRS_TIME;
         digitalWrite(led_pin, pulse_status);
         plotter.send_data_to_arabeat_gui(plot::HEART_PULSE, pulse_status);
         plotter.send_data_to_arabeat_gui(plot::RTOR_IN_MS, rtor);
-    }
+    // }
 }
 
 // brute force dc lead-off delection
@@ -187,7 +188,7 @@ void check_electrodes()
             plotter.send_data_to_arabeat_gui(plot::ELECTRODES_TOUCHED, 1);
 
             if ((current_time_ms - are_electrodes_touched_for_the_first_time) <= rtor_stabilizing_time_ms)
-                send_heart_pulse(fake_rtor_time_ms);
+                set_heart_pulse_on(fake_rtor_time_ms);
         }
         else
             plotter.send_data_to_arabeat_gui(plot::ELECTRODES_TOUCHED, 0);
@@ -203,8 +204,8 @@ void check_electrodes()
 void loop()
 {
     current_time_ms = millis();
-    check_electrodes();
-    check_rtor_led();
+    // check_electrodes();
+    set_heart_pulse_off();
 
     if (ecg_int_flag)
     {
@@ -236,7 +237,7 @@ void loop()
             rtor = rtor * 8;
 
             // Serial.print(rtor );
-            send_heart_pulse(rtor);
+            set_heart_pulse_on(rtor);
 
             // calculate BPM
             bpm = 1.0f / (rtor * RTOR_LSB_RES / 60.0f);
@@ -278,12 +279,17 @@ void loop()
             for (int i = 0; (sample_count > 1 && i < sample_count); i++)
             {
                 // plotter.send_data_to_protocentral_gui(ecg_sample[i], (uint16_t)rtor, (int16_t)bpm);
-                plotter.send_data_to_arduino_plotter(ecg_sample[i]);
+                // plotter.send_data_to_arduino_plotter(ecg_sample[i]);
 
-                plotter.send_data_to_arabeat_gui(plot::ECG_ANALOG_VOLTAGE, ecg_sample[i]);
-                plotter.send_data_to_arabeat_gui(plot::HEART_PULSE, pulse_status);
+                // plotter.send_data_to_arabeat_gui(plot::ECG_ANALOG_VOLTAGE, ecg_sample[i]);
+                // plotter.send_data_to_arabeat_gui(plot::HEART_PULSE, pulse_status);
+
+                Serial.print(ecg_sample[i]);
+                Serial.print(",");
+                Serial.println(pulse_status);
             }
-            update_dcloff_array();
+            // pulse_status = LOW;
+            // update_dcloff_array();
         }
     }
 }
