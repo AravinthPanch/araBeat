@@ -60,6 +60,7 @@ uint32_t heart_pulse_on_time_ms = 0;
 uint32_t heart_pulse_off_time_ms = 0;
 uint16_t current_rtor_interval_ms = 0;
 uint32_t last_rtor_interrupt_time_ms = 0;
+uint32_t last_fake_rtor_time_ms = 0;
 
 const uint8_t DCLOFF_ARRAY_SIZE = 96;
 int16_t dcloff_array[DCLOFF_ARRAY_SIZE];
@@ -139,9 +140,9 @@ void setup()
     // initialize max30003 chip
     ecg.max30003_init();
 
-    plotter.send_data_to_arduino_plotter("#####################");
-    plotter.send_data_to_arduino_plotter("araBeat Firmware v0.6");
-    plotter.send_data_to_arduino_plotter("#####################");
+    Serial.println("#####################");
+    Serial.println("araBeat Firmware v0.6");
+    Serial.println("#####################");
 }
 
 // switch off outputs after RTOR interval timeout
@@ -166,69 +167,19 @@ void set_heart_pulse_on(uint16_t rtor_interval_ms)
         current_rtor_interval_ms = rtor_interval_ms;
         digitalWrite(MCU_HEART_PULSE_PIN, heart_pulse_status);
         digitalWrite(DSP_HEART_PULSE_PIN, heart_pulse_status);
+        plotter.send_data_to_arabeat_gui(plot::RTOR_IN_MS, rtor_interval_ms);
     }
 }
 
-// brute force dc lead-off delection
-void update_dcloff_array()
+void make_fake_pulses()
 {
-    for (int i = 0;
-         (dcloff_array_count < DCLOFF_ARRAY_SIZE && sample_count > 1 && i < sample_count);
-         i++)
+    if (hands_on_status == true &&
+        ((CURRENT_SYSTEM_TIME_MS - last_rtor_interrupt_time_ms) > MAX_RTOR_INTERVAL) &&
+        ((CURRENT_SYSTEM_TIME_MS - last_fake_rtor_time_ms) > FAKE_RTOR_INTERVAL_MS) &&
+        heart_pulse_status == LOW)
     {
-        dcloff_array[dcloff_array_count] = ecg_sample[i];
-        dcloff_array_count++;
-    }
-}
-
-// check if electrodes are touched
-bool are_electrodes_touched()
-{
-    bool result = false;
-    // count voltages above threshold
-    for (int i = 0; i < DCLOFF_ARRAY_SIZE; i++)
-    {
-        if (dcloff_array[i] >= VOLTAGE_THRESHOLD)
-            ABOVE_VOLTAGE_THRESHOLD_COUNT++;
-    }
-
-    if (ABOVE_VOLTAGE_THRESHOLD_COUNT >= DEBOUNCE_ABOVE_VOLTAGE_THRESHOLD_COUNT)
-    {
-        result = true;
-
-        // check if the electrodes are touch for the first time after inactive time
-        if ((CURRENT_SYSTEM_TIME_MS - electrodes_last_touched_time_ms) >= USER_INACTIVE_TIME_MS)
-            are_electrodes_touched_for_the_first_time = true;
-        else
-            are_electrodes_touched_for_the_first_time = false;
-
-        electrodes_last_touched_time_ms = millis();
-    }
-
-    // reset counter
-    dcloff_array_count = 0;
-    ABOVE_VOLTAGE_THRESHOLD_COUNT = 0;
-
-    return result;
-}
-
-// if electrodes are touched, fake heartbeat till RTOR interrupt
-void check_electrodes()
-{
-    // if dcloff_array is full, check if electrodes are touched
-    if (dcloff_array_count == DCLOFF_ARRAY_SIZE)
-    {
-        if (are_electrodes_touched() &&
-            ((CURRENT_SYSTEM_TIME_MS - are_electrodes_touched_for_the_first_time) >=
-             DEBOUNCE_FAKE_RTOR_INTERVAL_MS))
-        {
-            plotter.send_data_to_arabeat_gui(plot::HANDS_ON, 1);
-
-            if ((CURRENT_SYSTEM_TIME_MS - are_electrodes_touched_for_the_first_time) <= RTOR_STABILIZING_TIME_MS)
-                set_heart_pulse_on(FAKE_RTOR_INTERVAL_MS);
-        }
-        else
-            plotter.send_data_to_arabeat_gui(plot::HANDS_ON, 0);
+        last_fake_rtor_time_ms = CURRENT_SYSTEM_TIME_MS;
+        set_heart_pulse_on(FAKE_RTOR_INTERVAL_MS);
     }
 }
 
@@ -240,7 +191,7 @@ void check_electrodes()
  ********************************************************************************/
 void loop()
 {
-    // check_electrodes();
+    make_fake_pulses();
     check_heart_pulse_off_timer();
 
     if (ecg_int_flag)
@@ -260,7 +211,7 @@ void loop()
             // Read RtoR register
             rtor = ecg.max30003_read_register(max30003::RTOR);
 
-            last_rtor_interrupt_time_ms = millis();
+            rtor_interrupt_pulse = RTOR_INTERRUPT_PULSE_ON;
 
             // extract 14 bits data from rtor register
             rtor = ((rtor >> 10) & 0x3fff);
@@ -268,9 +219,12 @@ void loop()
             // rtor must be multiplied by 8 to get the time interval in millisecond 8ms resolution is for 32768Hz master clock
             rtor = rtor * 8;
 
+            if (rtor >= MIN_RTOR_INTERVAL && rtor <= MAX_RTOR_INTERVAL)
+                last_rtor_interrupt_time_ms = millis();
+
             // switch on outputs
-            set_heart_pulse_on(rtor);
-            rtor_interrupt_pulse = RTOR_INTERRUPT_PULSE_ON;
+            if (hands_on_status)
+                set_heart_pulse_on(rtor);
 
             // calculate BPM
             bpm = 1.0f / (rtor * RTOR_LSB_RES / 60.0f);
@@ -313,7 +267,7 @@ void loop()
                 plotter.send_data_to_arabeat_gui(plot::RTOR_INTERRUPT_PULSE, rtor_interrupt_pulse);
                 rtor_interrupt_pulse = RTOR_INTERRUPT_PULSE_OFF;
 
-                // plotter.send_data_to_protocentral_gui(ecg_sample[i], (uint16_t)rtor, (int16_t)bpm);
+                // plotter.send_data_to_protocentral_gui(ecg_sample[i],(uint16_t)rtor, (int16_t)bpm);
                 // plotter.send_data_to_arduino_plotter(ecg_sample[i]);
 
                 if (ecg_sample[i] >= HANDS_OFF_TOP_VOLTAGE || ecg_sample[i] <= HANDS_OFF_BOTTOM_VOLTAGE)
@@ -322,30 +276,31 @@ void loop()
                     hands_off_count++;
             }
 
+            // hands on detection algorithm
             hands_on_detection_batch_count++;
             hands_off_count_threshold = abs(0.75 * sample_count * 5);
             hands_on_count_threshold = 1;
 
             if (hands_on_detection_batch_count == 5)
             {
-                plotter.send_data_to_arduino_plotter("OFF:");
-                plotter.send_data_to_arduino_plotter(hands_off_count);
+                Serial.print("OFF:");
+                Serial.print(hands_off_count);
 
-                plotter.send_data_to_arduino_plotter(", ON:");
-                plotter.send_data_to_arduino_plotter(hands_on_count);
+                Serial.print(", ON:");
+                Serial.print(hands_on_count);
 
-                plotter.send_data_to_arduino_plotter(", SAMPLE CNT:");
-                plotter.send_data_to_arduino_plotter(sample_count * 5);
+                Serial.print(", SAMPLE CNT:");
+                Serial.print(sample_count * 5);
 
                 if (hands_on_count > hands_on_count_threshold && hands_off_count > hands_off_count_threshold)
                 {
-                    plotter.send_data_to_arduino_plotter(" HANDS ON");
+                    Serial.println(" HANDS ON");
                     hands_on_status = true;
                     plotter.send_data_to_arabeat_gui(plot::HANDS_ON, hands_on_status);
                 }
                 else
                 {
-                    plotter.send_data_to_arduino_plotter(" HANDS OFF");
+                    Serial.println(" HANDS OFF");
                     hands_on_status = false;
                     plotter.send_data_to_arabeat_gui(plot::HANDS_ON, hands_on_status);
                 }
@@ -357,3 +312,66 @@ void loop()
         }
     }
 }
+
+// // brute force dc lead-off delection
+// void update_dcloff_array()
+// {
+//     for (int i = 0;
+//          (dcloff_array_count < DCLOFF_ARRAY_SIZE && sample_count > 1 && i < sample_count);
+//          i++)
+//     {
+//         dcloff_array[dcloff_array_count] = ecg_sample[i];
+//         dcloff_array_count++;
+//     }
+// }
+//
+// // check if electrodes are touched
+// bool are_electrodes_touched()
+// {
+//     bool result = false;
+//     // count voltages above threshold
+//     for (int i = 0; i < DCLOFF_ARRAY_SIZE; i++)
+//     {
+//         if (dcloff_array[i] >= VOLTAGE_THRESHOLD)
+//             ABOVE_VOLTAGE_THRESHOLD_COUNT++;
+//     }
+//
+//     if (ABOVE_VOLTAGE_THRESHOLD_COUNT >= DEBOUNCE_ABOVE_VOLTAGE_THRESHOLD_COUNT)
+//     {
+//         result = true;
+//
+//         // check if the electrodes are touch for the first time after inactive time
+//         if ((CURRENT_SYSTEM_TIME_MS - electrodes_last_touched_time_ms) >= USER_INACTIVE_TIME_MS)
+//             are_electrodes_touched_for_the_first_time = true;
+//         else
+//             are_electrodes_touched_for_the_first_time = false;
+//
+//         electrodes_last_touched_time_ms = millis();
+//     }
+//
+//     // reset counter
+//     dcloff_array_count = 0;
+//     ABOVE_VOLTAGE_THRESHOLD_COUNT = 0;
+//
+//     return result;
+// }
+//
+// // if electrodes are touched, fake heartbeat till RTOR interrupt
+// void check_electrodes()
+// {
+//     // if dcloff_array is full, check if electrodes are touched
+//     if (dcloff_array_count == DCLOFF_ARRAY_SIZE)
+//     {
+//         if (are_electrodes_touched() &&
+//             ((CURRENT_SYSTEM_TIME_MS - are_electrodes_touched_for_the_first_time) >=
+//              DEBOUNCE_FAKE_RTOR_INTERVAL_MS))
+//         {
+//             plotter.send_data_to_arabeat_gui(plot::HANDS_ON, 1);
+//
+//             if ((CURRENT_SYSTEM_TIME_MS - are_electrodes_touched_for_the_first_time) <= RTOR_STABILIZING_TIME_MS)
+//                 set_heart_pulse_on(FAKE_RTOR_INTERVAL_MS);
+//         }
+//         else
+//             plotter.send_data_to_arabeat_gui(plot::HANDS_ON, 0);
+//     }
+// }
