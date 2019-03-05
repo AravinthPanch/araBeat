@@ -57,7 +57,8 @@ const uint16_t MIN_RTOR_INTERVAL = 500;
 const uint16_t MAX_RTOR_INTERVAL = 1000;
 bool heart_pulse_status = LOW;
 int16_t rtor_interrupt_pulse = 1;
-uint32_t last_heart_pulse_time_ms = 0;
+uint32_t heart_pulse_on_time_ms = 0;
+uint32_t heart_pulse_off_time_ms = 0;
 uint16_t current_rtor_interval_ms = 0;
 uint32_t last_rtor_interrupt_time_ms = 0;
 
@@ -127,13 +128,12 @@ void setup()
 // switch off outputs after RTOR interval timeout
 void check_heart_pulse_off_timer()
 {
-    if ((CURRENT_SYSTEM_TIME_MS - last_heart_pulse_time_ms) >= HEART_PULSE_QRS_TIME)
+    if ((CURRENT_SYSTEM_TIME_MS - heart_pulse_on_time_ms) >= HEART_PULSE_QRS_TIME)
     {
         heart_pulse_status = LOW;
-        last_heart_pulse_time_ms = CURRENT_SYSTEM_TIME_MS;
+        heart_pulse_off_time_ms = CURRENT_SYSTEM_TIME_MS;
         digitalWrite(MCU_HEART_PULSE_PIN, heart_pulse_status);
         digitalWrite(DSP_HEART_PULSE_PIN, heart_pulse_status);
-        plotter.send_data_to_arabeat_gui(plot::HEART_PULSE, heart_pulse_status);
     }
 }
 
@@ -143,11 +143,10 @@ void set_heart_pulse_on(uint16_t rtor_interval_ms)
     if (rtor_interval_ms >= MIN_RTOR_INTERVAL && rtor_interval_ms <= MAX_RTOR_INTERVAL)
     {
         heart_pulse_status = HIGH;
-        current_rtor_interval_ms = HEART_PULSE_QRS_TIME;
+        heart_pulse_on_time_ms = CURRENT_SYSTEM_TIME_MS;
+        current_rtor_interval_ms = rtor_interval_ms;
         digitalWrite(MCU_HEART_PULSE_PIN, heart_pulse_status);
         digitalWrite(DSP_HEART_PULSE_PIN, heart_pulse_status);
-        plotter.send_data_to_arabeat_gui(plot::HEART_PULSE, heart_pulse_status);
-        plotter.send_data_to_arabeat_gui(plot::RTOR_IN_MS, rtor);
     }
 }
 
@@ -223,6 +222,7 @@ void check_electrodes()
 void loop()
 {
     // check_electrodes();
+    check_heart_pulse_off_timer();
 
     if (ecg_int_flag)
     {
@@ -297,8 +297,6 @@ void loop()
                 plotter.send_data_to_arabeat_gui(plot::RTOR_INTERRUPT_PULSE, rtor_interrupt_pulse);
                 rtor_interrupt_pulse = RTOR_INTERRUPT_PULSE_OFF;
             }
-
-            check_heart_pulse_off_timer();
             // update_dcloff_array();
         }
     }
