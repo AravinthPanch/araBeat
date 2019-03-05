@@ -48,7 +48,6 @@ plot plotter;
 uint32_t ecg_fifo, sample_count, etag_bits[32], rtor;
 int16_t ecg_sample[32];
 float bpm;
-
 volatile bool ecg_int_flag = 0;
 
 // 120 bpm
@@ -87,6 +86,22 @@ uint16_t electrodes_last_touched_time_ms = 0;
 // are electrodes touched for the first time after being inactive
 bool are_electrodes_touched_for_the_first_time = false;
 
+const int16_t HANDS_OFF_TOP_VOLTAGE = -5;
+const int16_t HANDS_OFF_MID_VOLTAGE = -15;
+const int16_t HANDS_OFF_BOTTOM_VOLTAGE = -25;
+const int16_t HANDS_ON_TOP_VOLTAGE = 40;
+const int16_t HANDS_ON_MID_VOLTAGE = 0;
+const int16_t HANDS_ON_BOTTOM_VOLTAGE = -40;
+
+uint16_t hands_off_count = 0;
+uint16_t hands_on_count = 0;
+uint16_t hands_off_count_threshold = 0;
+uint16_t hands_on_count_threshold = 0;
+const uint16_t debounce_hands_off_count = 5;
+const uint16_t debounce_hands_on_count = 5;
+int16_t hands_on_detection_batch_count = 0;
+bool hands_on_status = false;
+
 /*******************************************************************************
  * Functions
  ********************************************************************************/
@@ -123,6 +138,10 @@ void setup()
 
     // initialize max30003 chip
     ecg.max30003_init();
+
+    plotter.send_data_to_arduino_plotter("#####################");
+    plotter.send_data_to_arduino_plotter("araBeat Firmware v0.6");
+    plotter.send_data_to_arduino_plotter("#####################");
 }
 
 // switch off outputs after RTOR interval timeout
@@ -203,13 +222,13 @@ void check_electrodes()
             ((CURRENT_SYSTEM_TIME_MS - are_electrodes_touched_for_the_first_time) >=
              DEBOUNCE_FAKE_RTOR_INTERVAL_MS))
         {
-            plotter.send_data_to_arabeat_gui(plot::ELECTRODES_TOUCHED, 1);
+            plotter.send_data_to_arabeat_gui(plot::HANDS_ON, 1);
 
             if ((CURRENT_SYSTEM_TIME_MS - are_electrodes_touched_for_the_first_time) <= RTOR_STABILIZING_TIME_MS)
                 set_heart_pulse_on(FAKE_RTOR_INTERVAL_MS);
         }
         else
-            plotter.send_data_to_arabeat_gui(plot::ELECTRODES_TOUCHED, 0);
+            plotter.send_data_to_arabeat_gui(plot::HANDS_ON, 0);
     }
 }
 
@@ -232,7 +251,7 @@ void loop()
         // DC Lead-off detection interrupt
         if ((status & DCLOFF_STATUS_MASK) == DCLOFF_STATUS_MASK)
         {
-            // Serial.println("DC Lead-off detected");
+            Serial.println("DC Lead-off detected");
         }
 
         // R-to-R readout interrupt
@@ -289,15 +308,52 @@ void loop()
             // Print results
             for (int i = 0; (sample_count > 1 && i < sample_count); i++)
             {
-                // plotter.send_data_to_protocentral_gui(ecg_sample[i], (uint16_t)rtor, (int16_t)bpm);
-                // plotter.send_data_to_arduino_plotter(ecg_sample[i]);
-
                 plotter.send_data_to_arabeat_gui(plot::ECG_ANALOG_VOLTAGE, ecg_sample[i]);
                 plotter.send_data_to_arabeat_gui(plot::HEART_PULSE, heart_pulse_status);
                 plotter.send_data_to_arabeat_gui(plot::RTOR_INTERRUPT_PULSE, rtor_interrupt_pulse);
                 rtor_interrupt_pulse = RTOR_INTERRUPT_PULSE_OFF;
+
+                // plotter.send_data_to_protocentral_gui(ecg_sample[i], (uint16_t)rtor, (int16_t)bpm);
+                // plotter.send_data_to_arduino_plotter(ecg_sample[i]);
+
+                if (ecg_sample[i] >= HANDS_OFF_TOP_VOLTAGE || ecg_sample[i] <= HANDS_OFF_BOTTOM_VOLTAGE)
+                    hands_on_count++;
+                else
+                    hands_off_count++;
             }
-            // update_dcloff_array();
+
+            hands_on_detection_batch_count++;
+            hands_off_count_threshold = abs(0.75 * sample_count * 5);
+            hands_on_count_threshold = 1;
+
+            if (hands_on_detection_batch_count == 5)
+            {
+                plotter.send_data_to_arduino_plotter("OFF:");
+                plotter.send_data_to_arduino_plotter(hands_off_count);
+
+                plotter.send_data_to_arduino_plotter(", ON:");
+                plotter.send_data_to_arduino_plotter(hands_on_count);
+
+                plotter.send_data_to_arduino_plotter(", SAMPLE CNT:");
+                plotter.send_data_to_arduino_plotter(sample_count * 5);
+
+                if (hands_on_count > hands_on_count_threshold && hands_off_count > hands_off_count_threshold)
+                {
+                    plotter.send_data_to_arduino_plotter(" HANDS ON");
+                    hands_on_status = true;
+                    plotter.send_data_to_arabeat_gui(plot::HANDS_ON, hands_on_status);
+                }
+                else
+                {
+                    plotter.send_data_to_arduino_plotter(" HANDS OFF");
+                    hands_on_status = false;
+                    plotter.send_data_to_arabeat_gui(plot::HANDS_ON, hands_on_status);
+                }
+
+                hands_on_detection_batch_count = 0;
+                hands_off_count = 0;
+                hands_on_count = 0;
+            }
         }
     }
 }

@@ -23,7 +23,7 @@ public:
         RTOR_IN_MS = 0xE1,
         RTOR_INTERRUPT_PULSE = 0xE2,
         HEART_PULSE = 0x90,
-        ELECTRODES_TOUCHED = 0x91,
+        HANDS_ON = 0x91,
     };
 
     // constructor
