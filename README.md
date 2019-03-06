@@ -190,3 +190,50 @@ This is a 12-feet-tall-permanent-public-installation, therefore it is built to w
 <img src="./images/audio/speaker-rack-3.jpg" width=20%/>
 <img src="./images/audio/audio-3.jpg" width=30%/>
 </p>
+
+
+## DESIGN & DEVELOPMENT PROCESS
+
+### Software Tools
+
+- #### KiCad v5.0.1-3 for PCB Design
+
+<p align="center">
+<img src="./images/screenshots/kicad-pcb-design.png" width=60%/>
+</p>
+
+- #### Atom v1.34.0 + Platform IO v4.0.0a3 for ECG Firmware Development
+
+<p align="center">
+<img src="./images/screenshots/atom-ecg-firware.png" width=60%/>
+</p>
+
+- #### Fusion 360 v2.0.5357 for Mechanical Design
+
+<p align="center">
+<img src="./images/screenshots/fusion-360-mechanical-design.png" width=60%/>
+</p>
+
+- #### Affinity Designer v1.6.1 for Vector Design
+
+<p align="center">
+<img src="./images/screenshots/affinity-designer-vector-design.png" width=60%/>
+</p>
+
+- #### SigmaStudio v4.2 for Audio Synthesis
+
+<p align="center">
+<img src="./images/screenshots/sigmastudio-dsp-audio-synth.png" width=60%/>
+</p>
+
+- #### Processing v3.5.3 for araBeat GUI Software Development
+
+<p align="center">
+<img src="./images/screenshots/processing-arabeat-gui-software.png" width=60%/>
+</p>
+
+- #### araBeat GUI v0.9 for Optimisation of ECG and Audio Waveforms
+
+<p align="center">
+<img src="./images/screenshots/arabeat-gui-wave-sync.png" width=60%/>
+</p>
