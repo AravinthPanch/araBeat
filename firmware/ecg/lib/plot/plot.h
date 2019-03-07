@@ -22,6 +22,12 @@ public:
         ECG_ANALOG_VOLTAGE = 0xE0,
         RTOR_IN_MS = 0xE1,
         RTOR_INTERRUPT_PULSE = 0xE2,
+        HANDS_ON_COUNT = 0xE3,
+        HANDS_OFF_COUNT = 0xE4,
+        SAMPLE_COUNT = 0xE5,
+        HANDS_ON_COUNT_THRESHOLD = 0xE6,
+        HANDS_OFF_COUNT_THRESHOLD = 0xE7,
+        STABLE_RTOR_STATUS = 0xE8,
         HEART_PULSE = 0x90,
         HANDS_ON = 0x91,
     };
