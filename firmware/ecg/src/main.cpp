@@ -18,9 +18,9 @@
 // MAX30003 Interrupt 1 to receive ECG readings
 const uint8_t ECG_INT1_PIN = 2;
 // Heart Pulse LED on MCU Module
-const uint8_t MCU_HEART_PULSE_PIN = 5;
+const uint8_t MCU_HEART_PULSE_PIN = A1;
 // Heart Pulse to DSP GPIO MP2
-const uint8_t DSP_HEART_PULSE_PIN = 6;
+const uint8_t DSP_HEART_PULSE_PIN = A0;
 
 /*******************************************************************************
  * Definitions
@@ -31,6 +31,8 @@ const uint8_t DSP_HEART_PULSE_PIN = 6;
 #define STABLE_RTOR_STATUS_UNKNOWN 2
 #define STABLE_RTOR_STATUS_FALSE 0
 #define STABLE_RTOR_STATUS_TRUE 1
+#define DSP_HEART_PULSE_ON HIGH
+#define DSP_HEART_PULSE_OFF LOW
 
 /*******************************************************************************
  * Variable declarations
@@ -57,7 +59,7 @@ volatile bool ecg_int_flag = 0;
 const uint16_t MIN_RTOR_INTERVAL = 500;
 // 60 bpm
 const uint16_t MAX_RTOR_INTERVAL = 1000;
-bool heart_pulse_status = LOW;
+bool heart_pulse_status = DSP_HEART_PULSE_OFF;
 int16_t rtor_interrupt_pulse = 1;
 uint32_t heart_pulse_on_time_ms = 0;
 uint32_t heart_pulse_off_time_ms = 0;
@@ -90,7 +92,7 @@ uint16_t electrodes_last_touched_time_ms = 0;
 // are electrodes touched for the first time after being inactive
 bool are_electrodes_touched_for_the_first_time = false;
 
-const int16_t HANDS_OFF_TOP_VOLTAGE = -5;
+const int16_t HANDS_OFF_TOP_VOLTAGE = -8;
 const int16_t HANDS_OFF_MID_VOLTAGE = -15;
 const int16_t HANDS_OFF_BOTTOM_VOLTAGE = -25;
 
@@ -120,9 +122,19 @@ void setup()
     // setup serial port for plotting
     Serial.begin(115200);
 
+    Serial.println("#####################");
+    Serial.println("araBeat Firmware v0.6");
+    Serial.println("#####################");
+
     // setup outputs
     pinMode(MCU_HEART_PULSE_PIN, OUTPUT);
     pinMode(DSP_HEART_PULSE_PIN, OUTPUT);
+
+    digitalWrite(MCU_HEART_PULSE_PIN, HIGH);
+    digitalWrite(DSP_HEART_PULSE_PIN, HIGH);
+    delay(200);
+    digitalWrite(MCU_HEART_PULSE_PIN, LOW);
+    digitalWrite(DSP_HEART_PULSE_PIN, LOW);
 
     // setup interrupt
     pinMode(ECG_INT1_PIN, INPUT);
@@ -141,10 +153,6 @@ void setup()
 
     // initialize max30003 chip
     ecg.max30003_init();
-
-    Serial.println("#####################");
-    Serial.println("araBeat Firmware v0.6");
-    Serial.println("#####################");
 }
 
 // switch off outputs after RTOR interval timeout
@@ -152,7 +160,7 @@ void check_heart_pulse_off_timer()
 {
     if ((CURRENT_SYSTEM_TIME_MS - heart_pulse_on_time_ms) >= HEART_PULSE_QRS_TIME)
     {
-        heart_pulse_status = LOW;
+        heart_pulse_status = DSP_HEART_PULSE_OFF;
         heart_pulse_off_time_ms = CURRENT_SYSTEM_TIME_MS;
         digitalWrite(MCU_HEART_PULSE_PIN, heart_pulse_status);
         digitalWrite(DSP_HEART_PULSE_PIN, heart_pulse_status);
@@ -162,7 +170,7 @@ void check_heart_pulse_off_timer()
 // switch on outputs after RTOR detection
 void set_heart_pulse_on(uint16_t rtor_interval_ms)
 {
-    heart_pulse_status = HIGH;
+    heart_pulse_status = DSP_HEART_PULSE_ON;
     heart_pulse_on_time_ms = CURRENT_SYSTEM_TIME_MS;
     current_rtor_interval_ms = rtor_interval_ms;
     digitalWrite(MCU_HEART_PULSE_PIN, heart_pulse_status);
@@ -176,7 +184,7 @@ void check_stable_rtor_status()
     if (hands_on_status == true &&
         ((CURRENT_SYSTEM_TIME_MS - last_rtor_interrupt_time_ms) > MAX_RTOR_INTERVAL) &&
         ((CURRENT_SYSTEM_TIME_MS - last_fake_rtor_time_ms) > FAKE_RTOR_INTERVAL_MS) &&
-        heart_pulse_status == LOW)
+        heart_pulse_status == DSP_HEART_PULSE_OFF)
     {
         stable_rtor_status = STABLE_RTOR_STATUS_FALSE;
         last_fake_rtor_time_ms = CURRENT_SYSTEM_TIME_MS;
@@ -205,7 +213,7 @@ void loop()
         // DC Lead-off detection interrupt
         if ((status & DCLOFF_STATUS_MASK) == DCLOFF_STATUS_MASK)
         {
-            Serial.println("DC Lead-off detected");
+            // Serial.println("DC Lead-off detected");
         }
 
         // R-to-R readout interrupt
@@ -284,7 +292,7 @@ void loop()
 
             // hands on detection algorithm
             hands_on_detection_batch_count++;
-            hands_off_count_threshold = abs(0.75 * sample_count * 5);
+            hands_off_count_threshold = abs(0.50 * sample_count * 5);
             hands_on_count_threshold = 1;
 
             if (hands_on_detection_batch_count == hands_on_detection_batch_size)
