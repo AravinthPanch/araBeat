@@ -33,7 +33,7 @@ This is a 12-feet-tall-permanent-public-installation, therefore it is built to w
 -   Niranjan Harakel Rao - Firmware Optimisation, Next Big Thing
 -   Karissa Xie, Rolin Pei - Stainless Steel CNC Machining, HLH Prototypes
 -   Monica Shen, Ivy Li, Carmen Zheng - PCB Manufacturing, Seeed Studio
--   Goran, S-Hamacher - Stainless Steel WaterJet Cutting, S-Hamacher Art Production
+-   Goran, S-Hamacher - Stainless Steel WaterJet Cutting, S-Hamacher Art Production Studio
 -   Robert Blowsky - Digital Signal Processing, Analog Devices
 
 ## STUDIOS AND MANUFACTURERS
@@ -192,9 +192,7 @@ This is a 12-feet-tall-permanent-public-installation, therefore it is built to w
 </p>
 
 
-## DESIGN & DEVELOPMENT PROCESS
-
-### Software Tools
+## DESIGN & DEVELOPMENT TOOLS
 
 - #### KiCad v5.0.1-3 for PCB Design
 
@@ -212,6 +210,12 @@ This is a 12-feet-tall-permanent-public-installation, therefore it is built to w
 
 <p align="center">
 <img src="./images/screenshots/fusion-360-mechanical-design.png" width=60%/>
+</p>
+
+- #### Rhino + Grasshoper for Surface Design
+
+<p align="center">
+<img src="./images/screenshots/rhino-sensor-frontend.jpg" width=60%/>
 </p>
 
 - #### Affinity Designer v1.6.1 for Vector Design
@@ -236,4 +240,54 @@ This is a 12-feet-tall-permanent-public-installation, therefore it is built to w
 
 <p align="center">
 <img src="./images/screenshots/arabeat-gui-wave-sync.png" width=60%/>
+</p>
+
+## The Making - Behind the scenes
+
+- #### Aravinth - Prototype CNC Milling at MotionLab, Berlin
+
+<p align="center">
+<img src="./images/the-making/ara-sensor-frontend.jpg" width=40%/>
+</p>
+
+- #### Stacia - Mosaic Making at Private Studio, Minneapolis
+
+<p align="center">
+<img src="./images/the-making/stacia-mosaic-3.jpg" width=40%/>
+</p>
+
+- #### Stacia - Mosaic Making at Private Studio, Minneapolis
+
+<p align="center">
+<img src="./images/the-making/stacia-mosaic-4.jpg" width=40%/>
+</p>
+
+- #### Len - Structural Construction at Tivoli Too, Minneapolis
+
+<p align="center">
+<img src="./images/the-making/len-structure.jpg" width=40%/>
+</p>
+
+- #### Stacia - Styrofoam + Fibreglass Surface Finish at Tivoli Too, Minneapolis
+
+<p align="center">
+<img src="./images/the-making/stacia-styrofoam.jpg" width=40%/>
+</p>
+
+- #### Len - Mosaic Finish at Tivoli Too, Minneapolis
+
+<p align="center">
+<img src="./images/the-making/len-surface.jpg" width=40%/>
+</p>
+
+- #### Alessandro - Sound Design at Private Studio, Berlin
+
+<p align="center">
+<img src="./images/the-making/alessandro-audio.jpg" width=40%/>
+</p>
+
+- #### Chris - Metalworking at S-Hamacher Art Production Studio, Berlin
+
+<p align="center">
+<img src="./images/the-making/chris-speaker-rack.jpg" width=40%/>
 </p>
