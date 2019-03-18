@@ -31,6 +31,8 @@ const uint8_t DSP_HEART_PULSE_PIN = A0;
 #define STABLE_RTOR_STATUS_UNKNOWN 2
 #define STABLE_RTOR_STATUS_FALSE 0
 #define STABLE_RTOR_STATUS_TRUE 1
+
+// Active HIGH logic state of DSP output
 #define DSP_HEART_PULSE_ON HIGH
 #define DSP_HEART_PULSE_OFF LOW
 
@@ -79,7 +81,7 @@ const uint16_t FAKE_RTOR_INTERVAL_MS = 833;
 // time to wait since electrodes touched, before sending the fake rtor, to avoid noises
 // It takes approximately 20 seconds to get stablized RTOR from MAX30003/ Thompkins Algorithm
 
-const int16_t HANDS_OFF_TOP_VOLTAGE = -8;
+const int16_t HANDS_OFF_TOP_VOLTAGE = -5;
 const int16_t HANDS_OFF_BOTTOM_VOLTAGE = -25;
 uint16_t hands_off_count = 0;
 uint16_t hands_on_count = 0;
@@ -104,7 +106,6 @@ void setup()
 {
     // setup serial port for plotting
     Serial.begin(115200);
-
     Serial.println("#####################");
     Serial.println("araBeat Firmware v0.6");
     Serial.println("#####################");
@@ -113,6 +114,7 @@ void setup()
     pinMode(MCU_HEART_PULSE_PIN, OUTPUT);
     pinMode(DSP_HEART_PULSE_PIN, OUTPUT);
 
+    // test outputs
     digitalWrite(MCU_HEART_PULSE_PIN, HIGH);
     digitalWrite(DSP_HEART_PULSE_PIN, HIGH);
     delay(200);
@@ -136,6 +138,7 @@ void setup()
 
     // initialize max30003 chip
     ecg.max30003_init();
+    Serial.println("Hardware initialized");
 }
 
 // switch off outputs after RTOR interval timeout

@@ -75,17 +75,15 @@ void max30003::max30003_init()
     max30003::GeneralConfiguration_u CNFG_GEN_r;
     CNFG_GEN_r.bits.en_ecg = 1;       // Enable ECG channel
     CNFG_GEN_r.bits.en_rbias = 1;     // Enable resistive bias
+    CNFG_GEN_r.bits.rbiasv = 0b00;    // Resistive Bias Mode
     CNFG_GEN_r.bits.rbiasn = 1;       // Enable resistive bias on negative input
     CNFG_GEN_r.bits.rbiasp = 1;       // Enable resistive bias on positive input
-    CNFG_GEN_r.bits.imag = 0b101;     // Current magnitude
-    CNFG_GEN_r.bits.en_dcloff = 0b01; // Enable DC lead-off detection
+    CNFG_GEN_r.bits.imag = 0b000;     // Current magnitude
+    CNFG_GEN_r.bits.en_dcloff = 0b00; // Enable DC lead-off detection
     CNFG_GEN_r.bits.vth = 0b11;       // Lead-Off Voltage Threshold
     max30003_write_register(max30003::CNFG_GEN, CNFG_GEN_r.all);
     // max30003_write_register(max30003::CNFG_GEN, 0x081007);
     delay(100);
-    // Serial.println("CNFG_GEN_r");
-    // Serial.println(CNFG_GEN_r.all, BIN);
-    // Serial.println(CNFG_GEN_r.all, HEX);
 
     // Calibration config register setting
     max30003::CalConfiguration_u CNFG_CAL_r;
@@ -95,9 +93,6 @@ void max30003::max30003_init()
     max30003_write_register(max30003::CNFG_CAL, CNFG_CAL_r.all);
     // max30003_write_register(max30003::CNFG_CAL, 0x720000);
     delay(100);
-    // Serial.println("CNFG_CAL_r");
-    // Serial.println(CNFG_CAL_r.all, BIN);
-    // Serial.println(CNFG_CAL_r.all, HEX);
 
     // MUX config register setting
     max30003::MuxConfiguration_u CNFG_EMUX_r;
@@ -106,22 +101,16 @@ void max30003::max30003_init()
     max30003_write_register(max30003::CNFG_EMUX, CNFG_EMUX_r.all);
     // max30003_write_register(max30003::CNFG_EMUX, 0x0B0000);
     delay(100);
-    // Serial.println("CNFG_EMUX_r");
-    // Serial.println(CNFG_EMUX_r.all, BIN);
-    // Serial.println(CNFG_EMUX_r.all, HEX);
 
     // ECG Config register setting
     max30003::ECGConfiguration_u CNFG_ECG_r;
-    CNFG_ECG_r.bits.dlpf = 1;    // Digital LPF cutoff = 40Hz
-    CNFG_ECG_r.bits.dhpf = 1;    // Digital HPF cutoff = 0.5Hz
+    CNFG_ECG_r.bits.dlpf = 0b10; // Digital LPF cutoff
+    CNFG_ECG_r.bits.dhpf = 1;    // Digital HPF cutoff
     CNFG_ECG_r.bits.gain = 0b01; // ECG gain
     CNFG_ECG_r.bits.rate = 2;    // Sample rate = 128 sps for fMSTR = 32768Hz
     max30003_write_register(max30003::CNFG_ECG, CNFG_ECG_r.all);
     // max30003_write_register(max30003::CNFG_ECG, 0x805000);
     delay(100);
-    // Serial.println("CNFG_ECG_r");
-    // Serial.println(CNFG_ECG_r.all, BIN);
-    // Serial.println(CNFG_ECG_r.all, HEX);
 
     // R-to-R configuration
     max30003::RtoR1Configuration_u CNFG_RTOR_r;
@@ -133,9 +122,6 @@ void max30003::max30003_init()
     max30003_write_register(max30003::CNFG_RTOR1, CNFG_RTOR_r.all);
     // max30003_write_register(max30003::CNFG_RTOR1, 0x3fc600);
     delay(100);
-    // Serial.println("CNFG_RTOR_r");
-    // Serial.println(CNFG_RTOR_r.all, BIN);
-    // Serial.println(CNFG_RTOR_r.all, HEX);
 
     // Enable interrupts register setting
     max30003::EnableInterrupts_u EN_INT_r;
@@ -143,7 +129,7 @@ void max30003::max30003_init()
     EN_INT_r.bits.en_eint = 1;      // Enable EINT interrupt
     EN_INT_r.bits.en_rrint = 1;     // Enable R-to-R interrupt
     EN_INT_r.bits.intb_type = 1;    // CMOS Driver
-    EN_INT_r.bits.en_dcloffint = 1; // Enable DC Lead-Off Detection Interrupt
+    EN_INT_r.bits.en_dcloffint = 0; // Enable DC Lead-Off Detection Interrupt
     max30003_write_register(max30003::EN_INT, EN_INT_r.all);
 
     // Manage interrupts register setting
