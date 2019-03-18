@@ -10,8 +10,8 @@ This is a 12-feet-tall-permanent-public-installation, therefore it is built to w
 
 ## ARTISTS
 
--   Aravinth Panch <http://aravinth.info> > New Media Art
--   Stacia Goodman <http://www.staciagoodmanmosaics.com> > Mosaic Art
+-   Aravinth Panch < http://aravinth.info > New Media Art
+-   Stacia Goodman < http://www.staciagoodmanmosaics.com > Mosaic Art
 
 ## COLLABORATORS
 
@@ -21,30 +21,28 @@ This is a 12-feet-tall-permanent-public-installation, therefore it is built to w
 -   Alessandro Aresta - Sound Engineering, Berlin
 -   Len Goodman - Graphic Design, Minneapolis
 -   John Bean, Hart John, Randi Johnson - Production Management, Minneapolis
--   Pavel - Stainless Steel Structural Design & Construction, Minneapolis
+-   Pavel - Structural Design & Construction, Minneapolis
 -   Shresth Agrawal - Software Engineering, Berlin
--   Chris Kooper - Stainless Steel Metalworking, Berlin
+-   Chris Kooper - Metalworking, Berlin
 
 ## SUPPORTERS
 
 -   Natalia Aravinth, Mladen Miljic, Darina Onoprienko - Family & Mental Support
--   David Riding, Jasmin Skenderi - Electrical Design Review, Next Big Thing
--   Christoph Iwasjuta - Advisor, MotionLab Berlin
--   Niranjan Harakel Rao - Firmware Optimisation, Next Big Thing
--   Karissa Xie, Rolin Pei - Stainless Steel CNC Machining, HLH Prototypes
--   Monica Shen, Ivy Li, Carmen Zheng - PCB Manufacturing, Seeed Studio
--   Goran, S-Hamacher - Stainless Steel WaterJet Cutting, S-Hamacher Art Production
--   Robert Blowsky - Digital Signal Processing, Analog Devices
+-   David Riding, Jasmin Skenderi - Electrical Design Review, Next Big Thing, Berlin
+-   Karissa Xie, Rolin Pei - CNC Machining, HLH Prototypes, Shenzhen
+-   Monica Shen, Ivy Li, Carmen Zheng - PCB Manufacturing, Seeed Studio, Shenzhen
+-   Goran, Sascha Hamacher - WaterJet Cutting, S-Hamacher Art Production Studio, Berlin
+-   Robert Blowsky - Digital Signal Processing, Analog Devices, EZ Forum
 
 ## STUDIOS AND MANUFACTURERS
 
--   nLab Berlin - Interaction Technology Design & Development
--   MotionLab Berlin - Prototype CNC Machining
--   Tivoli Too Minneapolis - Fiberglass and Steel Structure Construction
--   Seeed Studio Shenzhen - PCB Manufacturing
--   Troublemaker Shenzhen - Prototyping
--   HLH Prototypes Shenzhen - Stainless Steel CNC Machining
--   S-Hamacher Art Production Berlin - Stainless Steel WaterJet Cutting & Metalwork
+-   nLab, Berlin - Interaction Technology Design & Development
+-   MotionLab, Berlin - Prototype CNC Machining
+-   Tivoli Too, Minneapolis - Structural Design & Construction
+-   Seeed Studio, Shenzhen - PCB Manufacturing
+-   Troublemaker, Shenzhen - Prototyping
+-   HLH Prototypes, Shenzhen - CNC Machining
+-   S-Hamacher Art Production Studio, Berlin - WaterJet Cutting & Metalworking
 
 ## DESIGN
 
@@ -141,7 +139,11 @@ This is a 12-feet-tall-permanent-public-installation, therefore it is built to w
 <img src="./images/pcbs/motherboard-v0.1-1.png" width=15%/>
 <img src="./images/pcbs/motherboard-v0.1-2.png" width=15%/>
 <img src="./images/pcbs/motherboard-v0.1-3.png" width=19%/>
+</br>
+<img src="./images/pcbs/motherboard-v0.1-4.jpg" width=30%/>
 </p>
+
+
 
 -   #### ECG Module v0.1
 
@@ -157,7 +159,6 @@ This is a 12-feet-tall-permanent-public-installation, therefore it is built to w
 <img src="./images/pcbs/ecg-module-v0.2-1.png" width=30%/>
 <img src="./images/pcbs/ecg-module-v0.2-2.png" width=30%/>
 <img src="./images/pcbs/ecg-module-v0.2-3.png" width=30%/>
-
 </p>
 
 -   #### MCU Module v0.1
@@ -174,9 +175,11 @@ This is a 12-feet-tall-permanent-public-installation, therefore it is built to w
 <img src="./images/pcbs/motherboard-v1.0-2.png" width=30%/>
 <img src="./images/pcbs/motherboard-v1.0-3.png" width=30%/>
 <img src="./images/pcbs/motherboard-v1.0-1.png" width=30%/>
+</br>
+<img src="./images/pcbs/arabeat-v1.0-1.jpg" width=40%/>
 </p>
 
--   #### Motherboard v1.0 in Weatherproof Industrial Heated Enclosure - NB121005-1HFS
+-   #### Motherboard v1.0 in Weatherproof Industrial Heated Enclosure
 
 <p align="center">
 <img src="./images/pcbs/mcu-module-v0.1-enclosure.png" width=30%/>
@@ -187,14 +190,11 @@ This is a 12-feet-tall-permanent-public-installation, therefore it is built to w
 -   #### Marine Standard Tweeter, Sub-Woofer, Amplifier, PSU
 
 <p align="center">
-<img src="./images/audio/speaker-rack-3.jpg" width=20%/>
+<img src="./images/audio/speaker-rack-2.jpg" width=20%/>
 <img src="./images/audio/audio-3.jpg" width=30%/>
 </p>
 
-
-## DESIGN & DEVELOPMENT PROCESS
-
-### Software Tools
+## DESIGN & DEVELOPMENT TOOLS
 
 - #### KiCad v5.0.1-3 for PCB Design
 
@@ -212,6 +212,12 @@ This is a 12-feet-tall-permanent-public-installation, therefore it is built to w
 
 <p align="center">
 <img src="./images/screenshots/fusion-360-mechanical-design.png" width=60%/>
+</p>
+
+- #### Rhino + Grasshoper for Surface Design
+
+<p align="center">
+<img src="./images/screenshots/rhino-sensor-frontend.jpg" width=60%/>
 </p>
 
 - #### Affinity Designer v1.6.1 for Vector Design
@@ -236,4 +242,54 @@ This is a 12-feet-tall-permanent-public-installation, therefore it is built to w
 
 <p align="center">
 <img src="./images/screenshots/arabeat-gui-wave-sync.png" width=60%/>
+</p>
+
+## The Making - Behind the scenes
+
+- #### Aravinth - Prototype CNC Milling at MotionLab, Berlin
+
+<p align="center">
+<img src="./images/the-making/ara-sensor-frontend.jpg" width=40%/>
+</p>
+
+- #### Stacia - Mosaic Making at Private Studio, Minneapolis
+
+<p align="center">
+<img src="./images/the-making/stacia-mosaic-3.jpg" width=40%/>
+</p>
+
+- #### Stacia - Mosaic Making at Private Studio, Minneapolis
+
+<p align="center">
+<img src="./images/the-making/stacia-mosaic-4.jpg" width=40%/>
+</p>
+
+- #### Len - Structural Construction at Tivoli Too, Minneapolis
+
+<p align="center">
+<img src="./images/the-making/len-structure.jpg" width=40%/>
+</p>
+
+- #### Stacia - Styrofoam + Fibreglass Surface Finish at Tivoli Too, Minneapolis
+
+<p align="center">
+<img src="./images/the-making/stacia-styrofoam.jpg" width=40%/>
+</p>
+
+- #### Len - Mosaic Finish at Tivoli Too, Minneapolis
+
+<p align="center">
+<img src="./images/the-making/len-surface.jpg" width=40%/>
+</p>
+
+- #### Alessandro - Sound Design at Private Studio, Berlin
+
+<p align="center">
+<img src="./images/the-making/alessandro-audio.jpg" width=40%/>
+</p>
+
+- #### Chris - Metalworking at S-Hamacher Art Production Studio, Berlin
+
+<p align="center">
+<img src="./images/the-making/chris-speaker-rack.jpg" width=40%/>
 </p>

@@ -45,7 +45,8 @@ const uint8_t FIFO_VALID_SAMPLE_MASK = 0x0;
 const uint8_t FIFO_FAST_SAMPLE_MASK = 0x1;
 const uint8_t ETAG_BITS_MASK = 0x7;
 const float RTOR_LSB_RES = 0.0078125f;
-const uint8_t RTOR_PRESCALE = 8; // 8ms RTOR resolution is for 32768Hz master clock
+// 8ms RTOR resolution is for 32768Hz master clock
+const uint8_t RTOR_PRESCALE = 8;
 
 max30003 ecg;
 plot plotter;
@@ -67,41 +68,23 @@ uint16_t current_rtor_interval_ms = 0;
 uint32_t last_rtor_interrupt_time_ms = 0;
 uint32_t last_fake_rtor_time_ms = 0;
 
-const uint8_t DCLOFF_ARRAY_SIZE = 96;
-int16_t dcloff_array[DCLOFF_ARRAY_SIZE];
-uint8_t dcloff_array_count = 0;
-// avg voltage of samples when electrodes touched. It should be just above the avg peak of when electrodes not-touched
-const int16_t VOLTAGE_THRESHOLD = 0;
-// count of avg voltage of samples above threshold when electrodes touched
-uint8_t ABOVE_VOLTAGE_THRESHOLD_COUNT = 0;
-// counts to check since electrodes touched, before confirming real touch, to avoid noises
-const int16_t DEBOUNCE_ABOVE_VOLTAGE_THRESHOLD_COUNT = 2;
-
 // portion of RTOR when QRS happens
 const uint16_t HEART_PULSE_QRS_TIME = 200;
 // 72 bpm before RTOR stablized
 const uint16_t FAKE_RTOR_INTERVAL_MS = 833;
+
+// avg voltage of samples when electrodes touched. It should be just above the avg peak of when electrodes not-touched
+// count of avg voltage of samples above threshold when electrodes touched
+// counts to check since electrodes touched, before confirming real touch, to avoid noises
 // time to wait since electrodes touched, before sending the fake rtor, to avoid noises
-const uint16_t DEBOUNCE_FAKE_RTOR_INTERVAL_MS = 3 * 1000;
-// time after hands off the electrodes
-const uint16_t USER_INACTIVE_TIME_MS = 20 * 1000;
 // It takes approximately 20 seconds to get stablized RTOR from MAX30003/ Thompkins Algorithm
-const uint16_t RTOR_STABILIZING_TIME_MS = 10 * 1000;
-// timestamp when electrodes were touched last
-uint16_t electrodes_last_touched_time_ms = 0;
-// are electrodes touched for the first time after being inactive
-bool are_electrodes_touched_for_the_first_time = false;
 
 const int16_t HANDS_OFF_TOP_VOLTAGE = -8;
-const int16_t HANDS_OFF_MID_VOLTAGE = -15;
 const int16_t HANDS_OFF_BOTTOM_VOLTAGE = -25;
-
 uint16_t hands_off_count = 0;
 uint16_t hands_on_count = 0;
 uint16_t hands_off_count_threshold = 0;
 uint16_t hands_on_count_threshold = 0;
-const uint16_t debounce_hands_off_count = 5;
-const uint16_t debounce_hands_on_count = 5;
 int16_t hands_on_detection_batch_count = 0;
 bool hands_on_status = false;
 const int16_t hands_on_detection_batch_size = 5;
@@ -227,8 +210,8 @@ void loop()
             // extract 14 bits data from rtor register
             rtor = ((rtor >> 10) & 0x3fff);
 
-            // rtor must be multiplied by 8 to get the time interval in millisecond 8ms resolution is for 32768Hz master clock
-            rtor = rtor * 8;
+            // rtor must be multiplied by prescaler
+            rtor = rtor * RTOR_PRESCALE;
 
             if (rtor >= MIN_RTOR_INTERVAL && rtor <= MAX_RTOR_INTERVAL)
                 last_rtor_interrupt_time_ms = millis();
