@@ -20,8 +20,8 @@ This is a 12-feet-tall-permanent-public-installation, therefore it is built to w
 -   Felix Christmann - Industrial Design, Berlin
 -   Alessandro Aresta - Sound Engineering, Berlin
 -   Len Goodman - Graphic Design, Minneapolis
--   John Bean, Hart John, Randi Johnson - Production Management, Minneapolis
--   Pavel - Structural Design & Construction, Minneapolis
+-   John Bean, Giam Nguyen, Hart Johnson, Randi Johnson - Production Management, Minneapolis
+-   Pavel Spieker, Kelly Ludeking, Anthony Kling - Structural Design & Construction, Minneapolis
 -   Shresth Agrawal - Software Engineering, Berlin
 -   Chris Kooper - Metalworking, Berlin
 
