@@ -19,8 +19,7 @@ In the first public appearance, araBeat is integrated into a permanent & public 
 <b>The Heart Of Uptown powered by araBeat</b>
 </br>
 </br>
-<img src="./images/visits/ara.jpg" width=30%/>
-<img src="./images/visits/stacia.jpg" width=50%/>
+<img src="./images/installation/heart-of-uptown.jpg" width=30%/>
 </p>
 
 ## ARTISTS
@@ -84,6 +83,13 @@ In the first public appearance, araBeat is integrated into a permanent & public 
 <p align="center">
 <img src="./images/installation/installation-4.jpg" width=30%/>
 <img src="./images/sensor-frontend/sensor-frontend-6.jpg" width=30%/>
+</p>
+
+  #### Stage 3 Completion
+
+<p align="center">
+<img src="./images/visits/ara.jpg" width=25%/>
+<img src="./images/behind-the-scenes/ara-arabeat-gui.jpg" width=30%/>
 </p>
 
 -   #### Electronics & Audio Chambers
@@ -264,47 +270,59 @@ In the first public appearance, araBeat is integrated into a permanent & public 
 - #### Aravinth - Prototype CNC Milling at MotionLab, Berlin
 
 <p align="center">
-<img src="./images/the-making/ara-sensor-frontend.jpg" width=40%/>
+<img src="./images/behind-the-scenes/ara-sensor-frontend.jpg" width=40%/>
 </p>
 
 - #### Stacia - Mosaic Making at Private Studio, Minneapolis
 
 <p align="center">
-<img src="./images/the-making/stacia-mosaic-3.jpg" width=40%/>
+<img src="./images/behind-the-scenes/stacia-mosaic-3.jpg" width=40%/>
 </p>
 
 - #### Stacia - Mosaic Making at Private Studio, Minneapolis
 
 <p align="center">
-<img src="./images/the-making/stacia-mosaic-4.jpg" width=40%/>
+<img src="./images/behind-the-scenes/stacia-mosaic-4.jpg" width=40%/>
 </p>
 
 - #### Len - Structural Construction at Tivoli Too, Minneapolis
 
 <p align="center">
-<img src="./images/the-making/len-structure.jpg" width=40%/>
+<img src="./images/behind-the-scenes/len-structure.jpg" width=40%/>
 </p>
 
 - #### Stacia - Styrofoam + Fibreglass Surface Finish at Tivoli Too, Minneapolis
 
 <p align="center">
-<img src="./images/the-making/stacia-styrofoam.jpg" width=40%/>
+<img src="./images/behind-the-scenes/stacia-styrofoam.jpg" width=40%/>
 </p>
 
 - #### Len - Mosaic Finish at Tivoli Too, Minneapolis
 
 <p align="center">
-<img src="./images/the-making/len-surface.jpg" width=40%/>
+<img src="./images/behind-the-scenes/len-surface.jpg" width=40%/>
 </p>
 
 - #### Alessandro - Sound Design at Private Studio, Berlin
 
 <p align="center">
-<img src="./images/the-making/alessandro-audio.jpg" width=40%/>
+<img src="./images/behind-the-scenes/alessandro-audio.jpg" width=40%/>
 </p>
 
 - #### Chris - Metalworking at S-Hamacher Art Production Studio, Berlin
 
 <p align="center">
-<img src="./images/the-making/chris-speaker-rack.jpg" width=40%/>
+<img src="./images/behind-the-scenes/chris-speaker-rack.jpg" width=40%/>
+</p>
+
+- #### Pavel - Metalworking at Tivoli Too, Minneapolis
+
+<p align="center">
+<img src="./images/behind-the-scenes/pavel-metal.jpg" width=40%/>
+</p>
+
+- #### Kelly - Metalworking at Tivoli Too, Minneapolis
+
+<p align="center">
+<img src="./images/behind-the-scenes/kelly-metal.jpg" width=40%/>
 </p>
