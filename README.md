@@ -4,9 +4,24 @@
 
 # araBeat
 
-An interactive New Media Art system to translate the heartbeat of the visitor to an artistic form of sound and light in real-time.
+araBeat is an interactive new media art developed for the artistic sonification of Electrocardiogram (ECG). It is a complete system that consists of modules of ECG, DSP, MCU & Motherboard.
 
-This is a 12-feet-tall-permanent-public-installation, therefore it is built to withstand a harsh environment where the temperature goes to -20°C.
+araBeat captures ECG of human Interactors through two gel-less electrodes, identifies the QRS complex of ECG, calculates the time difference between the R wave peaks and using Audio DSP, it synthesizes high & low frequency sound in realtime, which is synchronized with the heartbeats of the Interactor.
+
+araBeat lies in the spectrum of new media art, the form of interaction with the technology is designed with aesthetics in mind using stainless steel electrodes in the form of human hand.
+
+araBeat is designed to be extendable using modular designs, so that every component can be just individually plugged into the motherboard. It is also built as an industrial grade system to operate in harsh weather conditions from -40 ° Celsius to 85 ° Celsius. Furthermore, it is designed to comply with medical grade electronics to have low electrical noises and safety.
+
+In the first public appearance, araBeat is integrated into a permanent & public mosaic art installation called "The Heart Of Uptown", located at MoZaic East, Minneapolis, USA.
+
+
+<p align="center">
+<b>The Heart Of Uptown powered by araBeat</b>
+</br>
+</br>
+<img src="./images/visits/ara.jpg" width=30%/>
+<img src="./images/visits/stacia.jpg" width=50%/>
+</p>
 
 ## ARTISTS
 
