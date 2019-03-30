@@ -14,18 +14,17 @@ araBeat is designed to be extendable using modular designs, so that every compon
 
 In the first public appearance, araBeat is integrated into a permanent & public mosaic art installation called "The Heart Of Uptown", located at MoZaic East, Minneapolis, USA.
 
-
 <p align="center">
 <b>The Heart Of Uptown powered by araBeat</b>
 </br>
 </br>
-<img src="./images/installation/heart-of-uptown.jpg" width=30%/>
+<img src="./images/installation/heart-of-uptown.jpg" width=50%/>
 </p>
 
 ## ARTISTS
 
--   Aravinth Panch < http://aravinth.info > New Media Art
--   Stacia Goodman < http://www.staciagoodmanmosaics.com > Mosaic Art
+-   Aravinth Panch &lt; <http://aravinth.info> > New Media Art
+-   Stacia Goodman &lt; <http://www.staciagoodmanmosaics.com> > Mosaic Art
 
 ## COLLABORATORS
 
@@ -69,7 +68,7 @@ In the first public appearance, araBeat is integrated into a permanent & public 
 
 ## DEVELOPMENT
 
-### Installation
+### The Heart Of Uptown Installation
 
 -   #### Stage 1 Completion
 
@@ -81,43 +80,15 @@ In the first public appearance, araBeat is integrated into a permanent & public 
 -   #### Stage 2 Completion
 
 <p align="center">
-<img src="./images/installation/installation-4.jpg" width=30%/>
 <img src="./images/sensor-frontend/sensor-frontend-6.jpg" width=30%/>
+<img src="./images/installation/installation-4.jpg" width=30%/>
 </p>
 
-  #### Stage 3 Completion
+-   #### Stage 3 Completion
 
 <p align="center">
-<img src="./images/visits/ara.jpg" width=25%/>
 <img src="./images/behind-the-scenes/ara-arabeat-gui.jpg" width=30%/>
-</p>
-
--   #### Electronics & Audio Chambers
-
-<p align="center">
-<img src="./images/chambers/chamber-1.jpg" width=40%/>
-<img src="./images/chambers/chamber-3.jpg" width=25%/>
-</p>
-
-### Sensor Frontend
-
--   #### Design
-
-<p align="center">
-<img src="./images/sensor-frontend/design/design-1.jpg" width=30%/>
-</p>
-
--   #### Prototype
-
-<p align="center">
-<img src="./images/sensor-frontend/prototype/foam-milling-2.jpg" width=20%/>
-<img src="./images/sensor-frontend/prototype/foam-milling-5.jpg" width=30%/>
-</p>
-
--   #### Sensor Frontend v1.0
-
-<p align="center">
-<img src="./images/sensor-frontend/sensor-frontend-5.jpg" width=30%/>
+<img src="./images/visits/ara.jpg" width=24%/>
 </p>
 
 ### Interaction Technology
@@ -164,8 +135,6 @@ In the first public appearance, araBeat is integrated into a permanent & public 
 <img src="./images/pcbs/motherboard-v0.1-4.jpg" width=30%/>
 </p>
 
-
-
 -   #### ECG Module v0.1
 
 <p align="center">
@@ -206,60 +175,86 @@ In the first public appearance, araBeat is integrated into a permanent & public 
 <img src="./images/pcbs/mcu-module-v0.1-enclosure.png" width=30%/>
 </p>
 
-### Audio
+### Sensor Frontend
 
--   #### Marine Standard Tweeter, Sub-Woofer, Amplifier, PSU
+-   #### Design
+
+<p align="center">
+<img src="./images/sensor-frontend/design/design-1.jpg" width=30%/>
+</p>
+
+-   #### Prototype
+
+<p align="center">
+<img src="./images/sensor-frontend/prototype/foam-milling-2.jpg" width=20%/>
+<img src="./images/sensor-frontend/prototype/foam-milling-5.jpg" width=30%/>
+</p>
+
+-   #### Sensor Frontend v1.0
+
+<p align="center">
+<img src="./images/sensor-frontend/sensor-frontend-5.jpg" width=30%/>
+</p>
+
+#### Marine Standard Tweeter, Sub-Woofer, Amplifier, PSU
 
 <p align="center">
 <img src="./images/audio/speaker-rack-2.jpg" width=20%/>
 <img src="./images/audio/audio-3.jpg" width=30%/>
 </p>
 
+#### Electronics & Audio Chambers
+
+<p align="center">
+<img src="./images/chambers/chamber-1.jpg" width=40%/>
+<img src="./images/chambers/chamber-3.jpg" width=25%/>
+</p>
+
 ## DESIGN & DEVELOPMENT TOOLS
 
-- #### KiCad v5.0.1-3 for PCB Design
+-   #### KiCad v5.0.1-3 for PCB Design
 
 <p align="center">
 <img src="./images/screenshots/kicad-pcb-design.png" width=60%/>
 </p>
 
-- #### Atom v1.34.0 + Platform IO v4.0.0a3 for ECG Firmware Development
+-   #### Atom v1.34.0 + Platform IO v4.0.0a3 for ECG Firmware Development
 
 <p align="center">
 <img src="./images/screenshots/atom-ecg-firware.png" width=60%/>
 </p>
 
-- #### Fusion 360 v2.0.5357 for Mechanical Design
+-   #### Fusion 360 v2.0.5357 for Mechanical Design
 
 <p align="center">
 <img src="./images/screenshots/fusion-360-mechanical-design.png" width=60%/>
 </p>
 
-- #### Rhino + Grasshoper for Surface Design
+-   #### Rhino + Grasshoper for Surface Design
 
 <p align="center">
 <img src="./images/screenshots/rhino-sensor-frontend.jpg" width=60%/>
 </p>
 
-- #### Affinity Designer v1.6.1 for Vector Design
+-   #### Affinity Designer v1.6.1 for Vector Design
 
 <p align="center">
 <img src="./images/screenshots/affinity-designer-vector-design.png" width=60%/>
 </p>
 
-- #### SigmaStudio v4.2 for Audio Synthesis
+-   #### SigmaStudio v4.2 for Audio Synthesis
 
 <p align="center">
 <img src="./images/screenshots/sigmastudio-dsp-audio-synth.png" width=60%/>
 </p>
 
-- #### Processing v3.5.3 for araBeat GUI Software Development
+-   #### Processing v3.5.3 for araBeat GUI Software Development
 
 <p align="center">
 <img src="./images/screenshots/processing-arabeat-gui-software.png" width=60%/>
 </p>
 
-- #### araBeat GUI v0.9 for Optimisation of ECG and Audio Waveforms
+-   #### araBeat GUI v0.9 for Optimisation of ECG and Audio Waveforms
 
 <p align="center">
 <img src="./images/screenshots/arabeat-gui-wave-sync.png" width=60%/>
@@ -267,61 +262,61 @@ In the first public appearance, araBeat is integrated into a permanent & public 
 
 ## The Making - Behind the scenes
 
-- #### Aravinth - Prototype CNC Milling at MotionLab, Berlin
+-   #### Aravinth - Prototype CNC Milling at MotionLab, Berlin
 
 <p align="center">
 <img src="./images/behind-the-scenes/ara-sensor-frontend.jpg" width=40%/>
 </p>
 
-- #### Stacia - Mosaic Making at Private Studio, Minneapolis
+-   #### Stacia - Mosaic Making at Private Studio, Minneapolis
 
 <p align="center">
 <img src="./images/behind-the-scenes/stacia-mosaic-3.jpg" width=40%/>
 </p>
 
-- #### Stacia - Mosaic Making at Private Studio, Minneapolis
+-   #### Stacia - Mosaic Making at Private Studio, Minneapolis
 
 <p align="center">
 <img src="./images/behind-the-scenes/stacia-mosaic-4.jpg" width=40%/>
 </p>
 
-- #### Len - Structural Construction at Tivoli Too, Minneapolis
+-   #### Len - Structural Construction at Tivoli Too, Minneapolis
 
 <p align="center">
 <img src="./images/behind-the-scenes/len-structure.jpg" width=40%/>
 </p>
 
-- #### Stacia - Styrofoam + Fibreglass Surface Finish at Tivoli Too, Minneapolis
+-   #### Stacia - Styrofoam + Fibreglass Surface Finish at Tivoli Too, Minneapolis
 
 <p align="center">
 <img src="./images/behind-the-scenes/stacia-styrofoam.jpg" width=40%/>
 </p>
 
-- #### Len - Mosaic Finish at Tivoli Too, Minneapolis
+-   #### Len - Mosaic Finish at Tivoli Too, Minneapolis
 
 <p align="center">
 <img src="./images/behind-the-scenes/len-surface.jpg" width=40%/>
 </p>
 
-- #### Alessandro - Sound Design at Private Studio, Berlin
+-   #### Alessandro - Sound Design at Private Studio, Berlin
 
 <p align="center">
 <img src="./images/behind-the-scenes/alessandro-audio.jpg" width=40%/>
 </p>
 
-- #### Chris - Metalworking at S-Hamacher Art Production Studio, Berlin
+-   #### Chris - Metalworking at S-Hamacher Art Production Studio, Berlin
 
 <p align="center">
 <img src="./images/behind-the-scenes/chris-speaker-rack.jpg" width=40%/>
 </p>
 
-- #### Pavel - Metalworking at Tivoli Too, Minneapolis
+-   #### Pavel - Metalworking at Tivoli Too, Minneapolis
 
 <p align="center">
 <img src="./images/behind-the-scenes/pavel-metal.jpg" width=40%/>
 </p>
 
-- #### Kelly - Metalworking at Tivoli Too, Minneapolis
+-   #### Kelly - Metalworking at Tivoli Too, Minneapolis
 
 <p align="center">
 <img src="./images/behind-the-scenes/kelly-metal.jpg" width=40%/>
